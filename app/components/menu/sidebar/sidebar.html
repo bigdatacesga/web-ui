@@ -1,0 +1,41 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav in" id="side-menu">
+            <li ui-sref-active="active">
+                <a ui-sref="dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="clusters"><i class="fa fa-server fa-fw"></i> Clusters<span></span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="monitoring"><i class="fa fa-bar-chart-o fa-fw"></i> Monitoring<span></span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="jobhistory"><i class="fa fa-history fa-fw"></i> Job History</a>
+            </li>
+            <li ng-class="{active: collapseVar==1}">{{dropDown}}
+                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> Configuration<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                    <li ui-sref-active="active">
+                        <a ui-sref="configuration.ssh-keys">SSH Keys</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="configuration.ips">Firewall</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="configuration.options">Advanced Options</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="documentation"><i class="fa fa-book fa-fw"></i> Documentation</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div> 
+
+
+
