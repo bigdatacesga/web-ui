@@ -80,5 +80,5 @@ npm run protractor
 
 ### Travis CI
 
-We use [Travis CI][travis] continuous integration service.
+We use [Travis CI](http://travis-ci.org) continuous integration service.
 
