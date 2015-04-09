@@ -5,19 +5,23 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    
+  
+
+    <cluster ng-repeat="cluster in clusters.clusters" cluster-data="cluster" />
+
     <!-- /.panel -->
     <div class="row">
         <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-server fa-fw"></i> Active Clusters
+                    <i class="fa fa-server fa-fw"></i> Cluster hadoop-123
                 </div>
                 <div class="panel-body">
                   <p>These are the currently active clusters:</p>
                   <ul>
                     <li><i class="fa fa-database fa-fw"></i> Active Clusters</li>
                   </ul>
+
                 </div>
             </div>
             <!-- /.panel -->

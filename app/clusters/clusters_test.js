@@ -6,16 +6,28 @@ describe('hadoopApp.clusters module', function() {
 
   describe('clusters controller', function(){
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var homeCtrl = $controller('ClustersCtrl');
-      expect(homeCtrl).toBeDefined();
+    it('should load', inject(function($controller) {
+      var ctrl = $controller('ClustersCtrl');
+      expect(ctrl).toBeDefined();
     }));
 
-    it('should have awesome items', inject(function($controller) {
-      //spec body
+    it('should have sample clusters', inject(function($controller) {
       var ctrl = $controller('ClustersCtrl');
-      expect(ctrl.awesomeThings.length).toBe(3);
+      expect(ctrl.clusters.length).toBe(2);
+    }));
+
+    it('should have as many collapse options as sample clusters', inject(function($controller) {
+      var ctrl = $controller('ClustersCtrl');
+      expect(Object.keys(ctrl.isCollapsed).length).toBe(ctrl.clusters.length);
+    }));
+
+    it('should allow to toggle details changing collapse option', inject(function($controller) {
+      var ctrl = $controller('ClustersCtrl');
+      var clusterId = ctrl.clusters[0].id;
+      ctrl.toggleDetails(clusterId);
+      expect(ctrl.isCollapsed[clusterId]).toBe(false);
+      ctrl.toggleDetails(clusterId);
+      expect(ctrl.isCollapsed[clusterId]).toBe(true);
     }));
 
   });

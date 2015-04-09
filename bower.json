@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "hadoop-on-demand-web",
+  "description": "Hadoop on demand web for hadoop-on-demand-rest service",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
-  "license": "MIT",
+  "homepage": "https://github.com/javicacheiro/hadoop-on-demand-web",
+  "license": "GPL3",
   "private": true,
   "dependencies": {
     "angular": "1.2.x",
@@ -16,8 +16,9 @@
     "font-awesome": "4.3.0",
     "angular-bootstrap": "0.12.0",
     "metisMenu": "~1.1.3",
-    "angular-loading-bar": "~0.7.0"
+    "angular-loading-bar": "~0.7.0",
 
+    "font-mfizz": "2.0.x"
 
   }
 }
