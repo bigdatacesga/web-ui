@@ -1,4 +1,4 @@
-<div>
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Clusters</h1>
@@ -7,7 +7,7 @@
     </div>
   
 
-    <cluster ng-repeat="cluster in clusters.clusters" cluster-data="cluster" />
+    <cluster ng-repeat="cluster in clusters.clusters" cluster-data="cluster" show-details="false" />
 
     <!-- /.panel -->
     <div class="row">

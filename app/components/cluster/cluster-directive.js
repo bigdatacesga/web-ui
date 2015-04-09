@@ -15,11 +15,22 @@ angular.module('hadoopApp.cluster.cluster-directive', [])
     replace: true,
     scope: {
       clusterData: '=',
-      showDetails: '='
+      showDetails: '@'
     },
     link: function(scope, element, attrs) {
       scope.toggleDetails = function() {
-        scope.showDetails = !scope.showDetails;
+        if(scope.showDetails == 'false') {
+          scope.showDetails = 'true';
+        } else {
+          scope.showDetails = 'false';
+        }
+      };
+      scope.isCollapsed = function() {
+        if(scope.showDetails == 'false') {
+          return true;
+        } else {
+          return false;
+        }
       };
     },
     /* 

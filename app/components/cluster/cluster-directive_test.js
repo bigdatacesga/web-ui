@@ -99,7 +99,7 @@ describe('hadoopApp.cluster module', function() {
 
     // Then
     var compiledElementScope = element.isolateScope();
-    expect(compiledElementScope.showDetails).toEqual(true);
+    expect(compiledElementScope.showDetails).toEqual('true');
   });
 
   it('should load show-details option: false', function() {
@@ -114,7 +114,7 @@ describe('hadoopApp.cluster module', function() {
 
     // Then
     var compiledElementScope = element.isolateScope();
-    expect(compiledElementScope.showDetails).toEqual(false);
+    expect(compiledElementScope.showDetails).toEqual('false');
   });
 
   /*
@@ -138,24 +138,54 @@ describe('hadoopApp.cluster module', function() {
   it('should toggle cluster details info', function() {
     var scope = rootScope.$new();
     scope.clusterData = dummyCluster;
-    scope.showDetails = false;
 
     // When
     var element = compile('<cluster' +
-      ' cluster-data="clusterData" show-details="showDetails" />')(scope);
+      ' cluster-data="clusterData" show-details="false" />')(scope);
     scope.$digest();
     mockBackend.flush();
 
     // Then
     var compiledElementScope = element.isolateScope();
-    console.log(compiledElementScope.showDetails);
-    expect(compiledElementScope.showDetails).toEqual(false);
+    expect(compiledElementScope.showDetails).toEqual('false');
 
     // When
     compiledElementScope.toggleDetails();
 
     // Then
-    expect(compiledElementScope.showDetails).toEqual(true);
+    expect(compiledElementScope.showDetails).toEqual('true');
+  });
+
+  it('should collapse is show-details is false', function() {
+    var scope = rootScope.$new();
+    scope.clusterData = dummyCluster;
+
+    // When
+    var element = compile('<cluster' +
+      ' cluster-data="clusterData" show-details="false" />')(scope);
+    scope.$digest();
+    mockBackend.flush();
+
+    // Then
+    var compiledElementScope = element.isolateScope();
+    expect(compiledElementScope.showDetails).toEqual('false');
+    expect(compiledElementScope.isCollapsed()).toEqual(true);
+  });
+
+  it('should expand if show-details is true', function() {
+    var scope = rootScope.$new();
+    scope.clusterData = dummyCluster;
+
+    // When
+    var element = compile('<cluster' +
+      ' cluster-data="clusterData" show-details="true" />')(scope);
+    scope.$digest();
+    mockBackend.flush();
+
+    // Then
+    var compiledElementScope = element.isolateScope();
+    expect(compiledElementScope.showDetails).toEqual('true');
+    expect(compiledElementScope.isCollapsed()).toEqual(false);
   });
 
   afterEach(function() {

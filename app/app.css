@@ -3,8 +3,8 @@
 .ok {
   border-radius: 50%;
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   background: limegreen;
 }
 .warning {
@@ -28,7 +28,10 @@
   padding: 0 0 0.5em;
 }
 .cluster-name {
-  font-size: 30px;
+  font-size: 32px;
+}
+.cluster-details {
+  font-size: 18px;
 }
 
 .menu:before {
