@@ -43,6 +43,7 @@ app/                    --> all of the source files for the application
       sidebar/                   --> sidebar directive
     stats/              --> stats directive
     notifications/      --> notifications directive
+    wizard_cluster      --> wizard cluster directive
   dashboard/            --> dashboard view template and logic
     dashboard.html        --> the partial template
     dashboard.js          --> the controller logic
