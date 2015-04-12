@@ -4,6 +4,10 @@ describe('hadoopApp.clusters module', function() {
 
   beforeEach(module('hadoopApp.clusters'));
 
+  beforeEach(inject(function($state) {
+    spyOn($state, 'go');
+  }));
+
   describe('clusters controller', function(){
 
     it('should load', inject(function($controller) {
@@ -16,18 +20,11 @@ describe('hadoopApp.clusters module', function() {
       expect(ctrl.clusters.length).toBe(2);
     }));
 
-    it('should have as many collapse options as sample clusters', inject(function($controller) {
+    it('should launch the new cluster wizard', inject(function($controller, $state) {
       var ctrl = $controller('ClustersCtrl');
-      expect(Object.keys(ctrl.isCollapsed).length).toBe(ctrl.clusters.length);
-    }));
-
-    it('should allow to toggle details changing collapse option', inject(function($controller) {
-      var ctrl = $controller('ClustersCtrl');
-      var clusterId = ctrl.clusters[0].id;
-      ctrl.toggleDetails(clusterId);
-      expect(ctrl.isCollapsed[clusterId]).toBe(false);
-      ctrl.toggleDetails(clusterId);
-      expect(ctrl.isCollapsed[clusterId]).toBe(true);
+      //expect($state.is('clusters')).toBe(true);
+      ctrl.launchClusterWizard();
+      expect($state.go).toHaveBeenCalledWith('launcher');
     }));
 
   });

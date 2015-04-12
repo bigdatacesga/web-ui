@@ -18,7 +18,7 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
   });
 }])
 
-.controller('ClustersCtrl', [function() {
+.controller('ClustersCtrl', ['$state', function($state) {
   var self = this;
 
   self.clusters = [
@@ -82,13 +82,9 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
     }
   ];
 
-  self.isCollapsed = {};
-  for (var i=0; i<self.clusters.length; i++) {
-    var cluster = self.clusters[i];
-    self.isCollapsed[cluster.id] = true;
-  }
-  
-  self.toggleDetails = function(clusterId) {
-    self.isCollapsed[clusterId] = !self.isCollapsed[clusterId];
+  self.launchClusterWizard = function() {
+    // Open the modal to launch a new cluster
+    $state.go('launcher');
   };
+
 }]);

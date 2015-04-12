@@ -32,6 +32,9 @@ angular.module('hadoopApp.cluster.cluster-directive', [])
           return false;
         }
       };
+      scope.destroyCluster = function() {
+        // TODO
+      };
     },
     /* 
     // Default options: 

@@ -1,41 +1,41 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Clusters</h1>
-        </div><!-- /.col-lg-12 -->
-    </div>
-  
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-server fa-fw"></i> Active Clusters
-                </div>
-                <div class="panel-body">
-                  <div class="col-xs-12 panel">
-                    <button type="button" class="btn btn-success" ng-click='launchCluster()'>
-                      <i class="fa fa-plus"></i> Launch new cluster
-                    </button>
-                  </div>
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Clusters</h1>
+    </div><!-- /.col-lg-12 -->
+  </div>
 
-                  <cluster ng-repeat="cluster in clusters.clusters" cluster-data="cluster" show-details="false" />
-                </div>
+  <div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-server fa-fw"></i> Active Clusters
             </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-8 -->
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                </div>
-                <!-- /.panel-heading -->
-                <notifications></notifications> 
-                <!-- /.panel-body -->
+            <div class="panel-body">
+              <div class="col-xs-12 panel">
+                <button type="button" class="btn btn-success" ng-click='clusters.launchClusterWizard()'>
+                  <i class="fa fa-plus"></i> Launch new cluster
+                </button>
+              </div>
+
+              <cluster ng-repeat="cluster in clusters.clusters" cluster-data="cluster" show-details="false" />
             </div>
-            <!-- /.panel -->
         </div>
-        <!-- /.col-lg-4 -->
+        <!-- /.panel -->
     </div>
-    <!-- /.row -->
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Notifications Panel
+            </div>
+            <!-- /.panel-heading -->
+            <notifications></notifications> 
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-4 -->
+  </div>
+  <!-- /.row -->
 </div>
