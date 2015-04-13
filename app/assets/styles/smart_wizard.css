@@ -15,6 +15,9 @@
   overflow:visible;
   float:left;
   width:710px;
+  /* background color was added to avoid transparencies when the wizard went modal
+   * cause they definitely didnt look really well */
+  background-color: #FFF;
 }
 .swMain .stepContainer {
   display:block;

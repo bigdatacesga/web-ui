@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'hadoopApp.cluster'])
+angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'hadoopApp.cluster', 'dialogs.main'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('clusters', {
@@ -18,7 +18,7 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
   });
 }])
 
-.controller('ClustersCtrl', ['$state', function($state) {
+.controller('ClustersCtrl', ['$state', 'dialogs', function($state,dialogs) {
   var self = this;
 
   self.clusters = [
@@ -84,7 +84,8 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
 
   self.launchClusterWizard = function() {
     // Open the modal to launch a new cluster
-    $state.go('launcher');
+    //$state.go('launcher');
+    dialogs.create("launcher/launcher.html");
   };
 
 }]);
