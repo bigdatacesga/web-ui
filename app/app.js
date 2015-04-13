@@ -8,7 +8,8 @@ angular.module('hadoopApp', [
   'hadoopApp.menu',
   'hadoopApp.dashboard',
   'hadoopApp.clusters',
-  'hadoopApp.launcher'
+  'hadoopApp.launcher',
+  'hadoopApp.login'
 ]).
 config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
   $urlRouterProvider.otherwise('/dashboard');

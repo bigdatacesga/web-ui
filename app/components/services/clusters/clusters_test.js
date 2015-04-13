@@ -1,8 +1,8 @@
 'use strict';
 
-describe('hadoopApp.service.cluster', function() {
+describe('hadoopApp.service.clusters', function() {
 
-  beforeEach(module('hadoopApp.service.cluster'));
+  beforeEach(module('hadoopApp.service.clusters'));
 
   var service, mockBackend;
 

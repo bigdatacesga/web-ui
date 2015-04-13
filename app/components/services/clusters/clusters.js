@@ -7,7 +7,7 @@
  * # ClusterService
  * Service in the hadoopApp.
  */
-angular.module('hadoopApp.service.cluster', [])
+angular.module('hadoopApp.service.clusters', [])
 .factory('ClusterService', ['$http', function ($http) {
     return {
       list: function() {

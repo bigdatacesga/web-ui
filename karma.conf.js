@@ -12,6 +12,7 @@ module.exports = function(config){
       'app/clusters/**/*.js',
       'app/launcher/**/*.js',
       'app/settings/**/*.js',
+      'app/login/**/*.js',
       'app/help/**/*.js'
     ],
 
