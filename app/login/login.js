@@ -20,7 +20,7 @@ angular.module('hadoopApp.login', ['ui.router'])
 
 .controller('LoginCtrl', ['$state', '$http', '$window', function($state, $http, $window) {
   var self = this;
-  self.user = { username: 'test', password: 'testpass' };
+  self.user = { username: '', password: '' };
   self.message = '';
 
   self.login = function () {
