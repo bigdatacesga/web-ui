@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/javicacheiro/hadoop-on-demand-web.svg?branch=master)](https://travis-ci.org/javicacheiro/hadoop-on-demand-web)
-
 # Hadoop on demand Portal
+
+[![Build Status](https://travis-ci.org/javicacheiro/hadoop-on-demand-web.svg?branch=master)](https://travis-ci.org/javicacheiro/hadoop-on-demand-web)
 
 This project provides the web interface for the hadoop on demand REST API project.
 
