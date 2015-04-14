@@ -1,7 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('hadoopApp', [
+angular
+.module('hadoopApp', [
   'ui.router',
   'ui.bootstrap',
   'angular-loading-bar',
@@ -10,22 +11,8 @@ angular.module('hadoopApp', [
   'hadoopApp.clusters',
   'hadoopApp.launcher',
   'hadoopApp.login'
-]).
-config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
+])
+.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
+  // For any unmatched url, redirect to /dashboard
   $urlRouterProvider.otherwise('/dashboard');
-
-  //$stateProvider
-    //.state('dashboard', {
-      //url:'/dashboard',
-      //templateUrl: 'dashboard/main.html',
-    //})
-    //.state('dashboard.home',{
-      //url:'/home',
-      //controller: 'HomeCtrl',
-      //templateUrl:'dashboard/home.html',
-    //})
-
 }]);
-//config(['$routeProvider', function($routeProvider) {
-// $routeProvider.otherwise({redirectTo: '/view1'});
-//}]);
