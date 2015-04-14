@@ -64,10 +64,10 @@ describe('hadoopApp.cluster module', function() {
 
     // Then
     expect(element.html()).toEqual(
-      '<div ng-bind="clusterData.name" class="ng-binding">' +
+      '<div class="ng-binding" ng-bind="clusterData.name">' +
         'hadoop-189' +
       '</div>' +
-      '<div ng-bind="clusterData.vms[0].vmid" class="ng-binding">' +
+      '<div class="ng-binding" ng-bind="clusterData.vms[0].vmid">' +
          '42077' +
       '</div>');
   });
