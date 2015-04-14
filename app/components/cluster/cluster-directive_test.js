@@ -63,6 +63,8 @@ describe('hadoopApp.cluster module', function() {
     mockBackend.flush();
 
     // Then
+    /* Firefox and Chrome place the class and ng-bind attributes in different order
+     * so the below test always fails in one of them
     expect(element.html()).toEqual(
       '<div class="ng-binding" ng-bind="clusterData.name">' +
         'hadoop-189' +
@@ -70,6 +72,13 @@ describe('hadoopApp.cluster module', function() {
       '<div class="ng-binding" ng-bind="clusterData.vms[0].vmid">' +
          '42077' +
       '</div>');
+    */
+
+    var bindings = element.find('div'); 
+    expect(bindings.length).toBe(2);
+    expect(bindings.eq(0).text()).toBe('hadoop-189');
+    expect(bindings.eq(1).text()).toBe('42077');
+
   });
 
   it('should load correct cluster data', function() {
