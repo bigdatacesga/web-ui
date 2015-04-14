@@ -36,7 +36,7 @@ describe('hadoopApp.login module', function() {
     it('should fail login with wrong credentials', inject(function($controller, $state) {
       var ctrl = $controller('LoginCtrl');
       var dummyToken = "--DUMMYTOKEN--";
-      mockBackend.expectPOST('/authenticate', {user: "test", password: "wrongpass"}).respond(500, '');
+      mockBackend.expectPOST('/authenticate', {user: "test", password: "wrongpass"}).respond(401, '');
       ctrl.user = {user: "test", password: "wrongpass"};
       ctrl.login();
       mockBackend.flush();
