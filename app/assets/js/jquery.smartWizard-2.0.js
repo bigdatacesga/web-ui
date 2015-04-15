@@ -64,7 +64,7 @@
                   elmStepContainer = $('<div></div>').addClass("stepContainer");
                   btNext = $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("buttonNext");
                   btPrevious = $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("buttonPrevious");
-                  btFinish = $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("buttonFinish");
+                  btFinish = $('<a id="wizardLaunchButton">'+options.labelFinish+'</a>').attr("onclick","onLaunch()").attr("href","#/clusters").addClass("buttonFinish");
                   
                   // highlight steps with errors
                   if(options.errorSteps && options.errorSteps.length>0){
