@@ -10,7 +10,8 @@ angular
   'hadoopApp.dashboard',
   'hadoopApp.clusters',
   'hadoopApp.launcher',
-  'hadoopApp.login'
+  'hadoopApp.login',
+  'hadoopApp.sshkeys'
 ])
 .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
   // For any unmatched url, redirect to /dashboard

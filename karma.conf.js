@@ -13,7 +13,8 @@ module.exports = function(config){
       'app/launcher/**/*.js',
       'app/settings/**/*.js',
       'app/login/**/*.js',
-      'app/help/**/*.js'
+      'app/help/**/*.js',
+      'app/sshkeys/**/*.js'
     ],
 
     autoWatch : true,
