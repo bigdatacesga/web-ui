@@ -48,14 +48,13 @@ describe('hadoopApp.service.ips', function() {
   });
 
   it('should delete a given ip', function() {
-    var dummyMsg = {"message":"IP with id [1]: DELETED SUCCESSFULLY"};
-    mockBackend.expectDELETE('/hadoop/v1/ips/1').respond(dummyMsg);
-    var msg = {};
+    mockBackend.expectDELETE('/hadoop/v1/ips/1').respond(200, '');
+    var status = 0;
     service.delete('1').then(function(response){
-      msg = response.data;
+      status = response.status;
     });
     mockBackend.flush();
-    expect(msg).toEqual(dummyMsg); 
+    expect(status).toEqual(200); 
   });
 
   it('should add a new IP', function() {
@@ -64,29 +63,28 @@ describe('hadoopApp.service.ips', function() {
         address: "193.144.34.10",
         enabled: true
     };
-    mockBackend.expectPOST('/hadoop/v1/ips', data).respond(dummyMsg);
-    var msg = {};
+    mockBackend.expectPOST('/hadoop/v1/ips', data).respond(201, '');
+    var status;
     service.create("193.144.34.10").then(function(response){
-      msg = response.data;
+      status = response.status;
     });
     mockBackend.flush();
-    expect(msg).toEqual(dummyMsg); 
+    expect(status).toEqual(201); 
   });
 
   it('should update an IP', function() {
-    var dummyMsg = {"message":"id:1"};
     var ip = { 
         id: 1,
         address: "193.144.34.10",
         enabled: false
     };
-    mockBackend.expectPUT('/hadoop/v1/ips', ip).respond(dummyMsg);
-    var msg = {};
+    mockBackend.expectPUT('/hadoop/v1/ips', ip).respond(200, '');
+    var status;
     service.update(ip).then(function(response){
-      msg = response.data;
+      status = response.status;
     });
     mockBackend.flush();
-    expect(msg).toEqual(dummyMsg); 
+    expect(status).toEqual(200); 
   });
 
   afterEach(function() {
