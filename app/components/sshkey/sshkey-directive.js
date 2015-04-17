@@ -13,13 +13,32 @@ angular.module('hadoopApp.sshkey.sshkey-directive', [])
     templateUrl:'components/sshkey/sshkey.html',
     restrict: 'E',
     scope: {
-      sshkeyData: '='
+      sshkeyData: '=',
+      expandedKey: '@'
     },
     link: function(scope, element, attrs) {
       scope.removeKey = function() {
         // TODO
 	alert('TODO\n'+
 	  'removeKey function @ link function @ sshkey/sshkey-directive.js');
+      };
+      scope.expandShortenKey = function() {
+	if(scope.expandedKey=='true'){
+	  scope.expandedKey = 'false';
+	}
+	else{
+	  scope.expandedKey = 'true';
+	}
+      };
+      scope.isExpanded = function() {
+	if(scope.expandedKey=='true')
+	  return false;
+	return true;
+      };
+      scope.isNotExpanded = function() {
+	if(scope.expandedKey=='true')
+	  return true;
+	return false;
       };
     },
 
