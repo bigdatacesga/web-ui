@@ -14,7 +14,8 @@ module.exports = function(config){
       'app/settings/**/*.js',
       'app/login/**/*.js',
       'app/help/**/*.js',
-      'app/sshkeys/**/*.js'
+      'app/sshkeys/**/*.js',
+      'app/firewall/**/*.js'
     ],
 
     autoWatch : true,

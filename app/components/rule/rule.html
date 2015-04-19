@@ -4,7 +4,7 @@
     <div class="row">
       
       <div class="col-sm-12">
-      <div class="rule.rule" style="word-wrap: break-word;">{{ruleData.rule}}</div>
+      <div class="rule.rule" style="word-wrap: break-word;">{{getRuleText()}}</div>
       </div><!-- div col-sm-10 -->
       <div class="col-sm-10"></div>
       <div class="col-sm-2" align="right">
@@ -16,6 +16,9 @@
   </div> <!-- div panel-body -->
   
   <div class="panel-footer">
+      <button type="button" class="{{getStateButtonClass()}}" ng-click='toggleRule()'>
+	<i class="fa fa-trash-o"></i> {{getStateButtonText()}}
+      </button>
       <button type="button" class="btn btn-danger pull-right" ng-click='removeRule()'>
 	  <i class="fa fa-trash-o"></i> Remove Rule
 	</button>

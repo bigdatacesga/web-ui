@@ -15,9 +15,9 @@ describe('hadoopApp.firewall module', function() {
       expect(ctrl).toBeDefined();
     }));
 
-    it('should have 4 sample firewall', inject(function($controller) {
+    it('should have 3 sample ips', inject(function($controller) {
       var ctrl = $controller('FirewallCtrl');
-      expect(ctrl.rules.length).toBe(4);
+      expect(ctrl.ips.length).toBe(4);
     }));
 
 

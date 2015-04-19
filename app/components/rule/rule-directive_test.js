@@ -15,7 +15,7 @@ describe('hadoopApp.rule module', function() {
 
   var testRule;
   beforeEach(function() {
-    testRule = {rule:"-A INPUT -s 192.168.1.0/24 -p tcp -m tcp --dport 22 -j ACCEPT"};
+    testRule = {rule:"192.168.1.0/24"};
 
     mockBackend.expectGET('components/rule/rule.html').respond(
       '<div ng-bind="ruleData.rule"></div>');
@@ -34,7 +34,7 @@ describe('hadoopApp.rule module', function() {
 
     var bindings = element.find('div'); 
     expect(bindings.length).toBe(1);
-    expect(bindings.eq(0).text()).toBe('-A INPUT -s 192.168.1.0/24 -p tcp -m tcp --dport 22 -j ACCEPT');
+    expect(bindings.eq(0).text()).toBe('192.168.1.0/24');
 
   });
 

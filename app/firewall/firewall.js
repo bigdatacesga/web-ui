@@ -19,17 +19,33 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule'])
 }])
 
 .controller('FirewallCtrl', [function() {
-  this.rules = [
-      {rule:'-A INPUT -s 192.168.1.135/32 -p tcp -j ACCEPT'},
-      {rule:'-A INPUT -s 192.168.1.0/24 -p tcp -m tcp --dport 22 -j ACCEPT'},
-      {rule:'-A INPUT -s 0.0.0.0/32 -p tcp -m tcp --dport 80 -j ACCEPT'},
-      {rule:'-A INPUT -s 0.0.0.0/32 -p tcp -m tcp --sport 80 -j ACCEPT'},
-      {rule:'-A INPUT -s 0.0.0.0/32 -p tcp -m tcp --sport 8080 -j ACCEPT'},
-      {rule:'-A INPUT -s 0.0.0.0/32 -p tcp -m tcp --sport 8000 -j ACCEPT'}
+  this.ips = [
+      {
+	ip:'192.168.1.135',
+	mask:'32',
+	state:'enabled'
+	
+      },
+      {
+	ip:'192.168.1.0',
+	mask:'24',
+	state:'disabled'
+	
+      },
+      {
+	ip:'0.0.0.0',
+	mask:'32',
+	state: 'enabled'
+      },
+      {
+	ip: '192.168.1.1',
+	mask: '',
+	state: 'disabled'
+      }
     ];
 
   this.addRule = function() {
-    // Adds the rule inside text input
+    // Adds the rule inside text input if it is valid
     // TODO
     alert('TODO\n'+
       'addRule function @ firewall/firewall.js'
