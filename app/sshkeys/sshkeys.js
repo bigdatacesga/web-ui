@@ -28,10 +28,15 @@ angular.module('hadoopApp.sshkeys', ['ui.router', 'hadoopApp.sshkey'])
 
   this.addKey = function() {
     // Adds the key inside text input
-    // TODO
-    alert('TODO\n'+
-      'addKey function @ sshkeys/sshkey.js'
-    );
+    if(isValidSSHKey(document.getElementById("sshkeys_input_sshkey").value)){
+      this.sshKeys.push({
+	key: document.getElementById("sshkeys_input_sshkey").value
+      });
+      // TODO
+      alert('TODO\n'+
+	'addKey function must Notify API about adding given key @ sshkeys/sshkey.js'
+      );
+    }
   };
 
 }]);

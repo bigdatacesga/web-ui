@@ -18,9 +18,10 @@ angular.module('hadoopApp.sshkey.sshkey-directive', [])
     },
     link: function(scope, element, attrs) {
       scope.removeKey = function() {
+	element.html('');
         // TODO
 	alert('TODO\n'+
-	  'removeKey function @ link function @ sshkey/sshkey-directive.js');
+	  'removeKey function must Notify API about removing given key @ link function @ sshkey/sshkey-directive.js');
       };
       scope.expandShortenKey = function() {
 	if(scope.expandedKey=='true'){

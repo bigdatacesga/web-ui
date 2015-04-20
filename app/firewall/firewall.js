@@ -44,12 +44,19 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule'])
       }
     ];
 
-  this.addRule = function() {
+  this.addRule = function(str) {
     // Adds the rule inside text input if it is valid
-    // TODO
-    alert('TODO\n'+
-      'addRule function @ firewall/firewall.js'
-    );
+    if(isValidIP(document.getElementById("firewall_input_rule").value)){
+      this.ips.push({
+	ip: parseIPFrom(document.getElementById("firewall_input_rule").value),
+	mask: parseMaskFrom(document.getElementById("firewall_input_rule").value),
+	state: 'enabled'
+      });
+      // TODO
+      alert('TODO\n'+
+	'addRule function must Notify API about adding given rule @ firewall/firewall.js'
+      );
+    }
   };
 
 }]);

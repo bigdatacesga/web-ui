@@ -17,34 +17,29 @@ angular.module('hadoopApp.rule.rule-directive', [])
     },
     link: function(scope, element, attrs) {
       scope.removeRule = function() {
-        // TODO
+        element.html('');
+	// TODO
 	alert('TODO\n'+
-	  'removeRule function @ link function @ rule/rule-directive.js');
+	  'removeRule function must Notify API about removing given rule @ link function @ rule/rule-directive.js');
       };
-      scope.getStateButtonText= function() {
+      scope.getStateCheckboxChecked= function() {
 	if(scope.ruleData.state=='enabled')
-	  return "Disable Rule";
+	  return true;
 	else
-	  return "Enable Rule";
-      };
-      scope.getStateButtonClass= function() {
-	if(scope.ruleData.state=='enabled')
-	  return "btn btn-warning";
-	else
-	  return "btn btn-primary";
+	  return false;
       };
       scope.toggleRule = function() {
 	if(scope.ruleData.state=='enabled'){
 	  scope.ruleData.state='disabled';
 	  // TODO HERE: notify API about DISABLING rule
 	  alert('TODO\n'+
-	    'Notify APU about ENABLING rule @ toogleRule @ rule-directive.js');
+	    'Notify API about ENABLING rule @ toogleRule @ rule-directive.js');
 	}
 	else{
 	  scope.ruleData.state='enabled';
 	  // TODO HERE: notify API about ENABLING rule
 	  alert('TODO\n'+
-	    'Notify APU about DISABLING rule @ toogleRule @ rule-directive.js');
+	    'Notify API about DISABLING rule @ toogleRule @ rule-directive.js');
 	}
       };
       scope.getRuleText = function() {
