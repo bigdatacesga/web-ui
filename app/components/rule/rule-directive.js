@@ -44,8 +44,12 @@ angular.module('hadoopApp.rule.rule-directive', [])
       };
       scope.getRuleText = function() {
 	return scope.ruleData.ip+
-	  ((scope.ruleData.mask.length>0) ? ' / '+scope.ruleData.mask : '')+' '+
-	  ((scope.ruleData.state=='enabled') ? '(ENABLED)' : '(DISABLED)');
+	  ((scope.ruleData.mask.length>0) ? ' / '+scope.ruleData.mask : '');
+      };
+      scope.getRuleTextStyle = function() {
+	if(scope.ruleData.state!='enabled')
+	  return "color: #888; text-decoration: line-through";
+	return "color: #000";
       };
     },
 
