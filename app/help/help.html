@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="{{help.isActive('help')}}" ng-click="help.setActive('help')"><a href="#/help">Help</a></li>
+    <li role="presentation" class="{{help.isActive('clusters')}}" ng-click="help.setActive('clusters')"><a href="#/help">Clusters</a></li>
+    <li role="presentation" class="{{help.isActive('sshkeys')}}" ng-click="help.setActive('sshkeys')"><a href="#/help">SSH Keys</a></li>
+    <li role="presentation" class="{{help.isActive('firewall')}}" ng-click="help.setActive('firewall')"><a href="#/help">Firewall</a></li>
+  </ul>
+ 
+  <div ng-bind-html="help.helpText" style="padding: 5px">
+  </div>
+</div> <!-- container-fluis -->
