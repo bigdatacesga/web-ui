@@ -30,7 +30,7 @@ function helpTextFirewall(){
     'Into the <b><a href="#/firewall">Firewall</a></b> section of this portal you will be able to:<br/>\n'+
     '<ul>\n'+
     '<li>Check allowed IPs/Subnets</li>'+
-    '<li>Enabled or Disable IPs/Subnets, so they become active or not</li>'+
+    '<li>Enable or Disable IPs/Subnets, so they become active or not</li>'+
     '<li>Add new IPs/Subnets to your firewall</li>'+
     '<li>Remove those IPs/Subnets you no longer want</li>'+ 
     '</ul>\n';
