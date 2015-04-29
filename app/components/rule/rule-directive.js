@@ -6,9 +6,9 @@
  * @description
  * # stats
  */
-angular.module('hadoopApp.rule.rule-directive', []) 
+angular.module('hadoopApp.rule.rule-directive', ['hadoopApp.service.ips']) 
 
-.directive('rule', [function() {
+.directive('rule', ['IpService', function(IpService) {
   return {
     templateUrl:'components/rule/rule.html',
     restrict: 'E',
@@ -17,10 +17,17 @@ angular.module('hadoopApp.rule.rule-directive', [])
     },
     link: function(scope, element, attrs) {
       scope.removeRule = function() {
-        element.html('');
-	// TODO
-	alert('TODO\n'+
-	  'removeRule function must Notify API about removing given rule @ link function @ rule/rule-directive.js');
+        this.onIpServiceRemoveSuccess = function(data,elementToRemove){
+	    elementToRemove.html('');
+	}
+	
+	this.onIpServiceRemoveError = function(data,elementToRemove){
+	  alert('The IP could not be removed due to a server-side error.\n'+
+	    'Please notify administrator');
+	  elementToRemove.html('');
+	}
+	
+	IpService.remove(scope.ruleData.ip,this.onIpServiceRemoveSuccess,this.onIpServiceRemoveError);
       };
       scope.getStateCheckboxChecked= function() {
 	if(scope.ruleData.state=='enabled')
@@ -28,19 +35,36 @@ angular.module('hadoopApp.rule.rule-directive', [])
 	else
 	  return false;
       };
+      
       scope.toggleRule = function() {
-	if(scope.ruleData.state=='enabled'){
-	  scope.ruleData.state='disabled';
-	  // TODO HERE: notify API about DISABLING rule
-	  alert('TODO\n'+
-	    'Notify API about ENABLING rule @ toogleRule @ rule-directive.js');
+	this.toggleRuleCheckbox = function (){
+	  if(scope.ruleData.state=='enabled')
+	    scope.ruleData.state='disabled';
+	  else
+	    scope.ruleData.state='enabled';
 	}
-	else{
-	  scope.ruleData.state='enabled';
-	  // TODO HERE: notify API about ENABLING rule
-	  alert('TODO\n'+
-	    'Notify API about DISABLING rule @ toogleRule @ rule-directive.js');
+	
+	this.undoCheckboxChange = function (){
+	  scope.stateCheckbox = !scope.stateCheckbox;
 	}
+	
+	this.onIpServiceUpdateSuccess = function(data,toggleRuleCheckbox){
+	  toggleRuleCheckbox();
+	}
+	
+	this.onIpServiceUpdateError = function(data,undoCheckboxChange){
+	  alert('Rule state could not be updated due to a server-side error.\n'+
+	    'Please notify administrador');
+	  undoCheckboxChange();
+	}
+	
+	this.ipServiceUpdateData = {
+	  id: 2,
+	  address: scope.ruleData.ip+'/'+scope.ruleData.mask,
+	  enabled: (scope.ruleData.state=='enabled') ? false : true
+	};
+	IpService.update(this.ipServiceUpdateData, this.onIpServiceUpdateSuccess, this.onIpServiceUpdateError, this.toggleRuleCheckbox, this.undoCheckboxChange);
+	
       };
       scope.getRuleText = function() {
 	return scope.ruleData.ip+
