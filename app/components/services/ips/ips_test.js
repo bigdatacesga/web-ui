@@ -28,9 +28,13 @@ describe('hadoopApp.service.ips', function() {
   });
 
   it('should return the list of active ips', function() {
-    mockBackend.expectGET('/hadoop/v1/ips').respond(dummyIps);
+    mockBackend.expectGET('/hadoop/v1/ip?user=fajlc').respond(dummyIps);
     var ips = [];
-    service.getAll().then(function(response){
+    this.functSuccess = function(){
+    }
+    this.functError = function(){
+    }
+    service.getAll(this.functSuccess,this.functError,ips).then(function (response){
       ips = response.data;
     });
     mockBackend.flush();
@@ -48,9 +52,14 @@ describe('hadoopApp.service.ips', function() {
   });
 
   it('should delete a given ip', function() {
-    mockBackend.expectDELETE('/hadoop/v1/ips/1').respond(200, '');
+    mockBackend.expectDELETE('/hadoop/v1/ip/1').respond(200, '');
     var status = 0;
-    service.delete('1').then(function(response){
+    this.functSuccess = function(){  
+    }
+    this.functError = function(){ 
+    }
+    this.element= "";
+    service.remove('1',this.functSuccess,this.functError,this.element).then(function(response){
       status = response.status;
     });
     mockBackend.flush();
@@ -63,9 +72,15 @@ describe('hadoopApp.service.ips', function() {
         address: "193.144.34.10",
         enabled: true
     };
-    mockBackend.expectPOST('/hadoop/v1/ips', data).respond(201, '');
+    mockBackend.expectPOST('/hadoop/v1/ip', data).respond(201, '');
     var status;
-    service.create("193.144.34.10").then(function(response){
+    this.functSuccess = function(){
+    }
+    this.functError = function(){
+    }
+    this.arrIPs = [];
+    this.newIP = "";
+    service.create("193.144.34.10",this.functSuccess,this.functError,this.arrIPs,this.newIP).then(function(response){
       status = response.status;
     });
     mockBackend.flush();
@@ -78,9 +93,17 @@ describe('hadoopApp.service.ips', function() {
         address: "193.144.34.10",
         enabled: false
     };
-    mockBackend.expectPUT('/hadoop/v1/ips', ip).respond(200, '');
+    mockBackend.expectPUT('/hadoop/v1/ip', ip).respond(200, '');
     var status;
-    service.update(ip).then(function(response){
+    this.functSuccess = function(){
+    }
+    this.functError = function(){
+    }
+    this.functTglChkbx = function(){
+    }
+    this.functUndoChkbx = function(){
+    }
+    service.update(ip,this.functSuccess,this.functError,this.functTglChkbx,this.functUndoChkbx).then(function(response){
       status = response.status;
     });
     mockBackend.flush();

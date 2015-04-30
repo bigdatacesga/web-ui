@@ -15,10 +15,13 @@ describe('hadoopApp.firewall module', function() {
       expect(ctrl).toBeDefined();
     }));
 
-    it('should have 3 sample ips', inject(function($controller) {
+    /*
+     * Code below is commented because now IPs are obtained through "ips" service which has its own tests
+     */
+     /* it('should have 3 sample ips', inject(function($controller) {
       var ctrl = $controller('FirewallCtrl');
       expect(ctrl.ips.length).toBe(4);
-    }));
+    }));*/
 
 
   });
