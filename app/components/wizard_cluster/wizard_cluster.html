@@ -2,7 +2,7 @@
   <!-- HEADER -->
   <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Wizard Cluster</h1>
+        <h1 class="page-header">Launch New Cluster</h1>
     </div> <!-- div col-lg-12 -->
   </div> <!-- div row -->
   
@@ -20,7 +20,7 @@
 		Number of slave nodes
 	      </td>
 	      <td>
-		<input type="text" tooltip-placement="bottom" tooltip="Add number of desired slave nodes. Notice that master node is not include." ng-model="wizardCluster.slaveNodesNum"/>
+		<input type="text" tooltip-placement="bottom" tooltip="The number of desired slave nodes (data nodes). Additionally, one master node will be always launched automatically." ng-model="wizardCluster.slaveNodesNum"/>
 	      </td>
 	    </tr>
 	  </table>
@@ -53,7 +53,7 @@
 	    </tr>
 	  </table>
 	</div><!-- div advanced-content-div -->
-	<div name="summary-content-div" class="{{wizardCluster.isCollapsed2}}" align="center">
+	<div name="summary-content-div" class="{{wizardCluster.isCollapsed2}}" align="left">
 	  <p>You are about to start the following Hadoop cluster:</p>
 	  <table class="table table-bordered table-striped">
           <thead>
@@ -68,15 +68,15 @@
 	      <td>{{wizardCluster.slaveNodesNum}}</td>
             </tr>
             <tr>
-	      <td>HDFS Replicas</td>
+	      <td>Default HDFS Replicas</td>
 	      <td>{{wizardCluster.hdfsReplicas}}</td>
             </tr>
             <tr>
-	      <td>HDFS Block Size</td>
+	      <td>Default HDFS Block Size</td>
 	      <td>{{wizardCluster.hdfsBlockSize}}</td>
             </tr>
             <tr>
-	      <td>Reduce Tasks Numbers</td>
+	      <td>Default Number of Reduce Tasks</td>
 	      <td>{{wizardCluster.reduceTasksNum}}</td>
             </tr>
           </tbody>

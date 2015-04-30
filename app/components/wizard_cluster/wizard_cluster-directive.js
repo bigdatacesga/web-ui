@@ -62,18 +62,22 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
   
   // FOOTER (Buttons) FUNCTIONS
   this.getBackButtonType = function (){ // Define backButton class bassed on wizard state
-    if(this.wState==this.wStates.INITIAL)
+    if(this.wState==this.wStates.INITIAL) {
       return "btn-default";
-    return "btn-success";
+    }
+    else if(this.wState==this.wStates.SUMMARY){
+      return "btn-default"
+    }
+    return "btn-default";
   }
   this.getNextButtonType = function (){ // Define nextButton class bassed on wizard state
     if(this.wState==this.wStates.SUMMARY)
       return "btn-default";
-    return "btn-success";
+    return "btn-primary";
   }
   this.getLaunchButtonType = function (){ // Define launchButton class bassed on wizard state
     if(this.wState!=this.wStates.SUMMARY)
-      return "btn-default";
+      return "btn-primary";
     return "btn-success";
   }
   
