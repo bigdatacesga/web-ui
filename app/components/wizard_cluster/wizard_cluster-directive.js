@@ -10,7 +10,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
 
 .directive('wizardcluster', function($timeout){ 
    return {
-     link: link,
      templateUrl:'components/wizard_cluster/wizard_cluster.html',
      restrict: 'E',
      controller: 'WizardClusterCtrl',
@@ -31,10 +30,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
   this.advancedAllowed = false;
   this.summaryAllowed = false;
   
-  this.isCollapsed0 = "collapse in";
-  this.isCollapsed1 = "collapse";
-  this.isCollapsed2 = "collapse";
-  
   this.wState = this.wStates.INITIAL;
   
   // BODY TITLE
@@ -54,10 +49,10 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
   }
   
   // BODY CONTENT FUNCTIONS
-  this.updateCollapseds = function(){
-      this.isCollapsed0 = (this.wState == this.wStates.INITIAL) ? "collapse in" : "collapse";
-      this.isCollapsed1 = (this.wState == this.wStates.ADVANCED) ? "collapse in" : "collapse";
-      this.isCollapsed2 = (this.wState == this.wStates.SUMMARY) ? "collapse in" : "collapse";
+  this.isCollapsed = function(state){
+      if(state==this.wState)
+	return "collapse in";
+      return "collapse";
   }
   
   // FOOTER (Buttons) FUNCTIONS
@@ -87,7 +82,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
 	this.wState=this.wStates.INITIAL;
       else if(this.wState==this.wStates.SUMMARY)
 	this.wState=this.wStates.ADVANCED;
-      this.updateCollapseds();
   }
   
   this.nextButton = function (){ // on nextButton ng-click
@@ -101,7 +95,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
       if(!this.summaryAllowed)
 	this.summaryAllowed = true;
     }
-    this.updateCollapseds();
   }
   
   this.launchButton = function (){ // on launchButton ng-click
