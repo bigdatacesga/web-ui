@@ -10,7 +10,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
 
 .directive('wizardcluster', function($timeout){ 
    return {
-     link: link,
      templateUrl:'components/wizard_cluster/wizard_cluster.html',
      restrict: 'E',
      controller: 'WizardClusterCtrl',
