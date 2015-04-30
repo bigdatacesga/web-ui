@@ -30,10 +30,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
   this.advancedAllowed = false;
   this.summaryAllowed = false;
   
-  this.isCollapsed0 = "collapse in";
-  this.isCollapsed1 = "collapse";
-  this.isCollapsed2 = "collapse";
-  
   this.wState = this.wStates.INITIAL;
   
   // BODY TITLE
@@ -53,10 +49,10 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
   }
   
   // BODY CONTENT FUNCTIONS
-  this.updateCollapseds = function(){
-      this.isCollapsed0 = (this.wState == this.wStates.INITIAL) ? "collapse in" : "collapse";
-      this.isCollapsed1 = (this.wState == this.wStates.ADVANCED) ? "collapse in" : "collapse";
-      this.isCollapsed2 = (this.wState == this.wStates.SUMMARY) ? "collapse in" : "collapse";
+  this.isCollapsed = function(state){
+      if(state==this.wState)
+	return "collapse in";
+      return "collapse";
   }
   
   // FOOTER (Buttons) FUNCTIONS

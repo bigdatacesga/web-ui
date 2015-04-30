@@ -13,7 +13,7 @@
 	  <i class="fa fa-server fa-fw"></i> <b>{{wizardCluster.getBodyTitle()}}</b>
       </div>
       <div class="panel-body" style="height:300px;">
-	<div name="initial-content-div" class="{{wizardCluster.isCollapsed0}}" align="center">
+	<div name="initial-content-div" class="{{wizardCluster.isCollapsed(0)}}" align="center">
 	  <table>
 	    <tr>
 	      <td>
@@ -25,7 +25,7 @@
 	    </tr>
 	  </table>
 	</div><!-- div initial-content-div -->
-	<div name="advanced-content-div" class="{{wizardCluster.isCollapsed1}}" align="center">
+	<div name="advanced-content-div" class="{{wizardCluster.isCollapsed(1)}}" align="center">
 	  <table>
 	    <tr>
 	      <td>
@@ -53,7 +53,7 @@
 	    </tr>
 	  </table>
 	</div><!-- div advanced-content-div -->
-	<div name="summary-content-div" class="{{wizardCluster.isCollapsed2}}" align="center">
+	<div name="summary-content-div" class="{{wizardCluster.isCollapsed(2)}}" align="center">
 	  <p>You are about to start the following Hadoop cluster:</p>
 	  <table class="table table-bordered table-striped">
           <thead>
