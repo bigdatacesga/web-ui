@@ -1,93 +1,108 @@
-          <div id ="wizard" class="swMain">
-            <h4 style="text-align:center">New Cluster Wizard</h4>
-            <ul>
-              <li><a href="#step-1">
-                <span class="stepNumber">1</span>
-                <span class="stepDescE">
-                  CLUSTER SIZE
-                </span>
-              </a></li>
-              <li><a href="#step-2">
-                <span class="stepNumber">2</span>
-                <span class="stepDescE">
-                  ADVANCED OPTIONS
-                </span>
-              </a></li>
-              <li><a href="#step-3">
-                <span class="stepNumber">3</span>
-                <span class="stepDesc">
-                  REVIEW
-                </span>
-              </a></li>
-            </ul>
-            <div id="step-1">
-              <h2 class="StepTitle">Step 1 Number of Nodes</h2>
-              <br/><table style="margin: 0 auto;">
-              <tr>
-                <td onmouseover="ClusterService.tooltipNodes()" onmouseout="ClusterService.hide()">Number of slave nodes</td>
-                <td><input type="text" id="input_size" name="size"/></td>
-              </tr>
-            </table>
-          </div>
-          <div id="step-2">
-            <h2 class="StepTitle">Step 2 Advanced Options</h2>
-            <br/><table style="margin: 0 auto;">
-            <tr>
-              <td onmouseover="ClusterService.tooltipReplicas()" onmouseout="ClusterService.hide()">HDFS Replicas</td>
-              <td><input type="text" id="input_replicas" name="replicas"/></td>
-            </tr>
-            <tr>
-              <td onmouseover="ClusterService.tooltipBlockSize()" onmouseout="ClusterService.hide()">HDFS Block Size</td>
-              <td><input type="text" id="input_blocksize" name="blocksize"/></td>
-            </tr>
-            <tr>
-              <td onmouseover="ClusterService.tooltipReduceTasksNumber()" onmouseout="ClusterService.hide()">Reduce Tasks Number</td>
-              <td><input type="text" id="input_reducers" name="reduce"/></td>
-            </tr>
-          <!--<tr>
-              <td onmouseover="showHadoopVersion()" onmouseout="hideTipDiv()">Hadoop version</td>
-            </tr>
-            <tr>
-              <td><input type="radio" name="version" checked="checked">Hadoop v1</input></td>
-              <td><input type="radio" name="version" disabled="disabled">Hadoop v2</input></td>
-            </tr>
-            <tr>
-              <td colspan="2"><span class="clickable_span" onclick="printLaunchClusterTable()">Standard features</span></td>
-            </tr>-->
-          </table>
-          <div id="tipDiv"></div>
-        </div>
-        <div id="step-3">
-          <h2 class="StepTitle">Step 3 Review</h2>
-          <br/><p>You are about to start the following Hadoop cluster:</p>
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Parameter</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Number of slave nodes</td>
-                  <td id="review_size">0</td>
-                </tr>
-                <tr>
-                  <td>HDFS Replicas</td>
-                  <td id="review_replicas">0</td>
-                </tr>
-                <tr>
-                  <td>Default HDFS block size</td>
-                  <td id="review_blocksize">0</td>
-                </tr>
-                <tr>
-                  <td>Number of reduce tasks</td>
-                  <td id="review_reducers">0</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        <div id="addClusterDiv"></div>
+<div class="container-fluid">
+  <!-- HEADER -->
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Wizard Cluster</h1>
+    </div> <!-- div col-lg-12 -->
+  </div> <!-- div row -->
+  
+  <!-- BODY -->
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	  <i class="fa fa-server fa-fw"></i> <b>{{wizardCluster.getBodyTitle()}}</b>
       </div>
-
+      <div class="panel-body" style="height:300px;">
+	<div name="initial-content-div" class="{{wizardCluster.isCollapsed0}}" align="center">
+	  <table>
+	    <tr>
+	      <td>
+		Number of slave nodes
+	      </td>
+	      <td>
+		<input type="text" tooltip-placement="bottom" tooltip="Add number of desired slave nodes. Notice that master node is not include." ng-model="wizardCluster.slaveNodesNum"/>
+	      </td>
+	    </tr>
+	  </table>
+	</div><!-- div initial-content-div -->
+	<div name="advanced-content-div" class="{{wizardCluster.isCollapsed1}}" align="center">
+	  <table>
+	    <tr>
+	      <td>
+		HDFS Replicas
+	      </td>
+	      <td>
+		<input type="text" tooltip-placement="bottom" tooltip="Default number of replicas for each block." ng-model="wizardCluster.hdfsReplicas" />
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>
+		HDFS Block Size
+	      </td>
+	      <td>
+		<input type="text" tooltip-placement="bottom" tooltip="Default block size for new files, in MB." ng-model="wizardCluster.hdfsBlockSize"/>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>
+		Reduce Tasks Numbers
+	      </td>
+	      <td>
+		<input type="text" tooltip-placement="bottom" tooltip="Default number of reduce tasks." ng-model="wizardCluster.reduceTasksNum"/>
+	      </td>
+	    </tr>
+	  </table>
+	</div><!-- div advanced-content-div -->
+	<div name="summary-content-div" class="{{wizardCluster.isCollapsed2}}" align="center">
+	  <p>You are about to start the following Hadoop cluster:</p>
+	  <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+	      <td>Number of slave nodes</td>
+	      <td>{{wizardCluster.slaveNodesNum}}</td>
+            </tr>
+            <tr>
+	      <td>HDFS Replicas</td>
+	      <td>{{wizardCluster.hdfsReplicas}}</td>
+            </tr>
+            <tr>
+	      <td>HDFS Block Size</td>
+	      <td>{{wizardCluster.hdfsBlockSize}}</td>
+            </tr>
+            <tr>
+	      <td>Reduce Tasks Numbers</td>
+	      <td>{{wizardCluster.reduceTasksNum}}</td>
+            </tr>
+          </tbody>
+        </table>
+	</div><!-- div advanced-content-div -->
+      </div><!-- div panel-body -->
+      
+    </div><!-- div panel -->
+  </div><!-- div row -->
+  
+  <!-- FOOTER -->
+  <div class="row">
+    <div class="col-xs-9"></div>
+    <div class="col-xs-3">
+      <button type="button" class="btn {{wizardCluster.getBackButtonType()}}" ng-click='wizardCluster.backButton()'>
+	Back
+      </button>
+      <button type="button" class="btn {{wizardCluster.getNextButtonType()}}" ng-click='wizardCluster.nextButton()'>
+	Next
+      </button>
+      <button type="button" class="btn {{wizardCluster.getLaunchButtonType()}}" ng-click='wizardCluster.launchButton()'>
+	Launch
+      </button>
+    </div><!-- div col-xs-12 -->
+    <div class="clearfix"></div>
+  </div><!-- div row-->
+  <div class="row"><br/></div>
+  
+</div> <!-- div container-fluid -->
