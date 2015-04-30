@@ -78,7 +78,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
 	this.wState=this.wStates.INITIAL;
       else if(this.wState==this.wStates.SUMMARY)
 	this.wState=this.wStates.ADVANCED;
-      this.updateCollapseds();
   }
   
   this.nextButton = function (){ // on nextButton ng-click
@@ -92,7 +91,6 @@ angular.module('hadoopApp.wizard_cluster.wizard_cluster-directive', [])
       if(!this.summaryAllowed)
 	this.summaryAllowed = true;
     }
-    this.updateCollapseds();
   }
   
   this.launchButton = function (){ // on launchButton ng-click
