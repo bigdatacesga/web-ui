@@ -21,7 +21,7 @@ describe('hadoopApp.services.auth.auth-interceptor', function() {
     var dummyToken = "_TESTTOKEN_";
     window.sessionStorage.token = dummyToken;
     interceptor.request(config);
-    expect(config.headers.Authorization).toBe('Bearer ' + dummyToken);
+    expect(config.headers.Authorization).toBe('x-auth-token ' + dummyToken);
   }));
 
   it('should not add token to headers if token is empty', inject(function() {
