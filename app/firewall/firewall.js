@@ -19,10 +19,12 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
 }])
 
 .controller('FirewallCtrl', ['IpService', function(IpService) {
+  var vmFirewall = this;// viewmodelFirewall;
+  // --- Load Firewall data //
   this.ips = [];
-  this.onIpServiceGetAllSuccess = function (data,ips){
+  this.onIpServiceGetAllSuccess = function (data){
     for(var i=0 ; i < data.ips.length ; i++)
-      ips.push({
+      this.ips.push({
 	ip:parseIPFrom(data.ips[i]),
 	mask:parseMaskFrom(data.ips[i]),
 	state: 'enabled'
@@ -31,51 +33,51 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
     /* As API is not working yet the next code is used to load test data.
      * Once API is ready just remove it.
      */
-    ips.push({
+    this.ips.push({
 	ip:'192.168.1.135',
 	mask:'32',
 	state:'enabled'
     });
-    ips.push({
+    this.ips.push({
 	ip:'192.168.1.0',
 	mask:'24',
 	state:'disabled'
     });
-    ips.push({
+    this.ips.push({
 	ip:'0.0.0.0',
 	mask:'32',
 	state: 'enabled'
     });
-    ips.push({
+    this.ips.push({
 	ip: '192.168.1.1',
 	mask: '',
 	state: 'disabled'
     });
   }
   
-  this.onIpServiceGetAllError = function(data,ips){
+    this.onIpServiceGetAllError = function(data){
     alert('Firewall data could not be loaded.\n'+
       'Please notify administrator.');
     
     /* As API is not working yet the next code is used to load test data.
      * Once API is ready just remove it.
      */
-    ips.push({
+    this.ips.push({
 	ip:'192.168.1.135',
 	mask:'32',
 	state:'enabled'
     });
-    ips.push({
+    this.ips.push({
 	ip:'192.168.1.0',
 	mask:'24',
 	state:'disabled'
     });
-    ips.push({
+    this.ips.push({
 	ip:'0.0.0.0',
 	mask:'32',
 	state: 'enabled'
     });
-    ips.push({
+    this.ips.push({
 	ip: '192.168.1.1',
 	mask: '',
 	state: 'disabled'
@@ -83,8 +85,15 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
   }
   
   
-  IpService.getAll(this.onIpServiceGetAllSuccess,this.onIpServiceGetAllError,this.ips);
+  IpService.getAll().success(function (data){
+    vmFirewall.onIpServiceGetAllSuccess(data);
+  }).error(function (data){
+    vmFirewall.onIpServiceGetAllError(data);
+  });
     
+  // Firewall data Loaded --- //
+  
+  // --- Firewall Add Rule //
   this.addRule = function(str) {
     // Adds the rule inside text input if it is valid
     if(isValidIP(document.getElementById("firewall_input_rule").value)){ // TODO write isValidIP. assets/js/configuration_utils.js
@@ -94,23 +103,28 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
 	state: 'enabled'
       };
       
-      this.onIpServiceCreateSuccess = function(data,ips,newIP){
-	ips.push(newIP);
+      this.onIpServiceCreateSuccess = function(data){
+	this.ips.push(this.newIP);
 	document.getElementById("firewall_input_rule").value="";
       }
       
-      this.onIpServiceCreateError = function(data,ips,newIP){
-	alert('IP '+newIP.ip+'/'+newIP.mask+' could not be added to firewall due to a server-side error.\n'+
+      this.onIpServiceCreateError = function(data){
+	alert('IP '+this.newIP.ip+'/'+this.newIP.mask+' could not be added to firewall due to a server-side error.\n'+
 	  'Please notify administrator.');
       }
       
-      IpService.create(this.newIP.ip+'/'+this.newIP.mask,this.onIpServiceCreateSuccess,this.onIpServiceCreateError,this.ips,this.newIP);
+      IpService.create(this.newIP.ip+'/'+this.newIP.mask).success(function (data){
+	vmFirewall.onIpServiceCreateSuccess(data);
+      }).error(function (data){
+	vmFirewall.onIpServiceCreateError(data);
+      });
     
     }
     else
 	alert("Given IP was not valid.\n");
     
   };
+  // Firewall Rule Added --- //
 
 }]);
  

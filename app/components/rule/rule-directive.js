@@ -16,26 +16,29 @@ angular.module('hadoopApp.rule.rule-directive', ['hadoopApp.service.ips'])
       ruleData: '='
     },
     link: function(scope, element, attrs) {
+      var vmRule = scope;
+      
+      // --- REMOVE RULE //
       scope.removeRule = function() {
-        this.onIpServiceRemoveSuccess = function(data,elementToRemove){
-	    elementToRemove.html('');
+        this.onIpServiceRemoveSuccess = function(data){
+	   element.html('');
 	}
 	
-	this.onIpServiceRemoveError = function(data,elementToRemove){
+	this.onIpServiceRemoveError = function(data){
 	  alert('The IP could not be removed due to a server-side error.\n'+
 	    'Please notify administrator');
-	  elementToRemove.html('');
 	}
 	
-	IpService.remove(scope.ruleData.ip,this.onIpServiceRemoveSuccess,this.onIpServiceRemoveError);
+	IpService.remove(scope.ruleData.ip).success(function (data){
+	  vmRule.onIpServiceRemoveSuccess(data);
+	}).error(function (data){
+	  vmRule.onIpServiceRemoveError(data);
+	});
       };
-      scope.getStateCheckboxChecked= function() {
-	if(scope.ruleData.state=='enabled')
-	  return true;
-	else
-	  return false;
-      };
+      // REMOVE RULE --- //
       
+      
+      // --- RULE UPDATE //
       scope.toggleRule = function() {
 	this.toggleRuleCheckbox = function (){
 	  if(scope.ruleData.state=='enabled')
@@ -48,14 +51,14 @@ angular.module('hadoopApp.rule.rule-directive', ['hadoopApp.service.ips'])
 	  scope.stateCheckbox = !scope.stateCheckbox;
 	}
 	
-	this.onIpServiceUpdateSuccess = function(data,toggleRuleCheckbox){
-	  toggleRuleCheckbox();
+	this.onIpServiceUpdateSuccess = function(data){
+	  this.toggleRuleCheckbox();
 	}
 	
-	this.onIpServiceUpdateError = function(data,undoCheckboxChange){
+	this.onIpServiceUpdateError = function(data){
 	  alert('Rule state could not be updated due to a server-side error.\n'+
 	    'Please notify administrador');
-	  undoCheckboxChange();
+	  this.undoCheckboxChange();
 	}
 	
 	this.ipServiceUpdateData = {
@@ -63,13 +66,28 @@ angular.module('hadoopApp.rule.rule-directive', ['hadoopApp.service.ips'])
 	  address: scope.ruleData.ip+'/'+scope.ruleData.mask,
 	  enabled: (scope.ruleData.state=='enabled') ? false : true
 	};
-	IpService.update(this.ipServiceUpdateData, this.onIpServiceUpdateSuccess, this.onIpServiceUpdateError, this.toggleRuleCheckbox, this.undoCheckboxChange);
+	IpService.update(this.ipServiceUpdateData).success(function (data){
+	    vmRule.onIpServiceUpdateSuccess(data);
+	}).error(function (data){
+	    vmRule.onIpServiceUpdateError(data);
+	});
 	
       };
+      // RULE UPDATE --- //
+      
+      
+      scope.getStateCheckboxChecked= function() {
+	if(scope.ruleData.state=='enabled')
+	  return true;
+	else
+	  return false;
+      };
+      
       scope.getRuleText = function() {
 	return scope.ruleData.ip+
 	  ((scope.ruleData.mask.length>0) ? ' / '+scope.ruleData.mask : '');
       };
+      
       scope.getRuleTextStyle = function() {
 	if(scope.ruleData.state!='enabled')
 	  return "color: #888; text-decoration: line-through";
