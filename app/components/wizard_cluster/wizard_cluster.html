@@ -89,17 +89,17 @@
   
   <!-- FOOTER -->
   <div class="row">
-    <div class="col-xs-9"></div>
-    <div class="col-xs-3">
-      <button type="button" class="btn {{wizardCluster.getBackButtonType()}}" ng-click='wizardCluster.backButton()'>
-	Back
+    <div class="col-xs-8"></div>
+    <div class="col-xs-2">
+      <button type="button" class="btn {{wizardCluster.getBackButtonType()}}" ng-click='wizardCluster.backButton()' style="width: 100%;">
+	{{wizardCluster.getBackButtonText()}}
       </button>
-      <button type="button" class="btn {{wizardCluster.getNextButtonType()}}" ng-click='wizardCluster.nextButton()'>
-	Next
+    </div><!-- div col-xs-2 -->
+    <div class="col-xs-2">
+      <button type="button" class="btn {{wizardCluster.getNextButtonType()}}" ng-click='wizardCluster.nextButton()' style="width: 100%;">
+	{{wizardCluster.getNextButtonText()}}
       </button>
-      <button type="button" class="btn {{wizardCluster.getLaunchButtonType()}}" ng-click='wizardCluster.launchButton()'>
-	Launch
-      </button>
+    </div><!-- div col-xs-2 -->
     </div><!-- div col-xs-12 -->
     <div class="clearfix"></div>
   </div><!-- div row-->
