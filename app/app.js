@@ -6,6 +6,7 @@ angular
   'ui.router',
   'ui.bootstrap',
   'angular-loading-bar',
+  'hadoopApp.services.auth',
   'hadoopApp.menu',
   'hadoopApp.dashboard',
   'hadoopApp.clusters',
@@ -15,7 +16,7 @@ angular
   'hadoopApp.firewall',
   'hadoopApp.help'
 ])
-.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
+.config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   // For any unmatched url, redirect to /dashboard
   $urlRouterProvider.otherwise('/dashboard');
 }]);

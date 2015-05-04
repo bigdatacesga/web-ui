@@ -13,8 +13,11 @@ angular.module('hadoopApp.services.auth.auth-interceptor', [])
   return {
     request: function (config) {
       config.headers = config.headers || {};
-      if ($window.sessionStorage.token) {
-        config.headers.Authorization = 'x-auth-token ' + $window.sessionStorage.token;
+      var token = window.sessionStorage.token;
+      var expires = parseInt(window.sessionStorage.expires);
+      if (token && expires && expires > new Date().getTime()) {
+        config.headers['x-auth-token'] = $window.sessionStorage.token;
+        //config.headers.Authorization = 'x-auth-token ' + $window.sessionStorage.token;
       }
       return config;
     },

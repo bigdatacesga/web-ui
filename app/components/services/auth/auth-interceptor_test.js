@@ -18,10 +18,11 @@ describe('hadoopApp.services.auth.auth-interceptor', function() {
 
   it('should add token to headers when token available', inject(function() {
     var config = {};
-    var dummyToken = "_TESTTOKEN_";
+    var dummyToken = "==TESTTOKEN==";
     window.sessionStorage.token = dummyToken;
+    window.sessionStorage.expires = new Date().getTime() + 3600;
     interceptor.request(config);
-    expect(config.headers.Authorization).toBe('x-auth-token ' + dummyToken);
+    expect(config.headers['x-auth-token']).toBe(dummyToken);
   }));
 
   it('should not add token to headers if token is empty', inject(function() {
@@ -29,14 +30,23 @@ describe('hadoopApp.services.auth.auth-interceptor', function() {
     config.headers = {};
     window.sessionStorage.token = '';
     interceptor.request(config);
-    expect(config.headers.Authorization).toBe(undefined);
+    expect(config.headers['x-auth-token']).toBe(undefined);
   }));
 
   it('should not add token to headers if no token is available', inject(function() {
     var config = {};
     config.headers = {};
     interceptor.request(config);
-    expect(config.headers.Authorization).toBe(undefined);
+    expect(config.headers['x-auth-token']).toBe(undefined);
+  }));
+
+  it('should not add token to headers if it has expired', inject(function() {
+    var config = {};
+    var dummyToken = "==TESTTOKEN==";
+    window.sessionStorage.token = dummyToken;
+    window.sessionStorage.expires = new Date().getTime() - 1;
+    interceptor.request(config);
+    expect(config.headers['x-auth-token']).toBe(undefined);
   }));
 
   afterEach(function() {

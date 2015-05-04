@@ -16,16 +16,45 @@
         </div>
 
         <div class="panel-body">
-          <div class="row"> <!-- row(2) -->
-            <div class="col-xs-10 panel">
-              <input type="text" placeholder="eg. 193.144.34.248" class="col-xs-12" id="firewall_input_rule" tooltip-placement="bottom" tooltip="To add subnets use CIDR notation, eg. 193.144.34.0/24" /> <!-- TODO -->
-            </div> <!-- div col-xs-10 -->
-            <div class="col-xs-2">
-              <button class="btn btn-success pull-right" ng-click="firewall.addRule()" type="button">
-                <i class="fa fa-plus"></i> Add Rule
-              </button>
-            </div> <!-- div col-xs-2 -->
-          </div> <!-- div row (2) -->
+
+          <div class="alert alert-danger"
+                 ng-bind="firewall.errorMessage"
+                 ng-show="firewall.errorMessage" />
+
+          <form name="newipForm"
+                ng-submit="firewall.addRule()"
+                class="form-horizonal"
+                role="form">
+
+            <div class="row"> <!-- row(2) -->
+              <div class="col-xs-10 panel">
+                <input  type="text" 
+                        ng-model="vm.newip.address"
+                        placeholder="eg. 193.144.34.248" 
+                        class="col-xs-12" 
+                        id="address" 
+                        tooltip-placement="bottom" 
+                        tooltip="Network address eg. 193.144.34.0" />
+                /
+                <input  type="text" 
+                        ng-model="vm.newip.mask"
+                        placeholder="eg. 24" 
+                        class="col-xs-12" 
+                        id="mask" 
+                        tooltip-placement="bottom" 
+                        tooltip="Network mask in CIDR notation, eg. 8, 16, 24, 32" />
+              </div> <!-- div col-xs-10 -->
+              <div class="col-xs-2">
+                <input type="submit"
+                       class="btn btn-success pull-right"
+                       ng-disabled="newipForm.$invalid">
+                  <i class="fa fa-plus"></i> Add Rule
+                </input>
+              </div> <!-- div col-xs-2 -->
+            </div> <!-- div row (2) -->
+
+          </form>
+
           <div class="row">
             <b>
               <div class="col-xs-5">IP / mask</div>
@@ -34,7 +63,7 @@
             </b>
           </div>
 
-          <rule ng-repeat="ip in firewall.ips" rule-data="ip"/>
+          <!-- <rule ng-repeat="ip in firewall.ips" rule-data="ip"/> -->
 
         </div> <!-- div panel-body -->
       </div><!-- div panel -->
