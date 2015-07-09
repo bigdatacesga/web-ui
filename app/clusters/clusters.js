@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'hadoopApp.cluster'])
+angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'hadoopApp.cluster', 'hadoopApp.service.clusters'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('clusters', {
@@ -18,9 +18,36 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
   });
 }])
 
-.controller('ClustersCtrl', ['$state', function($state) {
-  var self = this;
+.controller('ClustersCtrl', 
+            ['ClusterService', '$log', '$state', function(ClusterService, $log, $state) {
 
+  var vm = this;
+
+  vm.clusters = [];
+
+  activate();
+
+  vm.launchClusterWizard = function() {
+    // Open the modal to launch a new cluster
+    $state.go('launcher');
+  };
+
+  function activate() {
+    return ClusterService.list()
+      .then(function(data){
+        vm.clusters = data;
+      })
+      .catch(function(error) {
+        vm.errorMessage = 'Unable to connect to the Big Data service';
+        $log.warn(vm.errorMessage);
+        $log.info('Status: ' + error.status);
+        $log.info('Error message: '+ error.data.message);
+      });
+    //TODO: Errors should be handled globally in a $http interceptor
+    //      eg. status=401 -> redirect to login page
+  }
+
+  /*
   self.clusters = [
     {
       id:"189",
@@ -81,10 +108,6 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
       exitStatus:0
     }
   ];
-
-  self.launchClusterWizard = function() {
-    // Open the modal to launch a new cluster
-    $state.go('launcher');
-  };
+  */
 
 }]);
