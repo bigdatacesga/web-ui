@@ -30,8 +30,8 @@ module.exports = function(config){
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers : ['Firefox'],
-    //browsers : ['PhantomJS'],
+    //browsers : ['Firefox'],
+    browsers : ['PhantomJS'],
 
     plugins : [
             'karma-chrome-launcher',
