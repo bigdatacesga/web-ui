@@ -12,13 +12,23 @@ The theme is based on the famous Free Bootstrap Theme [SB Admin v2.0 rewritten i
 npm install
 ```
 
-## Run the Application
+## Run the Application together with the REST service
 
+To run the application including a proxy to connect to the REST service:
+```
+grunt server
+```
+
+Start the hadoop-on-demand-rest-jhipster [REST service](https://github.com/javicacheiro/hadoop-on-demand-rest-jhipster) on port 8080
+
+Now browse to the app at `http://localhost:9001/app/index.html`.
+
+It is also possible to run the angularjs application in standalone mode (without the proxy) using:
 ```
 npm start
 ```
 
-Now browse to the app at `http://localhost:8000/app/index.html`.
+In this case the app is accessible at `http://localhost:8000/app/index.html`.
 
 ## Prepare files for deployment
 ```
