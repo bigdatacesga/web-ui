@@ -11,13 +11,13 @@ angular.module('hadoopApp.service.clusters', [])
 .factory('ClusterService', ['$http', function ($http) {
     return {
       list: function() {
-        return $http.get('/hadoop/v1/clusters');
+        return $http.get('/api/clusters');
       },
       show: function(clusterId) {
-        return $http.get('/hadoop/v1/clusters/'+clusterId);
+        return $http.get('/api/clusters/'+clusterId);
       },
       delete: function(clusterId) {
-        return $http.delete('/hadoop/v1/clusters/'+clusterId);
+        return $http.delete('/api/clusters/'+clusterId);
       },
       create: function(size, replicas, blocksize, reducers) {
         var options = { 
@@ -26,7 +26,7 @@ angular.module('hadoopApp.service.clusters', [])
           dfsBlockSize: blocksize,
           reduceTasksNumber: reducers, 
         };
-        return $http.post('/hadoop/v1/clusters', options);
+        return $http.post('/api/clusters', options);
       }
     };
   }]);

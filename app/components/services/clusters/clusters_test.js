@@ -76,7 +76,7 @@ describe('hadoopApp.service.clusters', function() {
   });
 
   it('should return the list of active clusters', function() {
-    mockBackend.expectGET('/hadoop/v1/clusters').respond(dummyClusters);
+    mockBackend.expectGET('/api/clusters').respond(dummyClusters);
     var clusters = [];
     service.list().then(function(response){
       clusters = response.data;
@@ -86,7 +86,7 @@ describe('hadoopApp.service.clusters', function() {
   });
 
   it('should show info about a given cluster', function() {
-    mockBackend.expectGET('/hadoop/v1/clusters/101').respond(dummyClusters[0]);
+    mockBackend.expectGET('/api/clusters/101').respond(dummyClusters[0]);
     var cluster = [];
     service.show('101').then(function(response){
       cluster = response.data;
@@ -97,7 +97,7 @@ describe('hadoopApp.service.clusters', function() {
 
   it('should delete a given cluster', function() {
     var dummyMsg = {"message":"Hadoop cluster with id [101]: DELETED SUCCESSFULLY"};
-    mockBackend.expectDELETE('/hadoop/v1/clusters/101').respond(dummyMsg);
+    mockBackend.expectDELETE('/api/clusters/101').respond(dummyMsg);
     var msg = {};
     service.delete('101').then(function(response){
       msg = response.data;
@@ -114,7 +114,7 @@ describe('hadoopApp.service.clusters', function() {
       dfsBlockSize: 64,
       reduceTasksNumber: 1, 
     };
-    mockBackend.expectPOST('/hadoop/v1/clusters', options).respond(dummyMsg);
+    mockBackend.expectPOST('/api/clusters', options).respond(dummyMsg);
     var msg = {};
     service.create(10, 3, 64, 1).then(function(response){
       msg = response.data;
