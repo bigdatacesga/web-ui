@@ -99,7 +99,7 @@ describe('hadoopApp.service.clusters', function() {
     var dummyMsg = {"message":"Hadoop cluster with id [101]: DELETED SUCCESSFULLY"};
     mockBackend.expectDELETE('/api/clusters/101').respond(dummyMsg);
     var msg = {};
-    service.delete('101').then(function(response){
+    service.remove('101').then(function(response){
       msg = response.data;
     });
     mockBackend.flush();
@@ -107,20 +107,19 @@ describe('hadoopApp.service.clusters', function() {
   });
 
   it('should create a new cluster', function() {
-    var dummyMsg = {"message":"id:101"};
-    var options = { 
+    var data = { 
       size: 10,
       dfsReplicas: 3,
       dfsBlockSize: 64,
-      reduceTasksNumber: 1, 
+      clustername: 'test' 
     };
-    mockBackend.expectPOST('/api/clusters', options).respond(dummyMsg);
-    var msg = {};
-    service.create(10, 3, 64, 1).then(function(response){
-      msg = response.data;
+    mockBackend.expectPOST('/api/clusters', data).respond(201, '');
+    var status;
+    service.create(10,3,64,'test').then(function(response){
+      status = response.data;
     });
     mockBackend.flush();
-    expect(msg).toEqual(dummyMsg); 
+    expect(status).toEqual(201); 
   });
 
   afterEach(function() {

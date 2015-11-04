@@ -28,7 +28,7 @@ describe('hadoopApp.service.keys', function() {
   });
 
   it('should return the list of active keys', function() {
-    mockBackend.expectGET('/hadoop/v1/keys').respond(dummykeys);
+    mockBackend.expectGET('/api/sshKeys').respond(dummykeys);
     var keys = [];
     service.getAll().then(function(response){
       keys = response.data;
@@ -38,7 +38,7 @@ describe('hadoopApp.service.keys', function() {
   });
 
   it('should show the info about a given key', function() {
-    mockBackend.expectGET('/hadoop/v1/keys/1').respond(dummykeys[0]);
+    mockBackend.expectGET('/api/sshKeys/1').respond(dummykeys[0]);
     var key;
     service.get('1').then(function(response){
       key = response.data;
@@ -48,9 +48,9 @@ describe('hadoopApp.service.keys', function() {
   });
 
   it('should delete a given key', function() {
-    mockBackend.expectDELETE('/hadoop/v1/keys/1').respond(200, '');
+    mockBackend.expectDELETE('/api/sshKeys/1').respond(200, '');
     var status = 0;
-    service.delete('1').then(function(response){
+    service.remove('1').then(function(response){
       status = response.status;
     });
     mockBackend.flush();
@@ -62,9 +62,9 @@ describe('hadoopApp.service.keys', function() {
         pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAqZqncbWjqhAtYUon0+K0+wdBxyHBq3ewoD+OJw2bddoILj7/LH4WxZu9W3Haug0Tv3NFndMKOo4k3zYd0Q0oQbcK2jXg/OKzB7M4zyNC/3q1mNpfhOFTe75NMiX7VotjgH/I8ETNun6sPe/YhmHmfbuel6cTozgbuCbb6a14wAk= jlc@lxplus",
         enabled: true
     };
-    mockBackend.expectPOST('/hadoop/v1/keys', data).respond(201, '');
+    mockBackend.expectPOST('/api/sshKeys', data).respond(201, '');
     var status;
-    service.create(data.pubkey).then(function(response){
+    service.create(data).then(function(response){
       status = response.status;
     });
     mockBackend.flush();
@@ -77,7 +77,7 @@ describe('hadoopApp.service.keys', function() {
         pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAqZqncbWjqhAtYUon0+K0+wdBxyHBq3ewoD+OJw2bddoILj7/LH4WxZu9W3Haug0Tv3NFndMKOo4k3zYd0Q0oQbcK2jXg/OKzB7M4zyNC/3q1mNpfhOFTe75NMiX7VotjgH/I8ETNun6sPe/YhmHmfbuel6cTozgbuCbb6a14wAk= jlc@lxplus",
         enabled: false
     };
-    mockBackend.expectPUT('/hadoop/v1/keys', key).respond(200, '');
+    mockBackend.expectPUT('/api/sshKeys/1', key).respond(200, '');
     var status;
     service.update(key).then(function(response){
       status = response.status;

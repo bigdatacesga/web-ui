@@ -1,9 +1,9 @@
 'use strict';
 
-describe('hadoopApp.rule module', function() {
+describe('hadoopApp.iprule module', function() {
 
   // Given
-  beforeEach(module('hadoopApp.rule.rule-directive'));
+  beforeEach(module('hadoopApp.iprule.iprule-directive'));
 
   var compile, mockBackend, rootScope;
 
@@ -15,19 +15,21 @@ describe('hadoopApp.rule module', function() {
 
   var testRule;
   beforeEach(function() {
-    testRule = {rule:"192.168.1.0/24"};
+    testRule = {
+        iprule:"192.168.1.0/24"
+      };
 
-    mockBackend.expectGET('components/rule/rule.html').respond(
-      '<div ng-bind="ruleData.rule"></div>');
+    mockBackend.expectGET('components/iprule/iprule.html').respond(
+      '<div ng-bind="ipruleData.iprule"></div>');
   });
 
   it('should render HTML based on scope correctly', function() {
     var scope = rootScope.$new();
-    scope.ruleData = testRule;
+    scope.ipruleData = testRule;
 
     // When
-    var element = compile('<rule' +
-      ' rule-data="ruleData" />')(scope);
+    var element = compile('<iprule' +
+      ' iprule-data="ipruleData" />')(scope);
     scope.$digest();
     mockBackend.flush();
 

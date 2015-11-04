@@ -1,35 +1,48 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-  
-    <div class="row">
-      
-      <div class="col-sm-12">
-      <div class="sshkey.key" style="word-wrap: break-word;" id="sshkeyContentDiv">
-	 <div collapse="isNotExpanded()">
-	  {{sshkeyData.key.substring(0,20)}} ... 
-	  {{sshkeyData.key.substring(sshkeyData.key.length-20)}}
-	 </div> <!-- div isNotExpanded -->
-	<div collapse="isExpanded()">
-	  {{sshkeyData.key}}
-	</div> <!-- div isExpanded -->
-      </div>
-      </div><!-- div col-sm-10 -->
-      <div class="col-sm-10"></div>
-      <div class="col-sm-2" align="right">
-	
-      </div><!-- div col-sm-2 -->
-      
-    </div> <!-- div row -->
+<div class="row">
 
-  </div> <!-- div panel-body -->
-  
-  <div class="panel-footer">
+  <div class="panel panel-default">
+
+
+    <div class="panel-body">
+
+        <div class="col-sm-12">
+          <span style={{getKeyTextStyle()}}>{{getKeyText()}}
+            <div class="sshkey.key" style="word-wrap: break-word;" id="sshkeyContentDiv">
+              <div collapse="isNotExpanded()">
+                {{sshkeyData.pubkey.substring(0,20)}} ... {{sshkeyData.pubkey.substring(sshkeyData.pubkey.length-20)}}
+              </div> <!-- div isNotExpanded -->
+
+              <div collapse="isExpanded()">
+                {{sshkeyData.pubkey}}
+              </div> <!-- div isExpanded -->
+            </div>
+          </span>
+        </div><!-- div col-sm-10 -->
+        
+        <div class="col-sm-10"></div>
+        
+        <div class="col-sm-2" align="right">
+        </div><!-- div col-sm-2 -->
+    </div> <!-- div panel-body -->
+
+    <div class="panel-footer">
       <button type="button" class="btn btn-info" ng-click='expandShortenKey()'>
-	<i class="fa fa-arrows-v"></i> Expand/Shorten Key
+        <i class="fa fa-arrows-v"></i> Expand/Shorten Key
       </button>
+    
       <button type="button" class="btn btn-danger pull-right" ng-click='removeKey()'>
-	  <i class="fa fa-trash-o"></i> Remove Key
+        <i class="fa fa-trash-o"></i> Remove Key
       </button>
-       <div class="clearfix"></div>
-  </div><!-- /.panel-footer-->
-</div> <!-- div panel panel-default -->
+    
+      <button type="button" class="btn btn-primary" ng-click='toggleRule()'>
+        <i class="fa"></i> Enable
+        <input type="checkbox"  ng-checked="getStateCheckboxChecked()" ng-model="stateCheckbox">
+      </button>
+
+      <div class="clearfix"></div>
+    </div><!-- /.panel-footer-->
+
+
+
+  </div> <!-- div panel panel-default -->
+</div> 

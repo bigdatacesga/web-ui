@@ -8,27 +8,28 @@
  * SSH Keys Service in the hadoopApp.
  */
 angular.module('hadoopApp.service.keys', [])
-.factory('KeyService', ['$http', function ($http) {
-    return {
-      getAll: function() {
-        return $http.get('/hadoop/v1/keys');
-      },
-      get: function(id) {
-        return $http.get('/hadoop/v1/keys/'+id);
-      },
-      delete: function(id) {
-        return $http.delete('/hadoop/v1/keys/'+id);
-      },
-      create: function(pubkey) {
-        var key = { 
-          pubkey: pubkey,
-          enabled: true 
+    .factory('KeyService', ['$http', function ($http) {
+        return {
+
+            getAll: function() {
+                return $http.get('/api/sshKeys');
+            },
+
+            get: function(id) {
+                return $http.get('/api/sshKeys/'+id);
+            },
+
+            remove: function(id) {
+                return $http.delete('/api/sshKeys/'+id);
+            },
+
+            create: function(key) {
+                key.enabled = true;
+                return $http.post('/api/sshKeys', key);
+            },
+
+            update: function(key) {
+                return $http.put('/api/sshKeys/' + key["id"], key);
+            }
         };
-        return $http.post('/hadoop/v1/keys', key);
-      },
-      // To update a key use {id: 2, pubkey: "dss ...", enabled: false}
-      update: function(key) {
-        return $http.put('/hadoop/v1/keys', key);
-      }
-    };
-  }]);
+    }]);

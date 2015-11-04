@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'hadoopApp.cluster', 'hadoopApp.service.clusters'])
+angular.module('hadoopApp.clusters', ['ui.router','ui.bootstrap', 'hadoopApp.notifications', 'hadoopApp.cluster', 'hadoopApp.service.clusters'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('clusters', {
@@ -19,7 +19,7 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
 }])
 
 .controller('ClustersCtrl', 
-            ['ClusterService', '$log', '$state', function(ClusterService, $log, $state) {
+            ['ClusterService', '$log', '$state', '$uibModal', function(ClusterService, $log, $state,$uibModal) {
 
   var vm = this;
 
@@ -28,86 +28,109 @@ angular.module('hadoopApp.clusters', ['ui.router', 'hadoopApp.notifications', 'h
   activate();
 
   vm.launchClusterWizard = function() {
-    // Open the modal to launch a new cluster
-    $state.go('launcher');
+    //$state.go('launcher');
+
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'clusters/partials/wizard.html',
+        controller: 'ModalInstanceCtrl',
+        controllerAs: 'modal',
+        resolve: {
+          items: function () {
+            return vm.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (data) {
+        vm.clusterDetails = data;
+        vm.errorMessage = 'Launching cluster';
+        ClusterService.create(data.clusterSize, data.replicas, data.blocksize, data.clusterName)    
+          .then(function(success) {
+            activate();
+          }).catch(function(error) {
+            vm.errorMessage = error.data;
+          })
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    
+
   };
 
   function activate() {
     return ClusterService.list()
       .then(function(data){
-        vm.clusters = data;
+        vm.clusters = data.data;
       })
       .catch(function(error) {
-        vm.errorMessage = 'Unable to connect to the Big Data service';
-        $log.warn(vm.errorMessage);
+        if(error.status == 401){
+          alert("You need to authenticate");
+          $state.go('login');
+        }else{
+          vm.errorMessage = 'Unable to connect to the Big Data service';
+        }
         $log.info('Status: ' + error.status);
         $log.info('Error message: '+ error.data.message);
       });
     //TODO: Errors should be handled globally in a $http interceptor
     //      eg. status=401 -> redirect to login page
   }
-
-  /*
-  self.clusters = [
-    {
-      id:"189",
-      user:"uscfajlc",
-      group:"hadoop",
-      name:"hadoop-189",
-      vms:[
-        {
-          vmid:"42077",
-          status:"runn",
-          ucpu:2,
-          umem:"2G",
-          host:"nubacesga-10-1",
-          time:"0d00h06",
-          name:"hadoop-189-0",
-          ip:"193.144.33.100"
-        },
-        {
-          vmid:"42078",
-          status:"runn",
-          ucpu:1,
-          umem:"1024M",
-          host:"nubacesga-05-2",
-          time:"0d00h06",
-          name:"hadoop-189-1",
-          ip:"10.38.1.2"
-        }
-      ],
-      exitStatus:0
-    },
-    {
-      id:"190",
-      user:"uscfajlc",
-      group:"hadoop",
-      name:"hadoop-190",
-      vms:[
-        {
-          vmid:"42079",
-          status:"runn",
-          ucpu:2,
-          umem:"2G",
-          host:"nubacesga-10-1",
-          time:"0d00h06",
-          name:"hadoop-189-0",
-          ip:"193.144.33.100"
-        },
-        {
-          vmid:"42080",
-          status:"runn",
-          ucpu:1,
-          umem:"1024M",
-          host:"nubacesga-05-2",
-          time:"0d00h06",
-          name:"hadoop-189-1",
-          ip:"10.38.1.2"
-        }
-      ],
-      exitStatus:0
-    }
-  ];
-  */
-
 }]);
+
+
+angular.module('hadoopApp.launcher', ['ui.router','ui.bootstrap'])
+
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+  var modal = this;
+
+  modal.steps = ['one', 'two', 'three'];
+  modal.step = 0;
+  modal.wizard = {
+    clusterName: "test",
+    clusterSize: 2,
+    HDFSblocksize: "64",
+    HDFSreplicas : "2"
+  };
+
+  modal.isFirstStep = function () {
+      return modal.step === 0;
+  };
+
+  modal.isLastStep = function () {
+      return modal.step === (modal.steps.length - 1);
+  };
+
+  modal.isCurrentStep = function (step) {
+      return modal.step === step;
+  };
+
+  modal.setCurrentStep = function (step) {
+      modal.step = step;
+  };
+
+  modal.getCurrentStep = function () {
+      return modal.steps[modal.step];
+  };
+
+  modal.getNextLabel = function () {
+      return (modal.isLastStep()) ? 'Submit' : 'Next';
+  };
+
+  modal.handlePrevious = function () {
+      modal.step -= (modal.isFirstStep()) ? 0 : 1;
+  };
+
+  modal.handleNext = function () {
+      if (modal.isLastStep()) {
+          $uibModalInstance.close(modal.wizard);
+      } else {
+          modal.step += 1;
+      }
+  };
+
+  modal.dismiss = function(reason) {
+      $uibModalInstance.dismiss(reason);
+  };
+});

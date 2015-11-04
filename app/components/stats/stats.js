@@ -6,21 +6,21 @@
  * @description
  * # stats
  */
-angular.module('hadoopApp.stats', [])
-    .directive('stats',function() {
-    	return {
-  		templateUrl:'components/stats/stats.html',
-  		restrict:'E',
-  		replace:true,
-  		scope: {
-        'model': '=',
-        'comments': '@',
-        'number': '@',
-        'name': '@',
-        'colour': '@',
-        'details':'@',
-        'type':'@'
-  		}
-  		
-  	}
-  });
+    angular.module('hadoopApp.stats', [])
+        .directive('stats',function() {
+            return {
+                templateUrl:'components/stats/stats.html',
+                restrict:'E',
+                replace:true,
+                scope: {
+                    'model': '=',
+                    'comments': '@',
+                    'number': '@',
+                    'name': '@',
+                    'colour': '@',
+                    'details':'@',
+                    'type':'@',
+                    'link' : '@'
+                }
+            }
+    });

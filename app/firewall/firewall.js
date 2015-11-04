@@ -7,7 +7,7 @@
  * Controller of the firewall view 
  * Allows to see current firewall configuration and to add new rules
  */
-angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.service.ips'])
+angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.iprule', 'hadoopApp.service.ips'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('firewall', {
@@ -26,11 +26,20 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
   vm.newip = { address: '', mask: '' };
 
   vm.addRule = function() {
-    IpService.create(vm.newip).then(function(success) {
-      activate();
-    }, function(error) {
-      vm.errorMessage = error.data;
-    })
+    IpService.create(vm.newip)
+    .then(function(success) {
+        activate();
+      })
+      .catch(function(error) {
+        if(error.status == 401){
+          alert("You need to authenticate");
+          $state.go('login');
+        }else{
+          vm.errorMessage = 'Unable to connect to the Big Data service';
+        }
+        $log.info('Status: ' + error.status);
+        $log.info('Error message: '+ error.data.message);
+      });
   };
 
   activate();
@@ -38,7 +47,7 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
   function activate() {
     return IpService.getAll()
       .then(function(data){
-        vm.ips = data;
+        vm.ips = data.data;
       })
       .catch(function(error) {
         vm.errorMessage = 'Unable to connect to the Big Data service';
@@ -49,7 +58,6 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.rule', 'hadoopApp.
     //TODO: Errors should be handled globally in a $http interceptor
     //      eg. status=401 -> redirect to login page
   }
-
 
 }]);
  

@@ -81,7 +81,7 @@ describe('hadoopApp.service.ips', function() {
         mask: "24",
         enabled: false
     };
-    mockBackend.expectPUT('/api/ips', ip).respond(200, '');
+    mockBackend.expectPUT('/api/ips/1', ip).respond(200, '');
     var status;
     service.update(ip).then(function(response){
       status = response.status;

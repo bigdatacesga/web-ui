@@ -16,15 +16,15 @@ angular.module('hadoopApp.service.clusters', [])
       show: function(clusterId) {
         return $http.get('/api/clusters/'+clusterId);
       },
-      delete: function(clusterId) {
+      remove: function(clusterId) {
         return $http.delete('/api/clusters/'+clusterId);
       },
-      create: function(size, replicas, blocksize, reducers) {
+      create: function(size, replicas, blocksize, clustername) {
         var options = { 
           size: size,
           dfsReplicas: replicas,
-          dfsBlockSize: blocksize,
-          reduceTasksNumber: reducers, 
+          dfsBlocksize: blocksize,
+          clustername: clustername
         };
         return $http.post('/api/clusters', options);
       }

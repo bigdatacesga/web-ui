@@ -6,10 +6,10 @@
           <i class="fa icon-hadoop fa-5x"></i>
         </div>
         <div class="col-sm-9">
-          <div class="pull-right ok"></div>
-          <div class="cluster-name">Cluster {{clusterData.name}}</div>
-          <div class="cluster-details">ssh hadoop@{{clusterData.vms[0].ip}}</div>
-          <div class="pull-right">{{clusterData.vms.length}} nodes</div>
+          <div class="{{getExitStatus()}}"></div>
+          <div class="cluster-name">Cluster {{clusterData.clustername}}</div>
+          <div class="cluster-details">Cluster is {{getClusterState()}}</div>
+          <div class="pull-right">{{clusterData.size}} nodes</div>
         </div>
       </div><!-- /.row -->
     </div><!-- /.panel-heading-->
@@ -18,7 +18,7 @@
       <button type="button" class="btn btn-info" ng-click='toggleDetails()'>
         <i class="fa fa-info-circle"></i> Show Details
       </button>
-      <button type="button" class="btn btn-danger pull-right">
+      <button type="button" class="btn btn-danger pull-right" ng-click='removeCluster()'>
         <i class="fa fa-trash-o"></i> Destroy Cluster
       </button>
        <div class="clearfix"></div>
