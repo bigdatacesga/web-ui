@@ -111,12 +111,12 @@ describe('hadoopApp.service.clusters', function() {
       size: 10,
       dfsReplicas: 3,
       dfsBlockSize: 64,
-      clustername: 'test' 
+      clustername: 'test'
     };
-    mockBackend.expectPOST('/api/clusters', data).respond(201, '');
+    mockBackend.expectPOST('/api/clusters',data).respond(201, '');
     var status;
-    service.create(10,3,64,'test').then(function(response){
-      status = response.data;
+    service.create(data).then(function(response){
+      status = response.status;
     });
     mockBackend.flush();
     expect(status).toEqual(201); 

@@ -46,7 +46,15 @@ angular.module('hadoopApp.clusters', ['ui.router','ui.bootstrap', 'hadoopApp.not
       modalInstance.result.then(function (data) {
         vm.clusterDetails = data;
         vm.errorMessage = 'Launching cluster';
-        ClusterService.create(data.clusterSize, data.replicas, data.blocksize, data.clusterName)    
+
+        var options = { 
+          size: data.clusterSize,
+          dfsReplicas: data.replicas,
+          dfsBlocksize: data.blocksize,
+          clustername: data.clusterName
+        };
+
+        ClusterService.create(options)    
           .then(function(success) {
             activate();
           }).catch(function(error) {
