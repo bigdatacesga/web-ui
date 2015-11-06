@@ -81,15 +81,15 @@ describe('hadoopApp.clusters controller', function() {
   }));
   */
 
-  beforeEach(inject(function(ClusterService, $q) {
-    spyOn(ClusterService, "list").andReturn($q.when(dummyClusters));
-    //spyOn(ClusterService, "list").andCallFake(function() {
-    //  var deferred = $q.defer();
-    //  deferred.resolve(dummyClusters);
-    //  //deferred.reject('Simulated error');
-    //  return deferred.promise;
-    //});
-  }));
+  // beforeEach(inject(function(ClusterService, $q) {
+  //   spyOn(ClusterService, "list").andReturn($q.when(dummyClusters));
+  //   //spyOn(ClusterService, "list").andCallFake(function() {
+  //   //  var deferred = $q.defer();
+  //   //  deferred.resolve(dummyClusters);
+  //   //  //deferred.reject('Simulated error');
+  //   //  return deferred.promise;
+  //   //});
+  // }));
 
   beforeEach(inject(function($state) {
     spyOn($state, 'go');
