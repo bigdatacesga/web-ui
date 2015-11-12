@@ -23,13 +23,14 @@ angular.module('hadoopApp.services.auth.auth-interceptor', [])
     },
     response: function (response) {
       if (response.status === 401) {
-        $state.go('login');
+        alert("You need to authenticate");
+        //$state.go('login');
+        location = "#/login";
       }
       return response || $q.when(response);
     }
   };
 })
-
 .config(function ($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 });

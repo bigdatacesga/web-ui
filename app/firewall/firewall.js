@@ -14,7 +14,10 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.iprule', 'hadoopAp
     url:'/firewall',
     templateUrl: 'firewall/firewall.html',
     controller: 'FirewallCtrl',
-    controllerAs: 'firewall'
+    controllerAs: 'firewall',
+    data: {
+        requireLogin: true
+    }
   });
 }])
 
@@ -31,12 +34,7 @@ angular.module('hadoopApp.firewall', ['ui.router', 'hadoopApp.iprule', 'hadoopAp
         activate();
       })
       .catch(function(error) {
-        if(error.status == 401){
-          alert("You need to authenticate");
-          $state.go('login');
-        }else{
-          vm.errorMessage = 'Unable to connect to the Big Data service';
-        }
+        vm.errorMessage = 'Unable to connect to the Big Data service';
         $log.info('Status: ' + error.status);
         $log.info('Error message: '+ error.data.message);
       });

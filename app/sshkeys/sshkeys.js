@@ -31,12 +31,7 @@ angular.module('hadoopApp.sshkeys', ['ui.router', 'hadoopApp.sshkey', 'hadoopApp
         activate();
       })
       .catch(function(error) {
-        if(error.status == 401){
-          alert("You need to authenticate");
-          $state.go('login');
-        }else{
-          vm.errorMessage = 'Unable to connect to the Big Data service';
-        }
+        alert("You need to authenticate");
         $log.info('Status: ' + error.status);
         $log.info('Error message: '+ error.data.message);
       });
@@ -55,8 +50,6 @@ angular.module('hadoopApp.sshkeys', ['ui.router', 'hadoopApp.sshkey', 'hadoopApp
         $log.info('Status: ' + error.status);
         $log.info('Error message: '+ error.data.message);
       });
-  //TODO: Errors should be handled globally in a $http interceptor
-  //      eg. status=401 -> redirect to login page
   }
 
 }]);

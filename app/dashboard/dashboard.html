@@ -7,18 +7,8 @@
   </div>
 
   <div class="row">
-    <stats link="#/clusters" comments="Clusters" colour="primary" type="database"></stats>
-    <stats link="#/firewall" comments="Allowed IPs" colour="green" type="arrows-h"></stats>
-    <stats link="#/sshkeys" comments="SSH Keys" colour="red" type="key"></stats>
 
-<!--    Con Numeros 
-    <stats number="2" link="#/clusters" comments="Clusters" colour="primary" type="database"></stats>
-    <stats number="4" link="#/firewall" comments="Allowed IPs" colour="green" type="arrows-h"></stats>
-    <stats number="2" link="#/sshkeys" comments="SSH Keys" colour="red" type="key"></stats> -->
-
-    <!-- <stats number="10" link="" comments="Nodes" colour="green" type="server"></stats> -->
-    <!-- <stats number="10" comments="Jobs" colour="yellow" type="tasks"></stats> -->
-    <!-- <stats number="2" comments="Alerts" colour="red" type="exclamation-circle"></stats> -->
+    <stat ng-repeat="stat in dashboard.stats" stat-data="stat"/>
   </div>
     
 </div>

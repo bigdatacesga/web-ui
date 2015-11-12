@@ -14,7 +14,10 @@ angular.module('hadoopApp.clusters', ['ui.router','ui.bootstrap', 'hadoopApp.not
     url:'/clusters',
     templateUrl: 'clusters/clusters.html',
     controller: 'ClustersCtrl',
-    controllerAs: 'clusters'
+    controllerAs: 'clusters',
+    data: {
+        requireLogin: true
+    }
   });
 }])
 
@@ -73,17 +76,10 @@ angular.module('hadoopApp.clusters', ['ui.router','ui.bootstrap', 'hadoopApp.not
         vm.clusters = data.data;
       })
       .catch(function(error) {
-        if(error.status == 401){
-          alert("You need to authenticate");
-          $state.go('login');
-        }else{
-          vm.errorMessage = 'Unable to connect to the Big Data service';
-        }
+        vm.errorMessage = 'Unable to connect to the Big Data service';
         $log.info('Status: ' + error.status);
         $log.info('Error message: '+ error.data.message);
       });
-    //TODO: Errors should be handled globally in a $http interceptor
-    //      eg. status=401 -> redirect to login page
   }
 }]);
 

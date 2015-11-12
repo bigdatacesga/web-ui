@@ -51,7 +51,7 @@ describe('hadoopApp.clusters controller', function() {
   //           host:"nubacesga-10-1",
   //           time:"0d00h06",
   //           name:"hadoop-189-0",
-  //           ip:"193.144.33.100"
+  //           ip :"193.144.33.100"
   //         },
   //         {
   //           vmid:"42080",
