@@ -23,7 +23,7 @@ angular.module('hadoopApp.sshkeys', ['ui.router', 'hadoopApp.sshkey', 'hadoopApp
   var vm = this;
 
   vm.keys = [];
-  vm.newkey = { pubkey: '', type: '' };
+  vm.newkey = { pubkey: '', type: 'droppedAttribute' };
 
   vm.addKey = function(){
     KeyService.create(vm.newkey)

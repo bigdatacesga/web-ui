@@ -27,8 +27,9 @@
                     <div class="form-group">
                         <label class="control-label" for="select01">HDFS Replicas</label>
                         <div class="controls">
-                            <select class="form-control" id="select01" ng-model="modal.wizard.replicas">
+                            <select class="form-control" id="select01" ng-model="modal.wizard.HDFSreplicas">
                                 <option>2</option>
+                                <option>3</option>
                                 <option>4</option>
                                 <option>6</option>
                             </select>
@@ -38,7 +39,7 @@
                     <div class="form-group">
                         <label class="control-label" for="select02">HDFS Blocksize</label>
                         <div class="controls">
-                            <select class="form-control" id="select02" ng-model="modal.wizard.blocksize">
+                            <select class="form-control" id="select02" ng-model="modal.wizard.HDFSblocksize">
                                 <option>64</option>
                                 <option>128</option>
                                 <option>256</option>
@@ -60,8 +61,8 @@
                         <div class="row">
                             <div class="col-xs-4">
                                 <p><strong>Cluster Name:</strong> {{modal.wizard.clusterName}}</p>
-                                <p><strong>HDFS Replicas:</strong> {{modal.wizard.replicas}}</p>
-                                <p><strong>HDFS Blocksize:</strong> {{modal.wizard.blocksize}}</p>
+                                <p><strong>HDFS Replicas:</strong> {{modal.wizard.HDFSreplicas}}</p>
+                                <p><strong>HDFS Blocksize:</strong> {{modal.wizard.HDFSblocksize}}</p>
                                 <p><strong>Size:</strong> {{modal.wizard.clusterSize}}</p>
                             </div>
                         </div>

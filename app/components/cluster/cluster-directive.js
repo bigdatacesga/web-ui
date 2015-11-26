@@ -6,9 +6,9 @@
  * @description
  * # stats
  */
-angular.module('hadoopApp.cluster.cluster-directive', ['hadoopApp.service.clusters'])
+angular.module('hadoopApp.cluster.cluster-directive', ['hadoopApp.service.clusters', 'hadoopApp.service.nodes'])
 
-.directive('cluster', ['ClusterService' ,function(ClusterService) {
+.directive('cluster', ['ClusterService', 'NodesService' ,function(ClusterService, NodesService) {
   return {
     templateUrl:'components/cluster/cluster.html',
     restrict: 'E',
@@ -20,22 +20,46 @@ angular.module('hadoopApp.cluster.cluster-directive', ['hadoopApp.service.cluste
     link: function(scope, element, attrs) {
       var vmCluster = scope;
 
-      
-      scope.toggleDetails = function() {
+      vmCluster.clusterData.vms = [];
+      vmCluster.showDetails = 'false';
+
+
+      vmCluster.refresh = function() {
+          vmCluster.toggleDetails();
+          vmCluster.toggleDetails();
+          vmCluster.refreshClusterDetails();
+          // NodesService.listClusterNodes(vmCluster.clusterData.id).success(function (data){
+          //   vmCluster.clusterData.vms = data;
+          // }).error(function (data){
+            
+          // });
+      }
+
+
+      vmCluster.refreshClusterDetails = function(){
+          ClusterService.show(vmCluster.clusterData.id).success(function (data){
+            vmCluster.clusterData.exitStatus = data.exitStatus;
+          }).error(function (data){
+            
+          });
+      }
+
+      vmCluster.toggleDetails = function() {
         if(vmCluster.showDetails == 'false') {
-          vmCluster.showDetails = 'true';
+          NodesService.listClusterNodes(vmCluster.clusterData.id).success(function (data){
+            vmCluster.clusterData.vms = data;
+            vmCluster.showDetails = 'true';
+          }).error(function (data){
+            
+          });
         } else {
           vmCluster.showDetails = 'false';
         }
       };
-      scope.isCollapsed = function() {
-        if(vmCluster.showDetails == 'false') {
-          return true;
-        } else {
-          return false;
-        }
+      vmCluster.isCollapsed = function() {
+          return vmCluster.showDetails == 'false';
       };
-      scope.removeCluster = function() {
+      vmCluster.removeCluster = function() {
         this.onClusterServiceRemoveSuccess = function(data){
             element.html('');
         };
@@ -45,7 +69,7 @@ angular.module('hadoopApp.cluster.cluster-directive', ['hadoopApp.service.cluste
                 'Please notify administrator');
         };
         
-        ClusterService.remove(scope.clusterData.id).success(function (data){
+        ClusterService.remove(vmCluster.clusterData.id).success(function (data){
           vmCluster.onClusterServiceRemoveSuccess(data);
         }).error(function (data){
           vmCluster.onClusterServiceRemoveError(data);
@@ -53,7 +77,11 @@ angular.module('hadoopApp.cluster.cluster-directive', ['hadoopApp.service.cluste
       };
 
 
-      scope.getClusterState = function(){
+      vmCluster.getClusterState = function(){
+        if(vmCluster.clusterData.exitStatus == null){
+          return 'starting';
+        }
+
         if(vmCluster.clusterData.exitStatus == '0' && vmCluster.clusterData.stopTime == null){
           return 'running';
         }else{
@@ -61,7 +89,10 @@ angular.module('hadoopApp.cluster.cluster-directive', ['hadoopApp.service.cluste
         }
       }
 
-      scope.getExitStatus = function(){
+      vmCluster.getExitStatus = function(){
+        if(vmCluster.clusterData.exitStatus == null){
+          return 'pull-right start';
+        }
         if(vmCluster.clusterData.exitStatus == '0' && vmCluster.clusterData.stopTime == null){
           return 'pull-right ok';
         }else{

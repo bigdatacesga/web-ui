@@ -52,8 +52,8 @@ angular.module('hadoopApp.clusters', ['ui.router','ui.bootstrap', 'hadoopApp.not
 
         var options = { 
           size: data.clusterSize,
-          dfsReplicas: data.replicas,
-          dfsBlocksize: data.blocksize,
+          dfsReplicas: data.HDFSreplicas,
+          dfsBlocksize: data.HDFSblocksize,
           clustername: data.clusterName
         };
 
@@ -61,7 +61,13 @@ angular.module('hadoopApp.clusters', ['ui.router','ui.bootstrap', 'hadoopApp.not
           .then(function(success) {
             activate();
           }).catch(function(error) {
-            vm.errorMessage = error.data;
+            if(error.status == 409){
+              alert('You have exceeded the number of nodes allowed.');
+              vm.errorMessage = 'You have exceeded the number of nodes allowed';
+              $log.info('Status: ' + error.status);
+            }
+              vm.errorMessage = 'You have exceeded the number of nodes allowed';
+              $log.info('Status: ' + error.status);
           })
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());

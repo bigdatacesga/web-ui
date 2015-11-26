@@ -25,6 +25,7 @@ angular.module('hadoopApp.service.keys', [])
 
             create: function(key) {
                 key.enabled = true;
+                key.type = "droppedAttribute";
                 return $http.post('/api/sshKeys', key);
             },
 

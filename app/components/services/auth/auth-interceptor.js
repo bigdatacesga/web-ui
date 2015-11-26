@@ -27,6 +27,9 @@ angular.module('hadoopApp.services.auth.auth-interceptor', [])
         //$state.go('login');
         location = "#/login";
       }
+      if (response.status === 409) {
+        alert("Maximum number of nodes exceeded.");
+      }
       return response || $q.when(response);
     }
   };

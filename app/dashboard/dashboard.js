@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('hadoopApp.dashboard', ['ui.router', 'hadoopApp.stat'])
+angular.module('hadoopApp.dashboard', ['ui.router', 'hadoopApp.stat', 'hadoopApp.service.clusters','hadoopApp.service.ips','hadoopApp.service.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {
@@ -21,7 +21,7 @@ angular.module('hadoopApp.dashboard', ['ui.router', 'hadoopApp.stat'])
   });
 }])
 
-.controller('DashboardCtrl', [function() {
+.controller('DashboardCtrl', ['ClusterService','IpService','KeyService', function(ClusterService,IpService,KeyService) {
   var vm = this;
   vm.awesomeThings = [
     'HTML5 Boilerplate',
@@ -29,70 +29,67 @@ angular.module('hadoopApp.dashboard', ['ui.router', 'hadoopApp.stat'])
     'Karma'
   ];
 
-  vm.stats = [
-    {
+
+  var errorNumber = "#unknown"
+  vm.stats = {
+    clusters : {
       link:"#/clusters",
       comments:"Clusters",
       colour:"primary",
-      type:"database"
+      type:"database",
+      number:errorNumber
     },
-    {
+    ips: {
       link:"#/firewall",
       comments:"AllowedIPs",
       colour:"green",
-      type:"arrows-h"
+      type:"arrows-h",
+      number: errorNumber
     },
-    {
+    keys: {
       link:"#/sshkeys",
       comments:"SSH Keys",
       colour:"red",
-      type:"key"
+      type:"key",
+      number: errorNumber
     }
-  ];
-  // var asd = 9090;
-  // vm.clusters = 
-  // var clustersLength = 0;
-  // function getClusters() {
-  //   return ClusterService.list()
-  //     .then(function(data){
-  //       vm.clusters = data.data;
-  //       vm.clustersLength = vm.clusters.lentgh;
-  //     })
-  //     .catch(function(error) {
-  //       vm.errorMessage = 'Unable to connect to the Big Data service';
-  //       $log.info('Status: ' + error.status);
-  //       $log.info('Error message: '+ error.data.message);
-  //     });
-  // }
-  // var dahj = 90;
-  // clustersLength = 90;
-  // var asdf = 90;
-  // function getIps() {
-  //     return IpService.getAll()
-  //       .then(function(data){
-  //         vm.ips = data.data;
-  //       })
-  //       .catch(function(error) {
-  //         vm.errorMessage = 'Unable to connect to the Big Data service';
-  //         $log.warn(vm.errorMessage);
-  //         $log.info('Status: ' + error.status);
-  //         $log.info('Error message: '+ error.data.message);
-  //       });
-  //   }
+  };
 
 
-  // function getKeys() {
-  //   return KeyService.getAll()
-  //     .then(function(data){
-  //       vm.keys = data.data;
-  //     })
-  //     .catch(function(error) {
-  //       vm.errorMessage = 'Unable to connect to the Big Data service';
-  //       $log.warn(vm.errorMessage);
-  //       $log.info('Status: ' + error.status);
-  //       $log.info('Error message: '+ error.data.message);
-  //     });
-  // }
+  getClusters();
+  getIps();
+  getKeys();
+
+  function getClusters() {
+    return ClusterService.list()
+      .then(function(data){
+        vm.clusters = data.data;
+        vm.stats.clusters.number = vm.clusters.length;
+      })
+      .catch(function(error) {
+        vm.stats.clusters.number = errorNumber;
+      });
+  }
+  function getIps() {
+      return IpService.getAll()
+        .then(function(data){
+          vm.ips = data.data;
+          vm.stats.ips.number = vm.ips.length;
+        })
+        .catch(function(error) {
+          vm.stats.ips.number = errorNumber;
+        });
+    }
 
 
+  function getKeys() {
+    return KeyService.getAll()
+      .then(function(data){
+        vm.keys = data.data;
+        vm.stats.keys.number = vm.keys.length;
+      })
+      .catch(function(error) {
+        vm.stats.keys.number = errorNumber;
+      });
+  }
 }]);
