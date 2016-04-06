@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Clusters</h1>
+    </div><!-- /.col-lg-12 -->
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-server fa-fw"></i> Active Clusters
+            </div>
+            <div class="panel-body">
+              <div class="col-xs-12 panel">
+                <button type="button" class="btn btn-success" ng-click='cloud_services.launchClusterWizard()'>
+                  <i class="fa fa-plus"></i> Launch new cloud service
+                </button>
+              </div>
+
+              <cloud ng-repeat="service in cloud_services.services" cloud-data="service" show-details="false" />
+            </div>
+        </div><!-- /.panel -->
+      </div><!-- /.col-lg-12 -->
+</div><!-- /.row -->

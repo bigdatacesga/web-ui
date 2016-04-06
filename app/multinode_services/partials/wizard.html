@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="modal.dismiss('Error')" aria-hidden="true">&times;</button>
+    <h3>Launch New Cluster Service</h3>
+</div>
+<div class="modal-body">
+    <div>
+        <div class="btn-group">
+            <button class="btn" ng-class="{'btn-primary':modal.isCurrentStep(0)}" ng-click="modal.setCurrentStep(0)">Basics</button>
+            <button class="btn" ng-class="{'btn-primary':modal.isCurrentStep(1)}" ng-click="modal.setCurrentStep(1)">Parameters</button>
+            <button class="btn" ng-class="{'btn-primary':modal.isCurrentStep(2)}" ng-click="modal.setCurrentStep(2)">Submit</button>
+        </div>
+        <div ng-switch="modal.getCurrentStep()" class="slide-frame">
+            
+
+            <div ng-switch-when="one" class="wave">
+                <fieldset>
+                    <div class="form-group">
+                        
+                        <label class="control-label" for="clusterName">Cluster Name</label>
+                        <div>
+                            <input class="form-control" type="text" class="input-xlarge" id="clusterName" ng-model="modal.wizard.clusterName">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div ng-switch-when="two" class="wave">
+                <fieldset>
+
+                    <div class="form-group">
+                        <label class="control-label" for="select01">Service to Deploy</label>
+                        <div class="controls">
+                            <select class="form-control" id="select01" ng-model="modal.wizard.ServiceName">
+                                <option>Slurm</option>
+                                <option>MPI</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="select02">Node CPUs</label>
+                        <div class="controls">
+                            <select class="form-control" id="select02" ng-model="modal.wizard.NodeCpus">
+                                <option>2</option>
+                                <option>4</option>
+                                <option>8</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="select03">Node Memory</label>
+                        <div class="controls">
+                            <select class="form-control" id="select03" ng-model="modal.wizard.NodeMemory">
+                                <option>512</option>
+                                <option>1024</option>
+                                <option>2056</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="clusterSize">Cluster Size</label>
+                        <div>
+                            <input class="form-control" type="number" class="input-xlarge" id="clusterSize" ng-model="modal.wizard.clusterSize">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div ng-switch-when="three" class="wave">
+                <fieldset>
+                    <div class="control-group">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p><strong>Cluster Name:</strong> {{modal.wizard.clusterName}}</p>
+                                <p><strong>Service to deploy:</strong> {{modal.wizard.ServiceName}}</p>
+                                <p><strong>Node CPUs:</strong> {{modal.wizard.NodeCpus}}</p>
+                                <p><strong>Node Memory:</strong> {{modal.wizard.NodeMemory}}</p>
+                                <p><strong>Size:</strong> {{modal.wizard.clusterSize}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a class="btn btn-default" ng-click="modal.handlePrevious()" ng-show="!modal.isFirstStep()">Back</a>
+    <a class="btn btn-primary" ng-click="modal.handleNext()">{{modal.getNextLabel()}}</a>
+</div>

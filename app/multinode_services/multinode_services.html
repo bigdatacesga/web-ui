@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Multinode Services</h1>
+    </div><!-- /.col-lg-12 -->
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-server fa-fw"></i> Available Services
+            </div>
+            <div class="panel-body">
+
+
+              <div class="col-xs-12 panel">
+                  <p>Before submitting a cluster, a service from the ones available below has to be selected. The cluster can be customized with a number of nodes, CPU&#39;s per node and memory per node. You can create a cluster that fits your needs or the service to be deployed.</p>
+
+                  <h2>Slurm</h2>
+
+                  <p>Create a cluster with Slurm deployed and configured, ready to run jobs using the queue manager as in any shared cluster, but with all the resources available to you.</p>
+
+                  <h2>MPI</h2>
+
+                  <p>Built on top of a Slurm cluster, this cluster also comes with an implementation of MPI (OpenMPI), ready to execute your parallel tasks.</p>
+              </div>
+
+              <div class="col-xs-12 panel">
+                <button type="button" class="btn btn-success" ng-click='multinode_services.launchClusterWizard()'>
+                  <i class="fa fa-plus"></i> Launch new multinode service
+                </button>
+              </div>
+              
+            </div>
+        </div><!-- /.panel -->
+      </div><!-- /.col-lg-12 -->
+</div><!-- /.row -->
+
+
+
+
+
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-server fa-fw"></i> Active Services
+            </div>
+
+            <div class="panel-body">
+
+
+
+
+              <multinode ng-repeat="service in multinode_services.services" multinode-data="service" show-details="false" />
+            </div>
+        </div><!-- /.panel -->
+      </div><!-- /.col-lg-12 -->
+</div><!-- /.row -->
