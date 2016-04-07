@@ -35,7 +35,7 @@ angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.componen
           MultinodeService.show(
               vmCluster.multinodeData.service_type,
               vmCluster.multinodeData.service_name,
-              vmCluster.multinodeData.service_id
+              vmCluster.multinodeData.instance_id
             ).success(function (data){
             vmCluster.multinodeData.exitStatus = data.exitStatus;
           }).error(function (data){
@@ -48,7 +48,7 @@ angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.componen
           NodesServiceMulti.listClusterNodes(
               vmCluster.multinodeData.service_type,
               vmCluster.multinodeData.service_name,
-              vmCluster.multinodeData.service_id
+              vmCluster.multinodeData.instance_id
             ).success(function (data){
             vmCluster.multinodeData.vms = data.nodes;
             vmCluster.showDetails = 'true';
@@ -75,7 +75,7 @@ angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.componen
         MultinodeService.remove(
             vmCluster.multinodeData.service_type,
             vmCluster.multinodeData.service_name,
-            vmCluster.multinodeData.service_id
+            vmCluster.multinodeData.instance_id
             ).success(function (data){
           vmCluster.onClusterServiceRemoveSuccess(data);
         }).error(function (data){
