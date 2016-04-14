@@ -68,10 +68,11 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
 
         var options = { 
           service_type : TypeOfService_Multi,
-          num_nodes: parseInt(data.clusterSize),
           service_name : data.ServiceName,
+          num_nodes: parseInt(data.clusterSize),
           mem: parseInt(data.NodeMemory),
           cpu: parseInt(data.NodeCpus),
+          disks: parseInt(data.NodeDisks),
           clustername: data.clusterName
         };
 
@@ -137,8 +138,8 @@ angular.module('cesgaBDApp.launcher.multinode', ['ui.router','ui.bootstrap'])
     clusterSize: 2,
     ServiceName: "Slurm",
     NodeCpus : "2",
-    NodeMemory: "1024"
-
+    NodeMemory: "1024",
+    NodeDisks: "1"
   };
 
   modal.isFirstStep = function () {

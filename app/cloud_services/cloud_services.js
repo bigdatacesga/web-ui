@@ -28,7 +28,7 @@ angular.module('cesgaBDApp.cloud_services', ['ui.router','ui.bootstrap', 'cesgaB
 
   //CONSTANTS
   var BackendDownMessage = 
-    "Sorry :( , it seems we could not launcch the service, the server may be down.";
+    "Sorry :( , it seems we could not launch the service, the server may be down.";
   var ExceededNumberOfNodes =
     "Sorry, it seems you have exceeded the number of nodes allowed.";
   var UnknownError =

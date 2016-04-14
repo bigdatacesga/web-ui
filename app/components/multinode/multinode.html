@@ -11,6 +11,7 @@
         <div class="col-sm-9" style="width:100%">
           <div class="multinode-name">{{multinodeData.clustername}}</div>
           <div class="pull-right">{{multinodeData.num_nodes}} nodes</div>
+          <div class="pull-right">{{multinodeData.disk}} disks</div>
         </div>
       </div><!-- /.row -->
     </div><!-- /.panel-heading-->
@@ -38,6 +39,8 @@
               <th>IP</th>
               <th>CPUs</th>
               <th>Memory</th>
+              <th>Num Disks</th>
+              <th>Disks</th>
             </tr>
           </thead>
           <tbody>
@@ -46,6 +49,8 @@
               <td>{{vm.nodeIP}}</td>
               <td>{{vm.node_cpu}}</td>
               <td>{{vm.node_mem}} MB</td>
+              <td>{{vm.node_disks}}</td>
+              <td>{{vm.node_disks_list}}</td>
             </tr>
           </tbody>
         </table>

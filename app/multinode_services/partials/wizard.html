@@ -58,6 +58,17 @@
                             </select>
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label" for="select04">Node Disks</label>
+                            <div class="controls">
+                                <select class="form-control" id="select04" ng-model="modal.wizard.NodeDisks">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label" for="clusterSize">Cluster Size</label>
@@ -73,11 +84,12 @@
                     <div class="control-group">
                         <div class="row">
                             <div class="col-xs-4">
-                                <p><strong>Cluster Name:</strong> {{modal.wizard.clusterName}}</p>
+                                <p><strong>Service Name:</strong> {{modal.wizard.clusterName}}</p>
                                 <p><strong>Service to deploy:</strong> {{modal.wizard.ServiceName}}</p>
                                 <p><strong>Node CPUs:</strong> {{modal.wizard.NodeCpus}}</p>
                                 <p><strong>Node Memory:</strong> {{modal.wizard.NodeMemory}}</p>
-                                <p><strong>Size:</strong> {{modal.wizard.clusterSize}}</p>
+                                <p><strong>Node Disks:</strong> {{modal.wizard.NodeDisks}}</p>
+                                <p><strong>Number of Nodes:</strong> {{modal.wizard.clusterSize}}</p>
                             </div>
                         </div>
                     </div>
