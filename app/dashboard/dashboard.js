@@ -56,12 +56,19 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
   };
 
 
+  var receivedData;
+
   getMultinodes();
   function getMultinodes() {
     return MultinodeService.list("multi")
       .then(function(data){
-        vm.multinodes = data.data.services;
-        vm.stats.multinodes.number = vm.multinodes.length;
+        receivedData = data.data;
+        if(receivedData == undefined){
+
+        }else{
+          vm.multinodes = receivedData.services;
+          vm.stats.multinodes.number = vm.multinodes.length;
+        }
       })
       .catch(function(error) {
         vm.stats.multinodes.number = errorNumber;
@@ -69,15 +76,21 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
   }
 
   getCloud();
+  var errorMessage;
   function getCloud() {
     return CloudService.list()
       .then(function(data){
-        vm.cloud = data.data;
-        vm.stats.cloud.number = vm.cloud.length;
+        receivedData = data.data;
+        if(receivedData == undefined){
+            errorMessage = "Sorry :( , it seems we could not get info from the server, it may be down.";
+            alert(errorMessage);
+        }else{
+          vm.cloud = data.data;
+          vm.stats.cloud.number = vm.cloud.length;
+        }
       })
       .catch(function(error) {
         vm.stats.cloud.number = errorNumber;
       });
   }
-
 }]);

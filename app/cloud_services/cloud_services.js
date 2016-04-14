@@ -26,14 +26,31 @@ angular.module('cesgaBDApp.cloud_services', ['ui.router','ui.bootstrap', 'cesgaB
 
   var vm = this;
 
-  vm.services = [];
+  //CONSTANTS
+  var BackendDownMessage = 
+    "Sorry :( , it seems we could not launcch the service, the server may be down.";
+  var ExceededNumberOfNodes =
+    "Sorry, it seems you have exceeded the number of nodes allowed.";
+  var UnknownError =
+    "There was an unkwnown error in the backend, how scary..."
+  var TypeOfService_Multi = "multi";
 
-  activate();
+  vm.services = [];
+  vm.endpoint = CloudService;
+
+
+  function handleBackendDown(message, status, error){
+    if(message != undefined) {
+      alert(message);
+    }
+    if(message != undefined) {$log.info('Message: ' + message);}
+    if(status != undefined) {$log.info('Status: ' + status);}
+    if(error != undefined) {$log.info('Error: ' + error);}
+  }
+
 
   vm.launchClusterWizard = function() {
-    //$state.go('launcher');
-
-
+    
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'cloud_services/partials/wizard.html',
@@ -57,36 +74,68 @@ angular.module('cesgaBDApp.cloud_services', ['ui.router','ui.bootstrap', 'cesgaB
           clustername: data.clusterName
         };
 
-        CloudService.create(options)    
+
+        vm.endpoint.create(options)    
           .then(function(success) {
-            activate();
+              if(success.data == undefined){
+                //ERROR
+                handleBackendDown(BackendDownMessage);
+              }else{
+                if(success.status != 200){
+                  //ERROR
+                  handleBackendDown(BackendDownMessage, success.status);
+                }else{
+                  //SUCCESS
+                  vm.activate();
+                }
+              }
           }).catch(function(error) {
+            //ERROR
             if(error.status == 409){
-              alert('You have exceeded the number of nodes allowed.');
-              vm.errorMessage = 'You have exceeded the number of nodes allowed';
-              $log.info('Status: ' + error.status);
+              handleBackendDown(ExceededNumberOfNodes, error.status, error.data.message);
             }
-              vm.errorMessage = 'You have exceeded the number of nodes allowed';
-              $log.info('Status: ' + error.status);
+            handleBackendDown(UnknownError, error.status, error.data.message);
           })
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
-    
-
+  
   };
 
-  function activate() {
-    return CloudService.list()
+  vm.activate = function() {
+    var receivedData, errMessage;
+    return vm.endpoint.list()
       .then(function(data){
-        vm.services = data.data;
+        if(data.status == '500'){
+            //ERROR
+            //HOT FIX, try to solve in the rest api
+            if(data.exception = "org.springframework.expression.spel.SpelEvaluationException"){
+              vm.errorMessage = 'Unable to retrieve info from backend, try login in again.';
+              alert(vm.errorMessage);
+              $state.go('login');
+            }else{
+              handleBackendDown(BackendDownMessage, data.status);
+              vm.services = [];
+            }
+        }else{
+          receivedData = data.data;
+          if (receivedData == undefined){
+            //ERROR
+            handleBackendDown(BackendDownMessage, data.status);
+            vm.services = [];
+          }else{
+            //SUCCESS
+            vm.services = data.data;
+          }
+        }
       })
       .catch(function(error) {
-        vm.errorMessage = 'Unable to connect to the Big Data service';
-        $log.info('Status: ' + error.status);
-        $log.info('Error message: '+ error.data.message);
+        handleBackendDown(BackendDownMessage, error.status, error.data.message);
       });
   }
+
+  //Call function to draw the data on the interface
+  vm.activate();
 }]);
 
 
@@ -143,4 +192,5 @@ angular.module('cesgaBDApp.launcher.cloud', ['ui.router','ui.bootstrap'])
   modal.dismiss = function(reason) {
       $uibModalInstance.dismiss(reason);
   };
+
 });

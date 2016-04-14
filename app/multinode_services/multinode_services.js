@@ -24,16 +24,32 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
 .controller('MultinodeCtrl', 
             ['MultinodeService', '$log', '$state', '$uibModal', function(MultinodeService, $log, $state, $uibModal) {
 
+
   var vm = this;
 
+  //CONSTANTS
+  var BackendDownMessage = 
+    "Sorry :( , it seems we could not launch the service, the server may be down.";
+  var ExceededNumberOfNodes =
+    "Sorry, it seems you have exceeded the number of nodes allowed.";
+  var UnknownError =
+    "There was an unkwnown error in the backend, how scary..."
+  var TypeOfService_Multi = "multi";
+
   vm.services = [];
+  vm.endpoint = MultinodeService;
 
-  activate();
+  function handleBackendDown(message, status, error){
+    if(message != undefined) {
+      alert(message);
+    }
+    if(message != undefined) {$log.info('Message: ' + message);}
+    if(status != undefined) {$log.info('Status: ' + status);}
+    if(error != undefined) {$log.info('Error: ' + error);}
+  }
 
+  // LAUNCH NEW SERVICE
   vm.launchClusterWizard = function() {
-    //$state.go('launcher');
-
-
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'multinode_services/partials/wizard.html',
@@ -51,7 +67,7 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
         vm.errorMessage = 'Launching cluster';
 
         var options = { 
-          service_type : "multi",
+          service_type : TypeOfService_Multi,
           num_nodes: parseInt(data.clusterSize),
           service_name : data.ServiceName,
           mem: parseInt(data.NodeMemory),
@@ -59,35 +75,53 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
           clustername: data.clusterName
         };
 
-        MultinodeService.create(options)    
+        vm.endpoint.create(options)    
           .then(function(success) {
-            activate();
+              if(success.data == undefined){
+                //ERROR
+                handleBackendDown(BackendDownMessage);
+              }else{
+                if(success.status != 200){
+                  //ERROR
+                  handleBackendDown(BackendDownMessage, success.status);
+                }else{
+                  //SUCCESS
+                  vm.activate();
+                }
+              }
           }).catch(function(error) {
+            //ERROR
             if(error.status == 409){
-              alert('You have exceeded the number of nodes allowed.');
-              vm.errorMessage = 'You have exceeded the number of nodes allowed';
-              $log.info('Status: ' + error.status);
+              handleBackendDown(ExceededNumberOfNodes, error.status, error.data.message);
             }
-            $log.info('Status: ' + error.status);
+            handleBackendDown(UnknownError, error.status, error.data.message);
           })
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
-    
-
   };
 
-  function activate() {
-    return MultinodeService.list("multi")
+  //DRAW INTERFACE
+  vm.activate = function($timeout) {
+    var receivedData;
+    return vm.endpoint.list(TypeOfService_Multi)
       .then(function(data){
-        vm.services = data.data.services;
-      })
-      .catch(function(error) {
-        vm.errorMessage = 'Unable to connect to the Big Data service';
-        $log.info('Status: ' + error.status);
-        $log.info('Error message: '+ error.data.message);
+        receivedData = data.data;
+        if(receivedData == undefined){
+          //ERROR
+          handleBackendDown(BackendDownMessage, data.status);
+        }else{
+          //SUCCESS
+          vm.services = receivedData.services;  
+        }      
+      }).catch(function(error) {
+        //ERROR
+        handleBackendDown(BackendDownMessage, data.status, error.data.message);
       });
   }
+
+  //Call function to draw the data on the interface
+  vm.activate();
 }]);
 
 

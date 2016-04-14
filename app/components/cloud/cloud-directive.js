@@ -37,7 +37,7 @@ angular.module('cesgaBDApp.cloud.cloud-directive', ['cesgaBDApp.components.endpo
 
 
       vmCluster.refreshClusterDetails = function(){
-          ClusterService.show(vmCluster.cloudData.id).success(function (data){
+          CloudService.show(vmCluster.cloudData.id).success(function (data){
             vmCluster.cloudData.exitStatus = data.exitStatus;
           }).error(function (data){
             
@@ -50,7 +50,8 @@ angular.module('cesgaBDApp.cloud.cloud-directive', ['cesgaBDApp.components.endpo
             vmCluster.cloudData.vms = data;
             vmCluster.showDetails = 'true';
           }).error(function (data){
-            
+             alert('Could not get the nodes info.');
+             vmCluster.showDetails = 'true';
           });
         } else {
           vmCluster.showDetails = 'false';

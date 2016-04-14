@@ -24,25 +24,6 @@ angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.componen
       vmCluster.showDetails = 'false';
 
 
-      vmCluster.refresh = function() {
-          vmCluster.toggleDetails();
-          vmCluster.toggleDetails();
-          vmCluster.refreshClusterDetails();
-      }
-
-
-      vmCluster.refreshClusterDetails = function(){
-          MultinodeService.show(
-              vmCluster.multinodeData.service_type,
-              vmCluster.multinodeData.service_name,
-              vmCluster.multinodeData.instance_id
-            ).success(function (data){
-            vmCluster.multinodeData.exitStatus = data.exitStatus;
-          }).error(function (data){
-            
-          });
-      }
-
       vmCluster.toggleDetails = function() {
         if(vmCluster.showDetails == 'false') {
           NodesServiceMulti.listClusterNodes(
@@ -50,10 +31,10 @@ angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.componen
               vmCluster.multinodeData.service_name,
               vmCluster.multinodeData.instance_id
             ).success(function (data){
+              vmCluster.showDetails = 'true';
             vmCluster.multinodeData.vms = data.nodes;
-            vmCluster.showDetails = 'true';
           }).error(function (data){
-            
+              alert("Couldn't retrieve the nodes info.")
           });
         } else {
           vmCluster.showDetails = 'false';

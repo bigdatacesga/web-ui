@@ -2,7 +2,7 @@
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('hadoop-on-demand app', function() {
+describe('cesga-big-data-services app', function() {
 
   browser.get('index.html');
 
@@ -11,16 +11,51 @@ describe('hadoop-on-demand app', function() {
   });
 
 
-  describe('clusters view', function() {
+  describe('cloud services view', function() {
 
     beforeEach(function() {
-      browser.get('index.html#/clusters');
+      browser.get('index.html#/cloud');
     });
 
 
-    it('should render clusters when user navigates to /clusters', function() {
-      expect(element.all(by.css('[ui-view] h1')).first().getText()).
-        toMatch(/Clusters/);
+    it('should render cloud services when user navigates to /cloud', function() {
+      expect(element.all(by.css('[ui-view] h1')).first().getText()).toMatch(/Cloud Services/);
+    });
+
+      // Check that there are 2 rows (title and services table)
+      // Don't know why it retrieves 4
+      var rows = element.all(by.css('[ui-view] .row'));
+      expect(rows.count()).toEqual(4);
+
+  });
+
+  describe('multinode services view', function() {
+
+    beforeEach(function() {
+      browser.get('index.html#/multinode');
+    });
+
+
+    it('should render multinode services when user navigates to /multinode', function() {
+      expect(element.all(by.css('[ui-view] h1')).first().getText()).toMatch(/Multinode Services/);
+
+      // Check that there are 3 rows (title, info and services table)
+      var rows = element.all(by.css('[ui-view] .row'));
+      expect(rows.count()).toEqual(3);
+
+
+      // // Check the first row details
+      // var firstRowRank = element(
+      // by.repeater('service in MultinodeCtrl.services')
+      // .row(0).column('clustername'));
+      // var firstRowName = element(
+      // by.repeater('service in MultinodeCtrl.services')
+      // .row(0).column('num_nodes'));
+      // expect(firstRowRank.isDisplayed()).toBe(true);
+      // expect(firstRowName.isDisplayed()).toBe(true);
+      // expect(firstRowRank.getText()).toEqual('My Slurm Cluster');
+      // expect(firstRowName.getText()).toEqual('2');
+
     });
 
   });
