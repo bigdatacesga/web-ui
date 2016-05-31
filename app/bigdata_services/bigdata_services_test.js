@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.multinode_services controller', function() {
+describe('cesgaBDApp.bigdata_services controller', function() {
 
-  beforeEach(module('cesgaBDApp.multinode_services'));
+  beforeEach(module('cesgaBDApp.bigdata_services'));
 
   var ctrl, mockService, dummyServices, state;
 
@@ -39,8 +39,8 @@ describe('cesgaBDApp.multinode_services controller', function() {
     };
   });
 
-  beforeEach(inject(function($controller, MultinodeService, $q) {
-    ctrl = $controller('MultinodeCtrl');
+  beforeEach(inject(function($controller, BigdataService, $q) {
+    ctrl = $controller('BigdataCtrl');
   }));
 
   beforeEach(inject(function($state) {

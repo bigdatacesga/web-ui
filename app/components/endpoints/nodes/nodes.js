@@ -7,7 +7,7 @@
  * # NodesService
  * Service in the cesgaBDApp.
  */
-angular.module('cesgaBDApp.components.endpoints.multinode.nodes', [])
+angular.module('cesgaBDApp.components.endpoints.bigdata.nodes', [])
 .factory('NodesServiceMulti', ['$http', function ($http) {
     return {
       listClusterNodes: function(service_type, service_name, instance_id) {

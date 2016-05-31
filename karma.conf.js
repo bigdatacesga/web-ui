@@ -10,7 +10,7 @@ module.exports = function(config){
       'app/bower_components/angular-bootstrap/ui-bootstrap.min.js',
       'app/components/**/*.js',
       'app/dashboard/**/*.js',
-      'app/multinode_services/**/*.js',
+      'app/bigdata_services/**/*.js',
       'app/cloud_services/**/*.js',
       //'app/launcher/**/*.js',
       //'app/settings/**/*.js',

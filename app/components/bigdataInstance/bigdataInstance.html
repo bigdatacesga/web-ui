@@ -5,13 +5,13 @@
         <!--
         <div class="col-sm-3 hidden-xs">
           <i class="fa icon-hadoop fa-5x"></i>
-          <div class="fa">{{multinodeData.service_type}} service</div>
+          <div class="fa">{{bigdataInstanceData.service_type}} service</div>
 
         </div>-->
         <div class="col-sm-9" style="width:100%">
-          <div class="multinode-name">{{multinodeData.clustername}}</div>
-          <div class="pull-right">{{multinodeData.num_nodes}} nodes</div>
-          <div class="pull-right">{{multinodeData.disk}} disks</div>
+          <div class="bigdata-name">{{vmCluster.clustername}}</div>
+          <div class="pull-right">{{vmCluster.num_nodes}} nodes</div>
+          <div class="pull-right">{{vmCluster.disk}} disks</div>
         </div>
       </div><!-- /.row -->
     </div><!-- /.panel-heading-->
@@ -30,7 +30,7 @@
     </div><!-- /.panel-footer-->
 
     <div collapse="isCollapsed()">
-      <!--<div class="cluster-name">{{multinodeData.service_full_name}}</div>-->
+      <!--<div class="cluster-name">{{bigdataData.service_full_name}}</div>-->
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
@@ -44,7 +44,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="vm in multinodeData.vms">
+            <tr ng-repeat="vm in vmCluster.vms">
               <td>{{vm.node_id}}</td>
               <td>{{vm.nodeIP}}</td>
               <td>{{vm.node_cpu}}</td>

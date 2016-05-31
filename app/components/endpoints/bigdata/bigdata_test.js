@@ -1,13 +1,13 @@
 'use strict';
 
-describe('cesgaBDApp.components.endpoints.multinodes', function() {
+describe('cesgaBDApp.components.endpoints.bigdata', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.multinodes'));
+  beforeEach(module('cesgaBDApp.components.endpoints.bigdata'));
 
   var service, mockBackend;
 
-  beforeEach(inject(function(MultinodeService, $httpBackend) {
-    service = MultinodeService;
+  beforeEach(inject(function(BigdataService, $httpBackend) {
+    service = BigdataService;
     mockBackend = $httpBackend;
   }));
 

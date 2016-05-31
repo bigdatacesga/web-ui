@@ -9,12 +9,12 @@ angular
   'cesgaBDApp.components.endpoints.auth',
   'cesgaBDApp.menu',
   'cesgaBDApp.dashboard',
-  'cesgaBDApp.multinode_services',
+  'cesgaBDApp.bigdata_services',
   'cesgaBDApp.cloud_services',
   'cesgaBDApp.login',
   'cesgaBDApp.help',
   'cesgaBDApp.launcher.cloud',
-  'cesgaBDApp.launcher.multinode'
+  'cesgaBDApp.launcher.bigdata'
 
 ])
 .config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {

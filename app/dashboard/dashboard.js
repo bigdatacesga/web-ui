@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBDApp.components.endpoints.multinodes', 'cesgaBDApp.components.endpoints.cloud'])
+angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.cloud'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {
@@ -21,7 +21,7 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
   });
 }])
 
-.controller('DashboardCtrl', ['MultinodeService', 'CloudService', function(MultinodeService, CloudService) {
+.controller('DashboardCtrl', ['BigdataService', 'CloudService', function(BigdataService, CloudService) {
   var vm = this;
   vm.awesomeThings = [
     'HTML5 Boilerplate',
@@ -32,9 +32,9 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
 
   var errorNumber = "#unknown"
   vm.stats = {
-    multinodes : {
-      link:"#/multinode",
-      comments:"Multinode Clusters",
+    bigdata : {
+      link:"#/bigdata",
+      comments:"Bigdata Clusters",
       colour:"primary",
       type:"database",
       number:errorNumber
@@ -45,33 +45,28 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
       colour:"primary",
       type:"database",
       number:errorNumber
-    }// ,
-    // singles : {
-    //   link:"#/simple_services",
-    //   comments:"Single Node Applications",
-    //   colour:"green",
-    //   type:"database",
-    //   number:errorNumber
-    // }
+    }
   };
 
 
   var receivedData;
 
-  getMultinodes();
-  function getMultinodes() {
-    return MultinodeService.list("multi")
+  getBigdata();
+  function getBigdata() {
+    var name = "jenes" //FIX THIS by getting the real username
+    
+    return BigdataService.listInstances(name,null,null)
       .then(function(data){
         receivedData = data.data;
         if(receivedData == undefined){
 
         }else{
-          vm.multinodes = receivedData.services;
-          vm.stats.multinodes.number = vm.multinodes.length;
+          vm.bigdata = receivedData.services;
+          vm.stats.bigdata.number = vm.bigdata.length;
         }
       })
       .catch(function(error) {
-        vm.stats.multinodes.number = errorNumber;
+        vm.stats.bigdata.number = errorNumber;
       });
   }
 

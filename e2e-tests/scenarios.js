@@ -29,15 +29,15 @@ describe('cesga-big-data-services app', function() {
 
   });
 
-  describe('multinode services view', function() {
+  describe('bigdata services view', function() {
 
     beforeEach(function() {
-      browser.get('index.html#/multinode');
+      browser.get('index.html#/bigdata');
     });
 
 
-    it('should render multinode services when user navigates to /multinode', function() {
-      expect(element.all(by.css('[ui-view] h1')).first().getText()).toMatch(/Multinode Services/);
+    it('should render bigdata services when user navigates to /bigdata', function() {
+      expect(element.all(by.css('[ui-view] h1')).first().getText()).toMatch(/Bigdata Services/);
 
       // Check that there are 3 rows (title, info and services table)
       var rows = element.all(by.css('[ui-view] .row'));
@@ -46,10 +46,10 @@ describe('cesga-big-data-services app', function() {
 
       // // Check the first row details
       // var firstRowRank = element(
-      // by.repeater('service in MultinodeCtrl.services')
+      // by.repeater('service in BigdataCtrl.services')
       // .row(0).column('clustername'));
       // var firstRowName = element(
-      // by.repeater('service in MultinodeCtrl.services')
+      // by.repeater('service in BigdataCtrl.services')
       // .row(0).column('num_nodes'));
       // expect(firstRowRank.isDisplayed()).toBe(true);
       // expect(firstRowName.isDisplayed()).toBe(true);

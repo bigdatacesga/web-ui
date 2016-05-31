@@ -1,28 +1,28 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.multinode_services:MultinodeCtrl
+ * @name cesgaBDApp.bigdata_services:BigdataCtrl
  * @description 
- * # MultinodeCtrl
+ * # BigdataCtrl
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.multinode', 'cesgaBDApp.components.endpoints.multinodes'])
+angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdataInstance', 'cesgaBDApp.bigdataPaasService', 'cesgaBDApp.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
-  $stateProvider.state('multinode_services', {
-    url:'/multinode',
-    templateUrl: 'multinode_services/multinode_services.html',
-    controller: 'MultinodeCtrl',
-    controllerAs: 'multinode_services',
+  $stateProvider.state('bigdata_services', {
+    url:'/bigdata',
+    templateUrl: 'bigdata_services/bigdata_services.html',
+    controller: 'BigdataCtrl',
+    controllerAs: 'bigdata_services',
     data: {
         requireLogin: true
     }
   });
 }])
 
-.controller('MultinodeCtrl', 
-            ['MultinodeService', '$log', '$state', '$uibModal', function(MultinodeService, $log, $state, $uibModal) {
+.controller('BigdataCtrl', 
+            ['BigdataService', '$log', '$state', '$uibModal', function(BigdataService, $log, $state, $uibModal) {
 
 
   var vm = this;
@@ -37,7 +37,8 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
   var TypeOfService_Multi = "multi";
 
   vm.services = [];
-  vm.endpoint = MultinodeService;
+  vm.instances = [];
+  vm.endpoint = BigdataService;
 
   function handleBackendDown(message, status, error){
     if(message != undefined) {
@@ -49,10 +50,10 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
   }
 
   // LAUNCH NEW SERVICE
-  vm.launchClusterWizard = function() {
+  vm.launchInstanceWizard = function() {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'multinode_services/partials/wizard.html',
+        templateUrl: 'bigdata_services/partials/wizard.html',
         controller: 'ModalInstanceCtrl',
         controllerAs: 'modal',
         resolve: {
@@ -102,10 +103,10 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
       });
   };
 
-  //DRAW INTERFACE
-  vm.activate = function($timeout) {
+  //DRAW SERVICES
+  vm.drawServices = function($timeout) {
     var receivedData;
-    return vm.endpoint.list(TypeOfService_Multi)
+    return vm.endpoint.listServices()
       .then(function(data){
         receivedData = data.data;
         if(receivedData == undefined){
@@ -113,7 +114,15 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
           handleBackendDown(BackendDownMessage, data.status);
         }else{
           //SUCCESS
-          vm.services = receivedData.services;  
+          var services = [];
+          for (var index in receivedData.services){
+            var serviceName = receivedData.services[index].split('/')[1]
+            services.push({
+              "name" : serviceName
+            })
+          }
+          vm.services = services;
+
         }      
       }).catch(function(error) {
         //ERROR
@@ -122,11 +131,35 @@ angular.module('cesgaBDApp.multinode_services', ['ui.router','ui.bootstrap', 'ce
   }
 
   //Call function to draw the data on the interface
-  vm.activate();
+  vm.drawServices();
+  vm.services = [{"name": "test"},{"name": "test2"}]
+
+  // //DRAW INSTANCES
+  // vm.drawInstances = function($timeout) {
+  //   var receivedData;
+  //   return vm.endpoint.listInstances("jenes",null,null)
+  //     .then(function(data){
+  //       receivedData = data.data;
+  //       if(receivedData == undefined){
+  //         //ERROR
+  //         handleBackendDown(BackendDownMessage, data.status);
+  //       }else{
+  //         //SUCCESS
+  //         vm.instances = receivedData.instances;
+  //       }      
+  //     }).catch(function(error) {
+  //       //ERROR
+  //       handleBackendDown(BackendDownMessage, data.status, error.data.message);
+  //     });
+  // }
+
+  // //Call function to draw the data on the interface
+  // vm.drawInstances();
+
 }]);
 
 
-angular.module('cesgaBDApp.launcher.multinode', ['ui.router','ui.bootstrap'])
+angular.module('cesgaBDApp.launcher.bigdata', ['ui.router','ui.bootstrap'])
 
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
   var modal = this;

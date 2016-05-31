@@ -1,0 +1,29 @@
+<div class="col-lg-12 col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <!--
+        <div class="col-sm-3 hidden-xs">
+          <i class="fa icon-hadoop fa-5x"></i>
+          <div class="fa">{{bigdataData.service_type}} service</div>
+
+        </div>-->
+      </div><!-- /.row -->
+    </div><!-- /.panel-heading-->
+
+
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="service in vmCluster.services">
+              <td>{{service.name}}</td>
+              <td>ASDF</td>
+            </tr>
+          </tbody>
+        </table>
+  </div><!-- /.panel-default -->
+</div>

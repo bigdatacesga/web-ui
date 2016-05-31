@@ -2,37 +2,37 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.multinode.multinode-directive:multinode
+ * @name cesgaBDApp.bigdataInstance.bigdataInstance-directive:bigdataInstance
  * @description
  * # stats
  */
-angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.components.endpoints.multinodes', 'cesgaBDApp.components.endpoints.multinode.nodes'])
+angular.module('cesgaBDApp.bigdataInstance.bigdataInstance-directive', ['cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.bigdata.nodes'])
 
-.directive('multinode', ['MultinodeService', 'NodesServiceMulti' ,function(MultinodeService, NodesServiceMulti) {
+.directive('bigdataInstance', ['BigdataService', 'NodesServiceBigdata' ,function(BigdataService, NodesServiceBigdata) {
   return {
-    templateUrl:'components/multinode/multinode.html',
+    templateUrl:'components/bigdata/bigdata.html',
     restrict: 'E',
     replace: true,
     scope: {
-      multinodeData: '=',
+      bigdataInstanceData: '=',
       showDetails: '@'
     },
     link: function(scope, element, attrs) {
       var vmCluster = scope;
 
-      vmCluster.multinodeData.vms = [];
+      vmCluster.bigdataInstanceData.vms = [];
       vmCluster.showDetails = 'false';
 
 
       vmCluster.toggleDetails = function() {
         if(vmCluster.showDetails == 'false') {
-          NodesServiceMulti.listClusterNodes(
-              vmCluster.multinodeData.service_type,
-              vmCluster.multinodeData.service_name,
-              vmCluster.multinodeData.instance_id
+          NodesServiceBigdata.listClusterNodes(
+              vmCluster.bigdataInstanceData.service_type,
+              vmCluster.bigdataInstanceData.service_name,
+              vmCluster.bigdataInstanceData.instance_id
             ).success(function (data){
               vmCluster.showDetails = 'true';
-            vmCluster.multinodeData.vms = data.nodes;
+            vmCluster.bigdataInstanceData.vms = data.nodes;
           }).error(function (data){
               alert("Couldn't retrieve the nodes info.")
           });
@@ -53,10 +53,10 @@ angular.module('cesgaBDApp.multinode.multinode-directive', ['cesgaBDApp.componen
                 'Please notify administrator');
         };
         
-        MultinodeService.remove(
-            vmCluster.multinodeData.service_type,
-            vmCluster.multinodeData.service_name,
-            vmCluster.multinodeData.instance_id
+        BigdataService.remove(
+            vmCluster.bigdataInstanceData.service_type,
+            vmCluster.bigdataInstanceData.service_name,
+            vmCluster.bigdataInstanceData.instance_id
             ).success(function (data){
           vmCluster.onClusterServiceRemoveSuccess(data);
         }).error(function (data){

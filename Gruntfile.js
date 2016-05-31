@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       proxies: [
         {
           context: '/bigdata/api',
-          host: 'localhost',
+          host: '10.112.0.110',
           port: 5000,
           https: false,
           changeOrigin: false

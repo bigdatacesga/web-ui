@@ -1,9 +1,9 @@
 'use strict';
 
-describe('cesgaBDApp.multinode module', function() {
+describe('cesgaBDApp.bigdataInstance module', function() {
 
   // Given
-  beforeEach(module('cesgaBDApp.multinode.multinode-directive'));
+  beforeEach(module('cesgaBDApp.bigdataInstance.bigdataInstance-directive'));
 
   var compile, mockBackend, rootScope;
 
@@ -28,43 +28,43 @@ describe('cesgaBDApp.multinode module', function() {
         "service_type": "multi", 
         "service_username": "jenes"
     };
-    mockBackend.expectGET('components/multinode/multinode.html').respond(
+    mockBackend.expectGET('components/bigdataInstance/bigdataInstance.html').respond(
       '<div>' +
-      '<div ng-bind="multinodeData.name"></div>' +
-      '<div ng-bind="multinodeData.vms[0].vmid"></div>' +
+      '<div ng-bind="bigdataInstanceData.name"></div>' +
+      '<div ng-bind="bigdataInstanceData.vms[0].vmid"></div>' +
       '</div>');
   });
 
   it('should render HTML based on scope correctly', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" />')(scope);
     scope.$digest();
     mockBackend.flush();
   });
 
   it('should load correct cluster data', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" />')(scope);
     scope.$digest();
     mockBackend.flush();
 
     // Then
     var compiledElementScope = element.isolateScope();
-    expect(compiledElementScope.multinodeData).toEqual(scope.multinodeData);
+    expect(compiledElementScope.bigdataInstanceData).toEqual(scope.bigdataInstanceData);
   });
 
   it('should load show-details option: true', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" show-details="true" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" show-details="true" />')(scope);
     scope.$digest();
     mockBackend.flush();
 
@@ -75,10 +75,10 @@ describe('cesgaBDApp.multinode module', function() {
 
   it('should load show-details option: false', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" show-details="false" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" show-details="false" />')(scope);
     scope.$digest();
     mockBackend.flush();
 
@@ -89,10 +89,10 @@ describe('cesgaBDApp.multinode module', function() {
 
   it('should toggle cluster details info', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" show-details="false" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" show-details="false" />')(scope);
     scope.$digest();
     mockBackend.flush();
 
@@ -112,10 +112,10 @@ describe('cesgaBDApp.multinode module', function() {
 
   it('should collapse if show-details is false', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" show-details="false" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" show-details="false" />')(scope);
     scope.$digest();
     mockBackend.flush();
 
@@ -127,10 +127,10 @@ describe('cesgaBDApp.multinode module', function() {
 
   it('should expand if show-details is true', function() {
     var scope = rootScope.$new();
-    scope.multinodeData = dummyService;
+    scope.bigdataInstanceData = dummyService;
 
     // When
-    var element = compile('<multinode multinode-data="multinodeData" show-details="true" />')(scope);
+    var element = compile('<bigdataInstance bigdataInstance-data="bigdataInstanceData" show-details="true" />')(scope);
     scope.$digest();
     mockBackend.flush();
 

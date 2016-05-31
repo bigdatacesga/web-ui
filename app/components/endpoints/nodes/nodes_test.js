@@ -2,7 +2,7 @@
 
 describe('cesgaBDApp.components.endpoints.nodes', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.multinode.nodes'));
+  beforeEach(module('cesgaBDApp.components.endpoints.bigdata.nodes'));
   beforeEach(module('cesgaBDApp.components.endpoints.cloud.nodes'));
 
   var serviceMulti, serviceCloud, mockBackend;

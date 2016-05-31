@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Bigdata Services</h1>
+    </div><!-- /.col-lg-12 -->
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <i class="fa fa-server fa-fw"></i> Available Services
+            </div>
+            <div class="panel-body">
+
+
+ <!--              <bigdataPaasService class="serviceRow" ng-repeat="service in bigdata_services.services" bigdataPaasService-data="service"/> -->
+
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="service in bigdata_services.services">
+                        <td>{{service.name}}</td>
+                        <td>ASDF</td>
+                      </tr>
+                    </tbody>
+                  </table> 
+              
+            </div>
+        </div><!-- /.panel -->
+      </div><!-- /.col-lg-12 -->
+  </div><!-- /.row -->
+
+
+
+
+
+<!--   <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-server fa-fw"></i> Active Services
+            </div>
+
+            <div class="panel-body">
+              <bigdataInstance class="serviceRow" ng-repeat="instance in bigdata_services.instance" bigdataInstance-data="instance" show-details="false" />
+            </div>
+        </div> -->
+        <!-- /.panel -->
+      <!-- </div> -->
+      <!-- /.col-lg-12 -->
+  <!-- </div> -->
+  <!-- /.row -->
