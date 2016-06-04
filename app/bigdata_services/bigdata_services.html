@@ -17,21 +17,7 @@
             <div class="panel-body">
 
 
- <!--              <bigdataPaasService class="serviceRow" ng-repeat="service in bigdata_services.services" bigdataPaasService-data="service"/> -->
-
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="service in bigdata_services.services">
-                        <td>{{service.name}}</td>
-                        <td>ASDF</td>
-                      </tr>
-                    </tbody>
-                  </table> 
+              <paasservice class="serviceRow" ng-repeat="service in bigdata_services.services" paasservice-data="service"/>
               
             </div>
         </div><!-- /.panel -->

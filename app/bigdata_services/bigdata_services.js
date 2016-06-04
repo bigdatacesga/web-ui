@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdataInstance', 'cesgaBDApp.bigdataPaasService', 'cesgaBDApp.components.endpoints.bigdata'])
+angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdataInstance', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('bigdata_services', {
@@ -108,7 +108,7 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
     var receivedData;
     return vm.endpoint.listServices()
       .then(function(data){
-        receivedData = data.data;
+        var receivedData = data.data;
         if(receivedData == undefined){
           //ERROR
           handleBackendDown(BackendDownMessage, data.status);
@@ -116,7 +116,7 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
           //SUCCESS
           var services = [];
           for (var index in receivedData.services){
-            var serviceName = receivedData.services[index].split('/')[1]
+            var serviceName = receivedData.services[index]
             services.push({
               "name" : serviceName
             })
@@ -132,7 +132,7 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
 
   //Call function to draw the data on the interface
   vm.drawServices();
-  vm.services = [{"name": "test"},{"name": "test2"}]
+  //vm.services = [{"name": "test"},{"name": "test2"}]
 
   // //DRAW INSTANCES
   // vm.drawInstances = function($timeout) {

@@ -13,7 +13,7 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
   var callTimeout = 10000; //10 seconds
     return {
       listServices: function() {
-        var url = '/bigdata/api/v1/services/'
+        var url = '/bigdata/api/v1/services'
         return $http.get(url, {timeout: callTimeout});
       },
       listInstances: function(username, service_name, service_version) {
@@ -41,25 +41,25 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         return $http.get(url, {timeout: callTimeout});
       },
       showServiceVersions: function(service_name) {
-        var url = '/bigdata/api/v1/services/' + service_name + '/'
+        var url = '/bigdata/api/v1/services/' + service_name
         return $http.get(url, {timeout: callTimeout});
       },
       showService: function(service_name, service_version) {
-        var url = '/bigdata/api/v1/services/' + service_name + '/' + service_version + '/'
+        var url = '/bigdata/api/v1/services/' + service_name + '/' + service_version
         return $http.get(url, {timeout: callTimeout});
       },
       show: function(service_type, service_name, instance_id) {
-        var base_url = '/bigdata/api/v1/services/'
+        var base_url = '/bigdata/api/v1/services'
         var url = base_url + '?type='+ service_type + '&name=' + service_name + '&id=' + instance_id
         return $http.get(url, {timeout: callTimeout});
       },
       remove: function(service_type, service_name, instance_id) {
-        var base_url = '/bigdata/api/v1/services/'
+        var base_url = '/bigdata/api/v1/services'
         var url = base_url + '?type='+ service_type + '&name=' + service_name + '&id=' + instance_id
         return $http.delete(url);
       },
       create: function(options) {
-        return $http.post('/bigdata/api/v1/services/', options, {timeout: callTimeout});
+        return $http.post('/bigdata/api/v1/services', options, {timeout: callTimeout});
       }
     };
   }]);

@@ -12,16 +12,17 @@ angular.module('cesgaBDApp.components.endpoints.cloud', [])
     var callTimeout = 10000; //10 seconds
     return {
       list: function() {
-        return $http.get('/cloud/api/clusters', {timeout: callTimeout});
+        return $http.get('/api/clusters', {timeout: callTimeout});
+        //return $http.get('/cloud/api/clusters', {timeout: callTimeout});
       },
       show: function(clusterId) {
-        return $http.get('/cloud/api/clusters/'+clusterId, {timeout: callTimeout});
+        return $http.get('/api/clusters/'+clusterId, {timeout: callTimeout});
       },
       remove: function(clusterId) {
-        return $http.delete('/cloud/api/clusters/'+clusterId);
+        return $http.delete('/api/clusters/'+clusterId);
       },
       create: function(options) {
-        return $http.post('/cloud/api/clusters', options, {timeout: callTimeout});
+        return $http.post('/api/clusters', options, {timeout: callTimeout});
       }
     };
   }]);

@@ -27,7 +27,7 @@ angular.module('cesgaBDApp.login', ['ui.router'])
     var credentials = "username=" + self.user.username 
              + "&password=" + self.user.password;
     $http
-      .post('/cloud/api/authenticate', credentials, {
+      .post('/api/authenticate', credentials, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           "Accept": "application/json"
