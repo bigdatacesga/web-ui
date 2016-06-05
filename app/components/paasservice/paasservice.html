@@ -27,14 +27,12 @@
               <td>{{service.version}}</td>
               <td>{{service.description}}</td>
               <td>
-                <button type="button" class="btn btn-info" ng-click='a()'>
+                <button type="button" class="btn btn-info" ng-click='seeDetails($index)'>
                   <i class="fa fa-info-circle"></i> See details
                 </button>
-
-                <button type="button" class="btn btn-info"  ng-click='b()'>
-                  <i class="fa fa-info-circle"></i> Launch instance
+                <button type="button" class="btn btn-info" ng-click='launchInstance($index)'>
+                  <i class="fa fa-info-circle"></i> Launch Instance
                 </button>
-
               </td>
             </tr>
           </tbody>

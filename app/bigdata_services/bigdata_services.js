@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdataInstance', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
+angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdatainstance', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('bigdata_services', {
@@ -135,26 +135,33 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
   //vm.services = [{"name": "test"},{"name": "test2"}]
 
   // //DRAW INSTANCES
-  // vm.drawInstances = function($timeout) {
-  //   var receivedData;
-  //   return vm.endpoint.listInstances("jenes",null,null)
-  //     .then(function(data){
-  //       receivedData = data.data;
-  //       if(receivedData == undefined){
-  //         //ERROR
-  //         handleBackendDown(BackendDownMessage, data.status);
-  //       }else{
-  //         //SUCCESS
-  //         vm.instances = receivedData.instances;
-  //       }      
-  //     }).catch(function(error) {
-  //       //ERROR
-  //       handleBackendDown(BackendDownMessage, data.status, error.data.message);
-  //     });
-  // }
+  vm.drawInstances = function($timeout) {
+    var receivedData;
+    return vm.endpoint.listInstances("jenes",null,null)
+      .then(function(data){
+        receivedData = data.data;
+        if(receivedData == undefined){
+          //ERROR
+          handleBackendDown(BackendDownMessage, data.status);
+        }else{
+          //SUCCESS
+          var instances = [];
+          for (var index in receivedData.instances){
+            var instanceName = receivedData.instances[index]
+            instances.push({
+              "name" : instanceName
+            })
+          }
+          vm.instances = instances;
+        }      
+      }).catch(function(error) {
+        //ERROR
+        handleBackendDown(BackendDownMessage, data.status, error.data.message);
+      });
+  }
 
-  // //Call function to draw the data on the interface
-  // vm.drawInstances();
+  //Call function to draw the data on the interface
+  vm.drawInstances();
 
 }]);
 

@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="modal.dismiss('Error')" aria-hidden="true">&times;</button>
+    <h3>Launch New Bigdata Service</h3>
+</div>
+<div class="modal-body">
+    <p>{{modal.serviceInfo.name}}</p>
+    <p>{{modal.serviceInfo.version}}</p>
+    <p>{{modal.serviceInfo.description}}</p>
+
+    <h4>
+    	Required
+    	<div ng-repeat="(key, value) in modal.serviceInfo.options.required">
+		  <td> {{ modal.serviceInfo.options.descriptions[key] }} </td> 
+		  <td> {{ key }} </td> 
+		  <td> {{ value }} </td>
+		</div>
+    </h4>
+
+    <h4>
+    	Optional
+    	<div ng-repeat="(key, value) in modal.serviceInfo.options.optional">
+		  <td> {{ modal.serviceInfo.options.descriptions[key] }} </td>
+		  <td> {{ key }} </td> 
+		  <td> {{ value }} </td>
+		</div>
+    </h4>
+</div>
+

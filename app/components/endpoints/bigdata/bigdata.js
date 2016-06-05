@@ -48,10 +48,11 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         var url = '/bigdata/api/v1/services/' + service_name + '/' + service_version
         return $http.get(url, {timeout: callTimeout});
       },
-      show: function(service_type, service_name, instance_id) {
-        var base_url = '/bigdata/api/v1/services'
-        var url = base_url + '?type='+ service_type + '&name=' + service_name + '&id=' + instance_id
-        return $http.get(url, {timeout: callTimeout});
+      showInstance: function(instance_path) {
+        var base_url = '/bigdata/api/v1/instances'
+        var url = base_url + '/' + instance_path
+        //return $http.get(url, {timeout: callTimeout});
+        return $http.get(url);
       },
       remove: function(service_type, service_name, instance_id) {
         var base_url = '/bigdata/api/v1/services'

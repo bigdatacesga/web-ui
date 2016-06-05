@@ -8,7 +8,7 @@
  */
 angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.bigdata.nodes'])
 
-.directive('paasservice', ['BigdataService' ,function(BigdataService) {
+.directive('paasservice', ['BigdataService', '$uibModal' ,function(BigdataService, $uibModal) {
   return {
     templateUrl:'components/paasservice/paasservice.html',
     restrict: 'E',
@@ -55,11 +55,36 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
       vmService.isCollapsed = function() {
           return vmService.showDetails == 'false';
       };
+      
+      vmService.launchInstance = function(index) {
+          //vmService.paasserviceData.services = ["asdf"];
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'bigdata_services/partials/launch.html',
+            controller: 'ModalInstanceCtrlBigdata',
+            controllerAs: 'modal',
+            resolve: {
+              serviceInfo: function () {
+                return vmService.paasserviceData.services[index];
+              }
+            }
+          });
+        };
 
-
-
-
-
+      vmService.seeDetails = function(index) {
+          //vmService.paasserviceData.services = ["asdf"];
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'bigdata_services/partials/details.html',
+            controller: 'ModalInstanceCtrlBigdata',
+            controllerAs: 'modal',
+            resolve: {
+              serviceInfo: function () {
+                return vmService.paasserviceData.services[index];
+              }
+            }
+          });
+        };
 
     },
   };
