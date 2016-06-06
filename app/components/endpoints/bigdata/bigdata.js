@@ -59,8 +59,12 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         var url = base_url + '?type='+ service_type + '&name=' + service_name + '&id=' + instance_id
         return $http.delete(url);
       },
-      create: function(options) {
-        return $http.post('/bigdata/api/v1/services', options, {timeout: callTimeout});
+      launchInstance: function(options, service_name, service_version) {
+        //return $http.post('/bigdata/api/v1/services/' + service_name + '/' + service_version, options, {timeout: callTimeout});
+        return $http.post('/bigdata/api/v1/services/' + service_name + '/' + service_version, options);
+      },
+      testAuth: function() {
+        return $http.get('/bigdata/api/v1/test');
       }
     };
   }]);

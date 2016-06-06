@@ -2,27 +2,55 @@
     <button type="button" class="close" ng-click="modal.dismiss('Error')" aria-hidden="true">&times;</button>
     <h3>Launch New Bigdata Service</h3>
 </div>
-<div class="modal-body">
-    <p>{{modal.serviceInfo.name}}</p>
-    <p>{{modal.serviceInfo.version}}</p>
-    <p>{{modal.serviceInfo.description}}</p>
 
-    <h4>
-    	Required
+
+
+<div class="modal-body table-responsive" style="width:100%">
+    <form name="myForm" class="form-horizontal" role="form" ng-submit="modal.submitForm()">
+        
+
+        <p>Name: {{modal.serviceInfo.name}}</p>
+        <p>Version: {{modal.serviceInfo.version}}</p>
+        <p>Description: {{modal.serviceInfo.description}}</p>
+
+
+    	<h4> Required </h4>
     	<div ng-repeat="(key, value) in modal.serviceInfo.options.required">
-		  <td> {{ modal.serviceInfo.options.descriptions[key] }} </td> 
-		  <td> {{ key }} </td> 
-		  <td> {{ value }} </td>
+            <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <label class="col-sm-2 control-label">{{ key }}</label>
+                </td>
+                <td>
+                    <p>{{ modal.serviceInfo.options.descriptions[key] }}</p>
+                </td>
+                <td>   
+                    <input type="number" dynamic-name="key" id="key" ng-value="modal.serviceInfo.options.required[key]" data-ng-model="modal.serviceToLaunch.options.required[key]" class="form-control" required/>
+                </td>
+            </tr>
+            </table>
 		</div>
-    </h4>
 
-    <h4>
-    	Optional
-    	<div ng-repeat="(key, value) in modal.serviceInfo.options.optional">
-		  <td> {{ modal.serviceInfo.options.descriptions[key] }} </td>
-		  <td> {{ key }} </td> 
-		  <td> {{ value }} </td>
-		</div>
-    </h4>
+        <h4> Optional </h4>
+        <div ng-repeat="(key, value) in modal.serviceInfo.options.optional">
+            <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <label class="col-sm-2 control-label">{{ key }}</label>
+                </td>
+                <td>
+                    <p>{{ modal.serviceInfo.options.descriptions[key] }}</p>
+                </td>
+                <td>   
+                    <input type="number" dynamic-name="key" id="key" ng-value="modal.serviceInfo.options.optional[key]" data-ng-model="modal.serviceToLaunch.options.optional[key]" class="form-control"/>      
+                </td>
+            </tr>
+            </table>
+        </div>
+
+
+         <input type="submit" ng-click="modal.dismiss('Submission')">
+
+    </form>
 </div>
 

@@ -63,6 +63,7 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
             templateUrl: 'bigdata_services/partials/launch.html',
             controller: 'ModalInstanceCtrlBigdata',
             controllerAs: 'modal',
+            size: 'lg',
             resolve: {
               serviceInfo: function () {
                 return vmService.paasserviceData.services[index];
@@ -71,6 +72,8 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
           });
         };
 
+
+
       vmService.seeDetails = function(index) {
           //vmService.paasserviceData.services = ["asdf"];
           var modalInstance = $uibModal.open({
@@ -78,6 +81,7 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
             templateUrl: 'bigdata_services/partials/details.html',
             controller: 'ModalInstanceCtrlBigdata',
             controllerAs: 'modal',
+            size: 'lg',
             resolve: {
               serviceInfo: function () {
                 return vmService.paasserviceData.services[index];
@@ -85,6 +89,9 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
             }
           });
         };
+
+
+
 
     },
   };

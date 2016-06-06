@@ -50,58 +50,58 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
   }
 
   // LAUNCH NEW SERVICE
-  vm.launchInstanceWizard = function() {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'bigdata_services/partials/wizard.html',
-        controller: 'ModalInstanceCtrl',
-        controllerAs: 'modal',
-        resolve: {
-          items: function () {
-            return vm.items;
-          }
-        }
-      });
+  // vm.launchInstanceWizard = function() {
+  //     var modalInstance = $uibModal.open({
+  //       animation: true,
+  //       templateUrl: 'bigdata_services/partials/wizard.html',
+  //       controller: 'ModalInstanceCtrl',
+  //       controllerAs: 'modal',
+  //       resolve: {
+  //         items: function () {
+  //           return vm.items;
+  //         }
+  //       }
+  //     });
 
-      modalInstance.result.then(function (data) {
-        vm.clusterDetails = data;
-        vm.errorMessage = 'Launching cluster';
+  //     modalInstance.result.then(function (data) {
+  //       vm.clusterDetails = data;
+  //       vm.errorMessage = 'Launching cluster';
 
-        var options = { 
-          service_type : TypeOfService_Multi,
-          service_name : data.ServiceName,
-          num_nodes: parseInt(data.clusterSize),
-          mem: parseInt(data.NodeMemory),
-          cpu: parseInt(data.NodeCpus),
-          disks: parseInt(data.NodeDisks),
-          clustername: data.clusterName
-        };
+  //       var options = { 
+  //         service_type : TypeOfService_Multi,
+  //         service_name : data.ServiceName,
+  //         num_nodes: parseInt(data.clusterSize),
+  //         mem: parseInt(data.NodeMemory),
+  //         cpu: parseInt(data.NodeCpus),
+  //         disks: parseInt(data.NodeDisks),
+  //         clustername: data.clusterName
+  //       };
 
-        vm.endpoint.create(options)    
-          .then(function(success) {
-              if(success.data == undefined){
-                //ERROR
-                handleBackendDown(BackendDownMessage);
-              }else{
-                if(success.status != 200){
-                  //ERROR
-                  handleBackendDown(BackendDownMessage, success.status);
-                }else{
-                  //SUCCESS
-                  vm.activate();
-                }
-              }
-          }).catch(function(error) {
-            //ERROR
-            if(error.status == 409){
-              handleBackendDown(ExceededNumberOfNodes, error.status, error.data.message);
-            }
-            handleBackendDown(UnknownError, error.status, error.data.message);
-          })
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
-  };
+  //       vm.endpoint.create(options)    
+  //         .then(function(success) {
+  //             if(success.data == undefined){
+  //               //ERROR
+  //               handleBackendDown(BackendDownMessage);
+  //             }else{
+  //               if(success.status != 200){
+  //                 //ERROR
+  //                 handleBackendDown(BackendDownMessage, success.status);
+  //               }else{
+  //                 //SUCCESS
+  //                 vm.activate();
+  //               }
+  //             }
+  //         }).catch(function(error) {
+  //           //ERROR
+  //           if(error.status == 409){
+  //             handleBackendDown(ExceededNumberOfNodes, error.status, error.data.message);
+  //           }
+  //           handleBackendDown(UnknownError, error.status, error.data.message);
+  //         })
+  //     }, function () {
+  //       $log.info('Modal dismissed at: ' + new Date());
+  //     });
+  // };
 
   //DRAW SERVICES
   vm.drawServices = function($timeout) {
@@ -164,61 +164,3 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
   vm.drawInstances();
 
 }]);
-
-
-angular.module('cesgaBDApp.launcher.bigdata', ['ui.router','ui.bootstrap'])
-
-.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-  var modal = this;
-
-  modal.steps = ['one', 'two', 'three'];
-  modal.step = 0;
-  modal.wizard = {
-    clusterName: "My Slurm Cluster",
-    clusterSize: 2,
-    ServiceName: "Slurm",
-    NodeCpus : "2",
-    NodeMemory: "1024",
-    NodeDisks: "1"
-  };
-
-  modal.isFirstStep = function () {
-      return modal.step === 0;
-  };
-
-  modal.isLastStep = function () {
-      return modal.step === (modal.steps.length - 1);
-  };
-
-  modal.isCurrentStep = function (step) {
-      return modal.step === step;
-  };
-
-  modal.setCurrentStep = function (step) {
-      modal.step = step;
-  };
-
-  modal.getCurrentStep = function () {
-      return modal.steps[modal.step];
-  };
-
-  modal.getNextLabel = function () {
-      return (modal.isLastStep()) ? 'Submit' : 'Next';
-  };
-
-  modal.handlePrevious = function () {
-      modal.step -= (modal.isFirstStep()) ? 0 : 1;
-  };
-
-  modal.handleNext = function () {
-      if (modal.isLastStep()) {
-          $uibModalInstance.close(modal.wizard);
-      } else {
-          modal.step += 1;
-      }
-  };
-
-  modal.dismiss = function(reason) {
-      $uibModalInstance.dismiss(reason);
-  };
-});

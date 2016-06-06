@@ -18,6 +18,7 @@
           <thead>
             <tr>
               <th>Name</th>
+              <th>State</th>
               <th>CPU</th>
               <th>Memory</th>
               <th>Disks</th>
@@ -27,6 +28,7 @@
           <tbody>
             <tr ng-repeat="node in bigdatainstanceData.nodes">
               <td>{{node.name}}</td>
+              <td>{{node.status}}</td>
               <td>{{node.cpu}}</td>
               <td>{{node.mem}}</td>
               <td>
