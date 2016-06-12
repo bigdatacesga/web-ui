@@ -96,7 +96,7 @@ describe('cesgaBDApp.components.endpoints.nodes', function() {
   });
 
   it('should return the list of nodes of a cloud service', function() {
-    mockBackend.expectGET('/cloud/api/nodes/cluster/12').respond(dummyNodesCloud);
+    mockBackend.expectGET('/api/nodes/cluster/12').respond(dummyNodesCloud);
     var services = [];
     serviceCloud.listClusterNodes("12").then(function(response){
       services = response.data;

@@ -31,7 +31,13 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
             for (var v in data.versions){
                 BigdataService.showService(vmService.paasserviceData.name, data.versions[v]).success(function (data, status){
                   if (status == 200){
-                    vmService.paasserviceData.services.push(data)
+                    var newService = {
+                      "description": data.description,
+                      "name": data.name,
+                      "version": data.version,
+                      "options": JSON.parse(data.options)
+                    }
+                    vmService.paasserviceData.services.push(newService)
                   }else{
                     // Skip this service-version
                   }

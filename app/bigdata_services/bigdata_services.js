@@ -22,7 +22,7 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
 }])
 
 .controller('BigdataCtrl', 
-            ['BigdataService', '$log', '$state', '$uibModal', function(BigdataService, $log, $state, $uibModal) {
+            ['BigdataService', '$log', '$state', '$uibModal', function(BigdataService, $log) {
 
 
   var vm = this;
@@ -30,11 +30,6 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
   //CONSTANTS
   var BackendDownMessage = 
     "Sorry :( , it seems we could not launch the service, the server may be down.";
-  var ExceededNumberOfNodes =
-    "Sorry, it seems you have exceeded the number of nodes allowed.";
-  var UnknownError =
-    "There was an unkwnown error in the backend, how scary..."
-  var TypeOfService_Multi = "multi";
 
   vm.services = [];
   vm.instances = [];
@@ -49,62 +44,8 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
     if(error != undefined) {$log.info('Error: ' + error);}
   }
 
-  // LAUNCH NEW SERVICE
-  // vm.launchInstanceWizard = function() {
-  //     var modalInstance = $uibModal.open({
-  //       animation: true,
-  //       templateUrl: 'bigdata_services/partials/wizard.html',
-  //       controller: 'ModalInstanceCtrl',
-  //       controllerAs: 'modal',
-  //       resolve: {
-  //         items: function () {
-  //           return vm.items;
-  //         }
-  //       }
-  //     });
-
-  //     modalInstance.result.then(function (data) {
-  //       vm.clusterDetails = data;
-  //       vm.errorMessage = 'Launching cluster';
-
-  //       var options = { 
-  //         service_type : TypeOfService_Multi,
-  //         service_name : data.ServiceName,
-  //         num_nodes: parseInt(data.clusterSize),
-  //         mem: parseInt(data.NodeMemory),
-  //         cpu: parseInt(data.NodeCpus),
-  //         disks: parseInt(data.NodeDisks),
-  //         clustername: data.clusterName
-  //       };
-
-  //       vm.endpoint.create(options)    
-  //         .then(function(success) {
-  //             if(success.data == undefined){
-  //               //ERROR
-  //               handleBackendDown(BackendDownMessage);
-  //             }else{
-  //               if(success.status != 200){
-  //                 //ERROR
-  //                 handleBackendDown(BackendDownMessage, success.status);
-  //               }else{
-  //                 //SUCCESS
-  //                 vm.activate();
-  //               }
-  //             }
-  //         }).catch(function(error) {
-  //           //ERROR
-  //           if(error.status == 409){
-  //             handleBackendDown(ExceededNumberOfNodes, error.status, error.data.message);
-  //           }
-  //           handleBackendDown(UnknownError, error.status, error.data.message);
-  //         })
-  //     }, function () {
-  //       $log.info('Modal dismissed at: ' + new Date());
-  //     });
-  // };
-
   //DRAW SERVICES
-  vm.drawServices = function($timeout) {
+  vm.drawServices = function() {
     var receivedData;
     return vm.endpoint.listServices()
       .then(function(data){
@@ -122,7 +63,6 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
             })
           }
           vm.services = services;
-
         }      
       }).catch(function(error) {
         //ERROR
@@ -130,12 +70,8 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
       });
   }
 
-  //Call function to draw the data on the interface
-  vm.drawServices();
-  //vm.services = [{"name": "test"},{"name": "test2"}]
-
   // //DRAW INSTANCES
-  vm.drawInstances = function($timeout) {
+  vm.drawInstances = function() {
     var receivedData;
     return vm.endpoint.listInstances("jenes",null,null)
       .then(function(data){
@@ -147,8 +83,13 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
           //SUCCESS
           var instances = [];
           for (var index in receivedData.instances){
-            var instanceName = receivedData.instances[index]
+            var instanceUri = receivedData.instances[index].uri
+            var instanceName = receivedData.instances[index].uri
+            if (receivedData.instances[index].result == "success"){
+              instanceName = receivedData.instances[index].data.instance_name
+            }
             instances.push({
+              "uri" : instanceUri,
               "name" : instanceName
             })
           }
@@ -159,7 +100,9 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
         handleBackendDown(BackendDownMessage, data.status, error.data.message);
       });
   }
-
+              
+  //Call function to draw the data on the interface
+  vm.drawServices();
   //Call function to draw the data on the interface
   vm.drawInstances();
 

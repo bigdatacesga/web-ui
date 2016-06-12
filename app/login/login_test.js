@@ -25,7 +25,7 @@ describe('cesgaBDApp.login module', function() {
     it('should login with right credentials', inject(function($controller, $state) {
       var ctrl = $controller('LoginCtrl');
       var dummyToken = { token: '==DUMMYTOKEN==', expires: 1430762101965 };
-      mockBackend.expectPOST('/cloud/api/authenticate', 
+      mockBackend.expectPOST('/api/authenticate',
                             'username=test&password=testpass',
                             function (headers) {
                               return headers['Content-Type'] === "application/x-www-form-urlencoded";
@@ -41,7 +41,7 @@ describe('cesgaBDApp.login module', function() {
 
     it('should fail login with wrong credentials', inject(function($controller, $state) {
       var ctrl = $controller('LoginCtrl');
-      mockBackend.expectPOST('/cloud/api/authenticate', 
+      mockBackend.expectPOST('/api/authenticate',
                              'username=test&password=wrongpass').respond(401, '');
       ctrl.user = {username: "test", password: "wrongpass"};
       ctrl.login();

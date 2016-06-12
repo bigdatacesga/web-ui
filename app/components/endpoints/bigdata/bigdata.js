@@ -10,7 +10,7 @@
 angular.module('cesgaBDApp.components.endpoints.bigdata', [])
 .factory('BigdataService', ['$http', function ($http) {
     
-  var callTimeout = 10000; //10 seconds
+  var callTimeout = 1000000; // seconds
     return {
       listServices: function() {
         var url = '/bigdata/api/v1/services'
@@ -49,7 +49,8 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         return $http.get(url, {timeout: callTimeout});
       },
       showInstance: function(instance_path) {
-        var base_url = '/bigdata/api/v1/instances'
+        //var base_url = '/bigdata/api/v1/instances'
+        var base_url = '/bigdata/api/v1'
         var url = base_url + '/' + instance_path
         //return $http.get(url, {timeout: callTimeout});
         return $http.get(url);

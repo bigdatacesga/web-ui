@@ -76,7 +76,7 @@ describe('cesgaBDApp.components.endpoints.cloud', function() {
   });
 
   it('should return the list of active clusters', function() {
-    mockBackend.expectGET('/cloud/api/clusters').respond(dummyClusters);
+    mockBackend.expectGET('/api/clusters').respond(dummyClusters);
     var clusters = [];
     service.list().then(function(response){
       clusters = response.data;
@@ -86,7 +86,7 @@ describe('cesgaBDApp.components.endpoints.cloud', function() {
   });
 
   it('should show info about a given cluster', function() {
-    mockBackend.expectGET('/cloud/api/clusters/101').respond(dummyClusters[0]);
+    mockBackend.expectGET('/api/clusters/101').respond(dummyClusters[0]);
     var cluster = [];
     service.show('101').then(function(response){
       cluster = response.data;
@@ -97,7 +97,7 @@ describe('cesgaBDApp.components.endpoints.cloud', function() {
 
   it('should delete a given cluster', function() {
     var dummyMsg = {"message":"Hadoop cluster with id [101]: DELETED SUCCESSFULLY"};
-    mockBackend.expectDELETE('/cloud/api/clusters/101').respond(dummyMsg);
+    mockBackend.expectDELETE('/api/clusters/101').respond(dummyMsg);
     var msg = {};
     service.remove('101').then(function(response){
       msg = response.data;
@@ -113,7 +113,7 @@ describe('cesgaBDApp.components.endpoints.cloud', function() {
       dfsBlockSize: 64,
       clustername: 'test'
     };
-    mockBackend.expectPOST('/cloud/api/clusters',data).respond(201, '');
+    mockBackend.expectPOST('/api/clusters',data).respond(201, '');
     var status;
     service.create(data).then(function(response){
       status = response.status;

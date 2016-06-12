@@ -4,39 +4,42 @@ describe('cesgaBDApp.bigdata_services controller', function() {
 
   beforeEach(module('cesgaBDApp.bigdata_services'));
 
-  var ctrl, mockService, dummyServices, state;
+  var ctrl, mockBackend, state;
+
+
+  beforeEach(inject(function(BigdataService, $httpBackend) {
+    mockBackend = $httpBackend;
+  }));
+
+  var dummyInstances;
+  var dummyServices
 
   beforeEach(function() {
     dummyServices = {
       "services": [
-        {
-          "clustername": "My MPI cluster", 
-          "cpu": 4, 
-          "masterIP": "10.112.13.110", 
-          "mem": 2048,
-          "disk": 2, 
-          "num_nodes": 2, 
-          "service_full_name": "MPI-jenes-1", 
-          "instance_id": 1, 
-          "service_name": "MPI", 
-          "service_type": "multi", 
-          "service_username": "jenes"
-        }, 
-        {
-          "clustername": "My Slurm cluster", 
-          "cpu": 12,  
-          "masterIP": "10.112.13.120", 
-          "mem": 6168,
-          "disk": 3, 
-          "num_nodes": 3, 
-          "service_full_name": "Slurm-jenes-2", 
-          "instance_id": 2, 
-          "service_name": "Slurm", 
-          "service_type": "multi", 
-          "service_username": "jenes"
-        }
+          "mpi",
+          "slurm",
+          "gluster",
+          "cdh"
       ]
     };
+
+    dummyInstances = {
+      "instances": [
+      {
+        "uri": "jenes/mpi/1.0/7",
+        "result":"success",
+        "data": {
+          "instance_name": "MpiCluster7"
+        }
+      },
+      {
+        "uri": "jenes/mpi/2.0/1",
+        "result":"failure",
+        "message": "TESTING FAIL"
+      }
+    ]
+  }
   });
 
   beforeEach(inject(function($controller, BigdataService, $q) {
@@ -52,15 +55,28 @@ describe('cesgaBDApp.bigdata_services controller', function() {
     expect(ctrl).toBeDefined();
   });
 
-  it('should have sample services', inject(function($rootScope, $httpBackend) {
-    $httpBackend.whenGET('/bigdata/api/v1/services/?type=multi').respond(dummyServices);
-    $httpBackend.expectGET('/bigdata/api/v1/services/?type=multi');
+  it('should have sample instances and services', inject(function($rootScope, $httpBackend) {
+    $httpBackend.whenGET('/bigdata/api/v1/services').respond(dummyServices);
+    $httpBackend.expectGET('/bigdata/api/v1/services');
+    $httpBackend.whenGET('/bigdata/api/v1/instances/jenes').respond(dummyInstances);
+    $httpBackend.expectGET('/bigdata/api/v1/instances/jenes');
+
     $rootScope.$apply();
-    ctrl.activate();
+    ctrl.drawServices();
+    ctrl.drawInstances();
     $httpBackend.flush();
-    expect(ctrl.services.length).toBe(2);
-    expect(ctrl.services[0].clustername).toEqual('My MPI cluster');
-    expect(ctrl.services[1].clustername).toEqual('My Slurm cluster');
+
+    expect(ctrl.services.length).toBe(4);
+    expect(ctrl.services[0].name).toEqual('mpi');
+    expect(ctrl.services[1].name).toEqual('slurm');
+    expect(ctrl.services[2].name).toEqual('gluster');
+    expect(ctrl.services[3].name).toEqual('cdh');
+
+    expect(ctrl.instances.length).toBe(2);
+    expect(ctrl.instances[0].uri).toEqual("jenes/mpi/1.0/7");
+    expect(ctrl.instances[0].name).toEqual("MpiCluster7");
+    expect(ctrl.instances[1].uri).toEqual("jenes/mpi/2.0/1");
+    expect(ctrl.instances[1].name).toEqual("jenes/mpi/2.0/1");
   }));
 });
 

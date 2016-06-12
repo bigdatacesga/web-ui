@@ -135,8 +135,8 @@ describe('cesgaBDApp.cloud module', function() {
     var compiledElementScope = element.isolateScope();
     expect(compiledElementScope.showDetails).toEqual('false');
 
-    mockBackend.whenGET("/cloud/api/nodes/cluster/189").respond({test:""});
-    mockBackend.expectGET("/cloud/api/nodes/cluster/189");
+    mockBackend.whenGET("/api/nodes/cluster/189").respond({test:""});
+    mockBackend.expectGET("/api/nodes/cluster/189");
     // When
     compiledElementScope.toggleDetails();
     mockBackend.flush();

@@ -26,9 +26,9 @@ angular.module('cesgaBDApp.bigdatainstance.bigdatainstance-directive', ['cesgaBD
         if(vmInstance.bigdatainstanceData.showDetails == 'false') {
 
 
-          BigdataService.showInstance(vmInstance.bigdatainstanceData.name).success(function (data){
-            vmInstance.bigdatainstanceData.nodes = data.nodes
-            vmInstance.bigdatainstanceData.name = data.instance_full_name
+          BigdataService.showInstance(vmInstance.bigdatainstanceData.uri).success(function (data){
+            vmInstance.bigdatainstanceData.nodes = data.data.nodes
+            vmInstance.bigdatainstanceData.uri = data.data.uri
             vmInstance.showDetails = 'true';
           }).error(function (data){
              alert('Could not get the version');

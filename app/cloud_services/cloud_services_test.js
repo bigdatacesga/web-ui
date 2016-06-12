@@ -4,7 +4,7 @@ describe('cesgaBDApp.cloud_services controller', function() {
 
   beforeEach(module('cesgaBDApp.cloud_services'));
 
-  var ctrl, mockService, dummyClusters, state;
+  var ctrl, dummyClusters, state;
 
   beforeEach(function() {
     dummyClusters = [
@@ -107,8 +107,8 @@ describe('cesgaBDApp.cloud_services controller', function() {
   });
 
   it('should have sample clusters', inject(function($rootScope, $httpBackend) {
-    $httpBackend.whenGET('/cloud/api/clusters').respond(dummyClusters);
-    $httpBackend.expectGET('/cloud/api/clusters');
+    $httpBackend.whenGET('/api/clusters').respond(dummyClusters);
+    $httpBackend.expectGET('/api/clusters');
     $rootScope.$apply();
     ctrl.activate();
     $httpBackend.flush();

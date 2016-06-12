@@ -11,180 +11,153 @@ describe('cesgaBDApp.components.endpoints.bigdata', function() {
     mockBackend = $httpBackend;
   }));
 
-  var dummyServices;
-  var dummyDeleteMsg = {"result":"success"};
-  var dummyPostMsg= {"result":"success"};
+  var dummyInstances;
 
   beforeEach(function() {
-      dummyServices = 
-      {
-      "services": [
+      dummyInstances =
+      [
         {
-          "clustername": "My MPI cluster", 
-          "cpu": 4, 
-          "masterIP": "10.112.13.110", 
-          "mem": 2048, 
-          "num_nodes": 2, 
-          "service_full_name": "MPI-jenes-1", 
-          "service_id": 1, 
-          "service_name": "MPI", 
-          "service_type": "multi", 
-          "service_username": "jenes"
+            "result": "success",
+            "data": {
+                "uri": "jenes/mpi/1.0/7",
+                "name": "MpiCluster7"
+            }
+        },
+            {
+            "result": "success",
+            "data": {
+                "uri": "jenes/mpi/2.0/8",
+                "name": "MpiCluster8"
+            }
         },
         {
-          "clustername": "My Slurm cluster Nº 1", 
-          "cpu": 12,  
-          "masterIP": "10.112.13.120", 
-          "mem": 6168, 
-          "num_nodes": 3, 
-          "service_full_name": "Slurm-jenes-1", 
-          "service_id": 1, 
-          "service_name": "Slurm", 
-          "service_type": "multi", 
-          "service_username": "jenes"
+            "result": "success",
+            "data": {
+                "uri": "jenes/slurm/2.3.0/2",
+                "name": "MpiCluster2"
+            }
         },
         {
-          "clustername": "My Slurm cluster Nº 2", 
-          "cpu": 12,  
-          "masterIP": "10.112.13.130", 
-          "mem": 6168, 
-          "num_nodes": 3, 
-          "service_full_name": "Slurm-jenes-2", 
-          "service_id": 2, 
-          "service_name": "Slurm", 
-          "service_type": "multi", 
-          "service_username": "jenes"
+            "result": "success",
+            "data": {
+                "uri": "javier/cdh/5.7.0/1",
+                "name": "CDH1"
+            }
         },
         {
-          "clustername": "Test HBase", 
-          "cpu": 4, 
-          "masterIP": "10.112.13.160", 
-          "mem": 2048, 
-          "num_nodes": 1, 
-          "service_full_name": "HBase-jenes-1", 
-          "service_id": 1, 
-          "service_name": "HBase", 
-          "service_type": "single", 
-          "service_username": "jenes"
+            "result": "success",
+            "data": {
+                "uri": "rodrigo/gluster/1/5",
+                "name": "RodGlus5"
+            }
         },
-        {
-          "clustername": "Test RStudio", 
-          "cpu": 4, 
-          "masterIP": "10.112.13.170", 
-          "mem": 2048, 
-          "num_nodes": 1, 
-          "service_full_name": "RStudio-jenes-1", 
-          "service_id": 1, 
-          "service_name": "RStudio", 
-          "service_type": "single", 
-          "service_username": "jenes"
-        }
       ]
-    }
   });
 
 
-  it('should return the list of active services', function() {
-    mockBackend.expectGET('/bigdata/api/v1/services/').respond(dummyServices);
-    var services = [];
-    service.list().then(function(response){
-      services = response.data;
+    it('should return the list of all active instances', function() {
+        var jsons = new Array();
+        jsons.push(dummyInstances[0]);
+        jsons.push(dummyInstances[1]);
+        jsons.push(dummyInstances[2]);
+        jsons.push(dummyInstances[3]);
+        jsons.push(dummyInstances[4]);
+        var dummyResponse = {'instances' : jsons}
+
+        mockBackend.whenGET('/bigdata/api/v1/instances').respond(dummyResponse);
+        mockBackend.expectGET('/bigdata/api/v1/instances')
+
+        var instances = [];
+            service.listInstances(null,null,null).then(function(response){
+            instances = response.data;
+        });
+        mockBackend.flush();
+        expect(instances).toEqual(dummyResponse);
     });
-    mockBackend.flush();
-    expect(services).toEqual(dummyServices); 
-  });
 
-  it('should return a list of a given type of service (multi)', function() {
-    var jsons = new Array();
-    jsons.push(dummyServices[0]);
-    jsons.push(dummyServices[1]);
-    jsons.push(dummyServices[2]);
-    var dummyResponse = {'services' : jsons}
+    it('should return a list of a user active instances', function() {
+        var jsons = new Array();
+        jsons.push(dummyInstances[0]);
+        jsons.push(dummyInstances[1]);
+        jsons.push(dummyInstances[2]);
+        var dummyResponse = {'instances' : jsons}
 
-    mockBackend.expectGET('/bigdata/api/v1/services/?type=multi').respond(dummyResponse);
-    var services = [];
-    service.list('multi').then(function(response){
-      services = response.data;
+        mockBackend.whenGET('/bigdata/api/v1/instances/jenes').respond(dummyResponse);
+        mockBackend.expectGET('/bigdata/api/v1/instances/jenes')
+
+        var instances = [];
+            service.listInstances('jenes', null, null).then(function(response){
+            instances = response.data;
+        });
+        mockBackend.flush();
+        expect(instances).toEqual(dummyResponse);
     });
-    mockBackend.flush();
-    expect(services).toEqual(dummyResponse); 
-  });
 
-  it('should return a list of a given type of service (single)', function() {
-    var jsons = new Array();
-    jsons.push(dummyServices[3]);
-    jsons.push(dummyServices[4]);
-    var dummyResponse = {'services' : jsons}
+    it('should return a list of a user instances of a specific service', function() {
+        var jsons = new Array();
+        jsons.push(dummyInstances[0]);
+        jsons.push(dummyInstances[1]);
+        var dummyResponse = {'instances' : jsons}
 
-    mockBackend.expectGET('/bigdata/api/v1/services/?type=single').respond(dummyResponse);
-    var services = [];
-    service.list('single').then(function(response){
-      services = response.data;
+        mockBackend.whenGET('/bigdata/api/v1/instances/jenes/mpi').respond(dummyResponse);
+        mockBackend.expectGET('/bigdata/api/v1/instances/jenes/mpi')
+
+        var instances = [];
+        service.listInstances('jenes', 'mpi', null).then(function(response){
+            instances = response.data;
+        });
+        mockBackend.flush();
+        expect(instances).toEqual(dummyResponse);
     });
-    mockBackend.flush();
-    expect(services).toEqual(dummyResponse); 
-  });
 
-  it('should return a list of a given type and name of service (multi, Slurm)', function() {
-    var jsons = new Array();
-    jsons.push(dummyServices[1]);
-    jsons.push(dummyServices[2]);
-    var dummyResponse = {'services' : jsons}
+    it('should return a list of a user instances of a specific service and version', function() {
+        var jsons = new Array();
+        jsons.push(dummyInstances[0]);
+        var dummyResponse = {'instances' : jsons}
 
-    mockBackend.expectGET('/bigdata/api/v1/services/?type=multi&name=slurm').respond(dummyResponse);
-    var services = [];
-    service.list('multi', 'slurm').then(function(response){
-      services = response.data;
+        mockBackend.whenGET('/bigdata/api/v1/instances/jenes/mpi/1.0').respond(dummyResponse);
+        mockBackend.expectGET('/bigdata/api/v1/instances/jenes/mpi/1.0')
+
+        var instances = [];
+        service.listInstances('jenes', 'mpi', '1.0').then(function(response){
+            instances = response.data;
+        });
+        mockBackend.flush();
+        expect(instances).toEqual(dummyResponse);
     });
-    mockBackend.flush();
-    expect(services).toEqual(dummyResponse); 
-  });
 
-  it('should return a single service from a type, name and id (multi, Slurm, 2)', function() {
-    var jsons = new Array();
-    jsons.push(dummyServices[2]);
-    var dummyResponse = {'services' : jsons}
+    it('should return a single user instance', function() {
+        var jsons = new Array();
+        jsons.push(dummyInstances[1]);
+        var dummyResponse = {'instances' : jsons}
 
-    mockBackend.expectGET('/bigdata/api/v1/services/?type=multi&name=slurm&id=2').respond(dummyResponse);
-    var services = [];
-    service.show('multi', 'slurm', '2').then(function(response){
-      services = response.data;
+        mockBackend.whenGET('/bigdata/api/v1/instances/jenes/mpi/2.0/8').respond(dummyResponse);
+        mockBackend.expectGET('/bigdata/api/v1/instances/jenes/mpi/2.0/8')
+
+        var instances = [];
+        service.showInstance('instances/jenes/mpi/2.0/8').then(function(response){
+            instances = response.data;
+        });
+        mockBackend.flush();
+        expect(instances).toEqual(dummyResponse);
     });
-    mockBackend.flush();
-    expect(services).toEqual(dummyResponse); 
-  });
 
 
   it('should create a new service', function() {
     var data = {
-      clusterName: "My Slurm Cluster",
-      clusterSize: 2,
-      ServiceName: "Slurm",
-      NodeCpus : "2",
-      NodeMemory: "1024"
+      "slaves.number": 2
     };
 
-    mockBackend.expectPOST('/bigdata/api/v1/services/',data).respond(201,dummyPostMsg);
+    mockBackend.expectPOST('/bigdata/api/v1/services/mpi/1.0',data).respond(201, "instances/jenes/mpi/1.0/1");
     var status;
     var msg = {};
-    service.create(data).then(function(response){
+    service.launchInstance(data, "mpi", "1.0").then(function(response){
       status = response.status;
       msg = response.data;
     });
     mockBackend.flush();
     expect(status).toEqual(201);
-    expect(msg).toEqual(dummyPostMsg) 
-  });
-
-  it('should delete a given cluster', function() {
-
-    mockBackend.expectDELETE('/bigdata/api/v1/services/?type=multi&name=slurm&id=1').respond(dummyDeleteMsg);
-    var msg = {};
-    service.remove('multi','slurm','1').then(function(response){
-      msg = response.data;
-    });
-    mockBackend.flush();
-    expect(msg).toEqual(dummyDeleteMsg); 
+    expect(msg).toEqual("instances/jenes/mpi/1.0/1")
   });
 
   afterEach(function() {

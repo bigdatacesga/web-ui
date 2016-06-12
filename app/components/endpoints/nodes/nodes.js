@@ -23,7 +23,7 @@ angular.module('cesgaBDApp.components.endpoints.cloud.nodes', [])
 .factory('NodesServiceCloud', ['$http', function ($http) {
     return {
       listClusterNodes: function(clusterId) {
-        return $http.get('/cloud/api/nodes/cluster/' + clusterId);
+        return $http.get('/api/nodes/cluster/' + clusterId);
       }
     };
   }]);
