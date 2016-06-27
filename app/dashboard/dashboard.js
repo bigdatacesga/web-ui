@@ -61,7 +61,7 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
         if(receivedData == undefined){
 
         }else{
-          vm.bigdata = receivedData.services;
+          vm.bigdata = receivedData.instances;
           vm.stats.bigdata.number = vm.bigdata.length;
         }
       })

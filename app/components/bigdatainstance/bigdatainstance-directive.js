@@ -28,13 +28,11 @@ angular.module('cesgaBDApp.bigdatainstance.bigdatainstance-directive', ['cesgaBD
 
           BigdataService.showInstance(vmInstance.bigdatainstanceData.uri).success(function (data){
             vmInstance.bigdatainstanceData.nodes = data.data.nodes
-            vmInstance.bigdatainstanceData.uri = data.data.uri
             vmInstance.showDetails = 'true';
           }).error(function (data){
              alert('Could not get the version');
              vmInstance.showDetails = 'true';
           });
-
 
           vmInstance.bigdatainstanceData.showDetails = 'true';
           
@@ -42,6 +40,21 @@ angular.module('cesgaBDApp.bigdatainstance.bigdatainstance-directive', ['cesgaBD
           vmInstance.bigdatainstanceData.showDetails = 'false';
         }
       };
+
+      vmInstance.destroyInstance = function(index) {
+
+          BigdataService.destroyInstance(vmInstance.bigdatainstanceData.uri).success(function (data, status){
+          if (status == 200){
+            // OK
+          }else{
+            // Skip this service-version
+          }
+        }).error(function (data){
+          alert('Could not destroy instance');
+        });
+
+      };
+
       vmInstance.isCollapsed = function() {
           return vmInstance.bigdatainstanceData.showDetails == 'false';
       };

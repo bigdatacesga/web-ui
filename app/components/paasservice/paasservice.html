@@ -23,9 +23,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="service in paasserviceData.services">
-              <td>{{service.version}}</td>
-              <td>{{service.description}}</td>
+            <tr ng-repeat="version in paasserviceData.versions">
+              <td>{{version.version}}</td>
+              <td>{{version.description}}</td>
               <td>
                 <button type="button" class="btn btn-info" ng-click='seeDetails($index)'>
                   <i class="fa fa-info-circle"></i> See details

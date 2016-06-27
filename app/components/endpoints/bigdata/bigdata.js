@@ -13,7 +13,7 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
   var callTimeout = 1000000; // seconds
     return {
       listServices: function() {
-        var url = '/bigdata/api/v1/services'
+        var url = '/bigdata/api/v1/products'
         return $http.get(url, {timeout: callTimeout});
       },
       listInstances: function(username, service_name, service_version) {
@@ -41,11 +41,11 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         return $http.get(url, {timeout: callTimeout});
       },
       showServiceVersions: function(service_name) {
-        var url = '/bigdata/api/v1/services/' + service_name
+        var url = '/bigdata/api/v1/products/' + service_name
         return $http.get(url, {timeout: callTimeout});
       },
       showService: function(service_name, service_version) {
-        var url = '/bigdata/api/v1/services/' + service_name + '/' + service_version
+        var url = '/bigdata/api/v1/products/' + service_name + '/' + service_version
         return $http.get(url, {timeout: callTimeout});
       },
       showInstance: function(instance_path) {
@@ -55,14 +55,15 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         //return $http.get(url, {timeout: callTimeout});
         return $http.get(url);
       },
-      remove: function(service_type, service_name, instance_id) {
-        var base_url = '/bigdata/api/v1/services'
-        var url = base_url + '?type='+ service_type + '&name=' + service_name + '&id=' + instance_id
+      destroyInstance: function(instance_path) {
+        //var base_url = '/bigdata/api/v1/instances'
+        var base_url = '/bigdata/api/v1'
+        var url = base_url + '/' + instance_path
         return $http.delete(url);
       },
       launchInstance: function(options, service_name, service_version) {
         //return $http.post('/bigdata/api/v1/services/' + service_name + '/' + service_version, options, {timeout: callTimeout});
-        return $http.post('/bigdata/api/v1/services/' + service_name + '/' + service_version, options);
+        return $http.post('/bigdata/api/v1/products/' + service_name + '/' + service_version, options);
       },
       testAuth: function() {
         return $http.get('/bigdata/api/v1/test');

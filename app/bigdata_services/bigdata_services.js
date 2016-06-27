@@ -55,14 +55,14 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
           handleBackendDown(BackendDownMessage, data.status);
         }else{
           //SUCCESS
-          var services = [];
-          for (var index in receivedData.services){
-            var serviceName = receivedData.services[index]
-            services.push({
+          var products = [];
+          for (var index in receivedData.products){
+            var serviceName = receivedData.products[index]
+            products.push({
               "name" : serviceName
             })
           }
-          vm.services = services;
+          vm.products = products;
         }      
       }).catch(function(error) {
         //ERROR

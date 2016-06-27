@@ -21,7 +21,7 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
       var vmService = scope;
       
 
-      vmService.paasserviceData.services = [];
+      vmService.paasserviceData.versions = [];
       vmService.showDetails = 'false';
 
 
@@ -34,10 +34,10 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
                     var newService = {
                       "description": data.description,
                       "name": data.name,
-                      "version": data.version,
-                      "options": JSON.parse(data.options)
+                      "version": data.version
+                      //"options": JSON.parse(data.options)
                     }
-                    vmService.paasserviceData.services.push(newService)
+                    vmService.paasserviceData.versions.push(newService)
                   }else{
                     // Skip this service-version
                   }
@@ -53,7 +53,7 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
 
         } else {
           vmService.showDetails = 'false';
-          vmService.paasserviceData.services = []
+          vmService.paasserviceData.versions = []
         }
       };
 
@@ -63,7 +63,6 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
       };
       
       vmService.launchInstance = function(index) {
-          //vmService.paasserviceData.services = ["asdf"];
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'bigdata_services/partials/launch.html',
@@ -72,13 +71,11 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
             size: 'lg',
             resolve: {
               serviceInfo: function () {
-                return vmService.paasserviceData.services[index];
+                return vmService.paasserviceData.versions[index];
               }
             }
           });
         };
-
-
 
       vmService.seeDetails = function(index) {
           //vmService.paasserviceData.services = ["asdf"];
@@ -90,15 +87,12 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
             size: 'lg',
             resolve: {
               serviceInfo: function () {
-                return vmService.paasserviceData.services[index];
+                return vmService.paasserviceData.versions[index];
               }
             }
           });
         };
-
-
-
-
+      
     },
   };
 }]);
