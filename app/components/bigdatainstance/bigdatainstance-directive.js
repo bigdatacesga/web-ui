@@ -8,7 +8,7 @@
  */
 angular.module('cesgaBDApp.bigdatainstance.bigdatainstance-directive', ['cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.bigdata.nodes'])
 
-.directive('bigdatainstance', ['BigdataService',function(BigdataService) {
+.directive('bigdatainstance', ['BigdataService', '$uibModal', function(BigdataService, $uibModal) {
   return {
     templateUrl:'components/bigdatainstance/bigdatainstance.html',
     restrict: 'E',
@@ -19,26 +19,20 @@ angular.module('cesgaBDApp.bigdatainstance.bigdatainstance-directive', ['cesgaBD
     },
     link: function(scope, element, attrs) {
       var vmInstance = scope;
-
-      vmInstance.bigdatainstanceData.showDetails = 'false';
-
+        
       vmInstance.toggleDetails = function() {
-        if(vmInstance.bigdatainstanceData.showDetails == 'false') {
-
-
-          BigdataService.showInstance(vmInstance.bigdatainstanceData.uri).success(function (data){
-            vmInstance.bigdatainstanceData.nodes = data.data.nodes
-            vmInstance.showDetails = 'true';
-          }).error(function (data){
-             alert('Could not get the version');
-             vmInstance.showDetails = 'true';
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'bigdata_instances/partials/details.html',
+            controller: 'ModalInstanceDetailsCtrlBigdata',
+            controllerAs: 'modal',
+            size: 'lg',
+            resolve: {
+              instanceInfo: function () {
+                return vmInstance.bigdatainstanceData;
+              }
+            }
           });
-
-          vmInstance.bigdatainstanceData.showDetails = 'true';
-          
-        } else {
-          vmInstance.bigdatainstanceData.showDetails = 'false';
-        }
       };
 
       vmInstance.destroyInstance = function(index) {
@@ -53,10 +47,6 @@ angular.module('cesgaBDApp.bigdatainstance.bigdatainstance-directive', ['cesgaBD
           alert('Could not destroy instance');
         });
 
-      };
-
-      vmInstance.isCollapsed = function() {
-          return vmInstance.bigdatainstanceData.showDetails == 'false';
       };
     },
   };

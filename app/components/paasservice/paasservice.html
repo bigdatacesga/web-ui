@@ -3,16 +3,9 @@
     <div class="panel-heading">
       <div class="row">
           <h1>{{paasserviceData.name}}</h1>
-          <button type="button" class="btn btn-info" ng-show="showDetails == 'false'" ng-click='toggleDetails()'>
-            <i class="fa fa-info-circle"></i> Show Details
-          </button>
-          <button type="button" class="btn btn-info" ng-hide="showDetails == 'false'" ng-click='toggleDetails()'>
-            <i class="fa fa-info-circle"></i> Hide Details
-          </button>
       </div><!-- /.row -->
     </div><!-- /.panel-heading-->
 
-  <div collapse="isCollapsed()">
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
@@ -27,9 +20,6 @@
               <td>{{version.version}}</td>
               <td>{{version.description}}</td>
               <td>
-                <button type="button" class="btn btn-info" ng-click='seeDetails($index)'>
-                  <i class="fa fa-info-circle"></i> See details
-                </button>
                 <button type="button" class="btn btn-info" ng-click='launchInstance($index)'>
                   <i class="fa fa-info-circle"></i> Launch Instance
                 </button>
@@ -38,10 +28,35 @@
           </tbody>
         </table>
       </div><!-- /.table-responsive -->
-    </div><!-- /.collapse -->
-
-
-
-
   </div><!-- /.panel-default -->
+</div>
+
+
+
+
+<!--<div class="col-lg-12 col-md-12">-->
+  <!--<div class="panel panel-default">-->
+    <!--<div class="panel-heading">-->
+      <!--<div>-->
+        <!--<table class="table table-bordered table-striped">-->
+          <!--<tr>-->
+            <!--<td><h3>{{bigdatainstanceData.product}}</h3></td>-->
+            <!--<td><p>{{bigdatainstanceData.version}}</p></td>-->
+            <!--<td><p>Cluster nº {{bigdatainstanceData.id}}</p></td>-->
+            <!--<td><p>{{bigdatainstanceData.status}}</p></td>-->
+            <!--<td>-->
+              <!--<button type="button" class="btn btn-info" ng-click='toggleDetails()'>-->
+                <!--<i class="fa fa-info-circle"></i> Details-->
+              <!--</button>-->
+            <!--</td>-->
+            <!--<td>-->
+              <!--<button type="button" class="btn btn-info" ng-click='destroyInstance($index)'>-->
+                <!--<i class="fa fa-info-circle"></i> Destroy Instance-->
+              <!--</button>-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+      <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.panel-heading&ndash;&gt;-->
+  <!--</div>&lt;!&ndash; /.panel-default &ndash;&gt;-->
 </div>

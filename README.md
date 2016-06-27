@@ -72,8 +72,8 @@ app/                                --> all of the source files for the applicat
   bigdata_services/               --> multi node services view template and logic
     partials/                           --> elements to implement the "launch a multi service" wizard
     bigdata_services.html                     --> the partial template
-    bigdata_services.js                       --> the controller logic
-    bigdata_services.js                       --> tests of the controller
+    bigdata_instances.js                       --> the controller logic
+    bigdata_instances.js                       --> tests of the controller
 karma.conf.js                     --> config file for running unit tests with Karma
 e2e-tests/                        --> end-to-end tests
   protractor-conf.js                --> Protractor config file

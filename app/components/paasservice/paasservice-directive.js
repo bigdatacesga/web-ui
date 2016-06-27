@@ -22,47 +22,40 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
       
 
       vmService.paasserviceData.versions = [];
-      vmService.showDetails = 'false';
 
-
-      vmService.toggleDetails = function() {
-        if(vmService.showDetails == 'false') {
-          BigdataService.showServiceVersions(vmService.paasserviceData.name).success(function (data){
-            for (var v in data.versions){
-                BigdataService.showService(vmService.paasserviceData.name, data.versions[v]).success(function (data, status){
-                  if (status == 200){
-                    var newService = {
-                      "description": data.description,
-                      "name": data.name,
-                      "version": data.version
-                      //"options": JSON.parse(data.options)
-                    }
-                    vmService.paasserviceData.versions.push(newService)
-                  }else{
-                    // Skip this service-version
-                  }
-                }).error(function (data){
-                   alert('Could not get the service info');
-                });
-            }
-            vmService.showDetails = 'true';
-          }).error(function (data){
-             alert('Could not get the version');
-             vmService.showDetails = 'true';
-          });
-
-        } else {
-          vmService.showDetails = 'false';
-          vmService.paasserviceData.versions = []
+      BigdataService.showServiceVersions(vmService.paasserviceData.name).success(function (data){
+        for (var v in data.versions){
+            BigdataService.showService(vmService.paasserviceData.name, data.versions[v]).success(function (data, status){
+              if (status == 200){
+                var newService = {
+                  "description": data.description,
+                  "name": data.name,
+                  "version": data.version
+                  //"options": JSON.parse(data.options)
+                }
+                vmService.paasserviceData.versions.push(newService)
+              }else{
+                // Skip this service-version
+              }
+            }).error(function (data){
+               alert('Could not get the service info');
+            });
         }
-      };
+      }).error(function (data){
+         alert('Could not get the version');
+      });
 
-
-      vmService.isCollapsed = function() {
-          return vmService.showDetails == 'false';
-      };
-      
       vmService.launchInstance = function(index) {
+        var product = vmService.paasserviceData.versions[index]
+        BigdataService.getProductOptions(vmService.paasserviceData.name, vmService.paasserviceData.versions[index].version).success(function (data){
+          product.options = {}
+          product.options.required = data.required //{}
+          product.options.optional = data.optional //{"size": 2}
+          product.options.advanced = data.advanced //{}
+          product.options.descriptions = data.descriptions //{"size": "number of worker nodes"}
+
+
+
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'bigdata_services/partials/launch.html',
@@ -75,24 +68,10 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
               }
             }
           });
-        };
-
-      vmService.seeDetails = function(index) {
-          //vmService.paasserviceData.services = ["asdf"];
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'bigdata_services/partials/details.html',
-            controller: 'ModalInstanceCtrlBigdata',
-            controllerAs: 'modal',
-            size: 'lg',
-            resolve: {
-              serviceInfo: function () {
-                return vmService.paasserviceData.versions[index];
-              }
-            }
-          });
-        };
-      
+        }).error(function (data){
+          alert('Could not get the product options');
+        });
+      };
     },
   };
 }]);

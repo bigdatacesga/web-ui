@@ -7,12 +7,6 @@
 
 <div class="modal-body table-responsive" style="width:100%">
     <form name="myForm" class="form-horizontal" role="form" ng-submit="modal.submitForm()">
-        
-
-        <p>Name: {{modal.serviceInfo.name}}</p>
-        <p>Version: {{modal.serviceInfo.version}}</p>
-        <p>Description: {{modal.serviceInfo.description}}</p>
-
 
     	<h4> Required </h4>
     	<div ng-repeat="(key, value) in modal.serviceInfo.options.required">

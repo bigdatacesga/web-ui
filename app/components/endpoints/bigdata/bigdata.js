@@ -17,7 +17,7 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         return $http.get(url, {timeout: callTimeout});
       },
       listInstances: function(username, service_name, service_version) {
-        var base_url = '/bigdata/api/v1/instances'
+        var base_url = '/bigdata/api/v1/clusters'
         var url = base_url
         
         if(username != "" && username != null){
@@ -48,10 +48,21 @@ angular.module('cesgaBDApp.components.endpoints.bigdata', [])
         var url = '/bigdata/api/v1/products/' + service_name + '/' + service_version
         return $http.get(url, {timeout: callTimeout});
       },
+      getProductOptions: function(service_name, service_version){
+        var url = '/bigdata/api/v1/products/' + service_name + '/' + service_version + '/' + 'options'
+        return $http.get(url, {timeout: callTimeout});
+      },
       showInstance: function(instance_path) {
         //var base_url = '/bigdata/api/v1/instances'
         var base_url = '/bigdata/api/v1'
         var url = base_url + '/' + instance_path
+        //return $http.get(url, {timeout: callTimeout});
+        return $http.get(url);
+      },
+      showInstanceNodes: function(instance_path) {
+        //var base_url = '/bigdata/api/v1/instances'
+        var base_url = '/bigdata/api/v1'
+        var url = base_url + '/' + instance_path + '/' + 'nodes'
         //return $http.get(url, {timeout: callTimeout});
         return $http.get(url);
       },
