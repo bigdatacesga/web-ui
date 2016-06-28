@@ -33,7 +33,7 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
   var errorNumber = "#unknown"
   vm.stats = {
     bigdata : {
-      link:"#/bigdata",
+      link:"#/bigdata_instances",
       comments:"Bigdata Clusters",
       colour:"primary",
       type:"database",
@@ -61,7 +61,7 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
         if(receivedData == undefined){
 
         }else{
-          vm.bigdata = receivedData.instances;
+          vm.bigdata = receivedData.clusters;
           vm.stats.bigdata.number = vm.bigdata.length;
         }
       })
@@ -88,4 +88,5 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
         vm.stats.cloud.number = errorNumber;
       });
   }
+
 }]);

@@ -1,62 +1,34 @@
-<div class="col-lg-12 col-md-12">
+
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <div class="row">
-          <h1>{{paasserviceData.name}}</h1>
-      </div><!-- /.row -->
-    </div><!-- /.panel-heading-->
 
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Version</th>
-              <th>Description</th>
-              <th>Commands</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="version in paasserviceData.versions">
-              <td>{{version.version}}</td>
-              <td>{{version.description}}</td>
-              <td>
-                <button type="button" class="btn btn-info" ng-click='launchInstance($index)'>
-                  <i class="fa fa-info-circle"></i> Launch Instance
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div><!-- /.table-responsive -->
+      <table class="table-responsive table table-bordered table-striped">
+        <tr>
+          <th rowspan="2"><h4>{{paasserviceData.name}}</h4></th>
+          <td>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Version</th>
+                  <th>Description</th>
+                  <th>Commands</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="version in paasserviceData.versions">
+                  <td>{{version.version}}</td>
+                  <td>{{version.description}}</td>
+                  <td>
+                    <button type="button" class="btn btn-info" ng-click='launchInstance($index)'>
+                      <i class="fa fa-info-circle"></i> Launch Instance
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table><!-- /.table-responsive -->
+
+
   </div><!-- /.panel-default -->
-</div>
 
-
-
-
-<!--<div class="col-lg-12 col-md-12">-->
-  <!--<div class="panel panel-default">-->
-    <!--<div class="panel-heading">-->
-      <!--<div>-->
-        <!--<table class="table table-bordered table-striped">-->
-          <!--<tr>-->
-            <!--<td><h3>{{bigdatainstanceData.product}}</h3></td>-->
-            <!--<td><p>{{bigdatainstanceData.version}}</p></td>-->
-            <!--<td><p>Cluster nº {{bigdatainstanceData.id}}</p></td>-->
-            <!--<td><p>{{bigdatainstanceData.status}}</p></td>-->
-            <!--<td>-->
-              <!--<button type="button" class="btn btn-info" ng-click='toggleDetails()'>-->
-                <!--<i class="fa fa-info-circle"></i> Details-->
-              <!--</button>-->
-            <!--</td>-->
-            <!--<td>-->
-              <!--<button type="button" class="btn btn-info" ng-click='destroyInstance($index)'>-->
-                <!--<i class="fa fa-info-circle"></i> Destroy Instance-->
-              <!--</button>-->
-            <!--</td>-->
-          <!--</tr>-->
-        <!--</table>-->
-      <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
-    <!--</div>&lt;!&ndash; /.panel-heading&ndash;&gt;-->
-  <!--</div>&lt;!&ndash; /.panel-default &ndash;&gt;-->
-</div>
