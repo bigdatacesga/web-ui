@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.cloud'])
+angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.cloud', 'cesgaBDApp.components.endpoints.ips','cesgaBDApp.components.endpoints.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {
@@ -21,7 +21,7 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
   });
 }])
 
-.controller('DashboardCtrl', ['BigdataService', 'CloudService', function(BigdataService, CloudService) {
+.controller('DashboardCtrl', ['BigdataService', 'CloudService', 'IpService', 'KeyService', '$window', function(BigdataService, CloudService, IpService, KeyService, $window) {
   var vm = this;
   vm.awesomeThings = [
     'HTML5 Boilerplate',
@@ -45,6 +45,20 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
       colour:"primary",
       type:"database",
       number:errorNumber
+    },
+    ips: {
+      link:"#/firewall",
+      comments:"AllowedIPs",
+      colour:"green",
+      type:"arrows-h",
+      number: errorNumber
+    },
+    keys: {
+      link:"#/sshkeys",
+      comments:"SSH Keys",
+      colour:"red",
+      type:"key",
+      number: errorNumber
     }
   };
 
@@ -53,9 +67,8 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
 
   getBigdata();
   function getBigdata() {
-    var name = "jenes" //FIX THIS by getting the real username
-    
-    return BigdataService.listInstances(name,null,null)
+    var username = window.sessionStorage.username;
+    return BigdataService.listInstances(username,null,null)
       .then(function(data){
         receivedData = data.data;
         if(receivedData == undefined){
@@ -88,5 +101,33 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
         vm.stats.cloud.number = errorNumber;
       });
   }
+
+
+  getIps();
+  function getIps() {
+    return IpService.getAll()
+        .then(function(data){
+          vm.ips = data.data;
+          vm.stats.ips.number = vm.ips.length;
+        })
+        .catch(function(error) {
+          vm.stats.ips.number = errorNumber;
+        });
+  }
+
+
+  getKeys();
+  function getKeys() {
+    return KeyService.getAll()
+        .then(function(data){
+          vm.keys = data.data;
+          vm.stats.keys.number = vm.keys.length;
+        })
+        .catch(function(error) {
+          vm.stats.keys.number = errorNumber;
+        });
+  }
+
+
 
 }]);

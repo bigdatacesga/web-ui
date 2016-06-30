@@ -22,7 +22,7 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
 }])
 
 .controller('BigdataInstancesCtrl',
-            ['BigdataService', '$log', '$state', '$uibModal', function(BigdataService, $log) {
+            ['BigdataService', '$log', '$state', '$uibModal', '$window', function(BigdataService, $log, $window) {
 
 
   var vm = this;
@@ -45,7 +45,8 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
   // //DRAW INSTANCES
   vm.drawInstances = function() {
     var receivedData;
-    return vm.endpoint.listInstances("jenes",null,null)
+    var username = window.sessionStorage.username;
+    return vm.endpoint.listInstances(username,null,null)
       .then(function(data){
         receivedData = data.data;
         if(receivedData == undefined){

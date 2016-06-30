@@ -16,7 +16,9 @@ angular
   'cesgaBDApp.help',
   'cesgaBDApp.launcher.cloud',
   'cesgaBDApp.launcher.bigdata',
-    'cesgaBDApp.details.bigdata'
+    'cesgaBDApp.details.bigdata',
+    'cesgaBDApp.components.endpoints.ips',
+    'cesgaBDApp.components.endpoints.keys'
 
 ])
 .config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {

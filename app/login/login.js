@@ -37,6 +37,8 @@ angular.module('cesgaBDApp.login', ['ui.router'])
         $log.debug('Successfully authentication of the user ' + self.user.username);
         $window.sessionStorage.token = data.token;
         $window.sessionStorage.expires = data.expires;
+        $window.sessionStorage.expires = data.expires;
+        $window.sessionStorage.username = self.user.username;
         self.message = 'Welcome';
         $state.go('dashboard');
       })
