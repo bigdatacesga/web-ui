@@ -4,22 +4,29 @@
             <li ui-sref-active="active">
                 <a ui-sref="dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
+
             <!--<li ui-sref-active="active">-->
-                <!--<a ui-sref="cloud_services"><i class="fa fa-server fa-fw"></i> Cloud Hadoop<span></span></a>-->
+                <!--<a ui-sref="bigdata_services"><i class="fa fa-server fa-fw"></i> PaaS <span></span></a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active">-->
+                <!--<a ui-sref="bigdata_instances"><i class="fa fa-server fa-fw"></i> PaaS <span></span></a>-->
             <!--</li>-->
             <li ui-sref-active="active">
-                <a ui-sref="bigdata_services"><i class="fa fa-server fa-fw"></i> Bigdata Products<span></span></a>
+                <a ui-sref="hdp"><i class="fa fa-server fa-fw"></i> HDP <span></span></a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="bigdata_instances"><i class="fa fa-server fa-fw"></i> Bigdata Clusters<span></span></a>
+                <a ui-sref="paas"><i class="fa fa-server fa-fw"></i> PaaS <span></span></a>
             </li>
-            <!--
             <li ui-sref-active="active">
-                <a ui-sref="jobhistory"><i class="fa fa-history fa-fw"></i> Job History</a>
-            </li> -->
-            <!--
+                <a ui-sref="cloud_services"><i class="fa fa-server fa-fw"></i> Cloud <span></span></a>
+            </li>
+
+            <!--<li ui-sref-active="active">-->
+                <!--<a ui-sref="jobhistory"><i class="fa fa-history fa-fw"></i> Job History</a>-->
+            <!--</li>-->
+
             <li ng-class="{active: collapseVar==1}">{{dropDown}}
-                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> Configuration<span
+                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> Configuration <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
                     <li ui-sref-active="active">
@@ -27,12 +34,13 @@
                     </li>
                     <li ui-sref-active="active">
                         <a ui-sref="firewall">Firewall</a>
-                    </li> Advanced Options are not defined yet
-                    <li ui-sref-active="active">
-                        <a ui-sref="configuration.options">Advanced Options</a>
-                    </li> 
+                    </li>
+                    <!--Advanced Options are not defined yet-->
+                    <!--<li ui-sref-active="active">-->
+                        <!--<a ui-sref="configuration.options">Advanced Options</a>-->
+                    <!--</li>-->
                 </ul>
-                -->
+
                 <!-- /.nav-second-level -->
             </li>
             <li ui-sref-active="active">

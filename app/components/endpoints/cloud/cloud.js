@@ -5,7 +5,7 @@
  * @name cesgaBDApp.CloudService
  * @description
  * # CloudService
- * Service in the hadoopApp.
+ * Service in the cesgaBDApp.
  */
 angular.module('cesgaBDApp.components.endpoints.cloud', [])
 .factory('CloudService', ['$http', function ($http) {

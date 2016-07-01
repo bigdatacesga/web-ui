@@ -33,22 +33,22 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
   var errorNumber = "#unknown"
   vm.stats = {
     bigdata : {
-      link:"#/bigdata_instances",
-      comments:"Bigdata Clusters",
-      colour:"primary",
-      type:"database",
+      link:"#/paas",
+      comments:"PaaS",
+      colour:"yellow",
+      type:"th-large",
       number:errorNumber
     },
     cloud : {
       link:"#/cloud",
-      comments:"Cloud Clusters",
+      comments:"Cloud Service",
       colour:"primary",
-      type:"database",
+      type:"cloud",
       number:errorNumber
     },
     ips: {
       link:"#/firewall",
-      comments:"AllowedIPs",
+      comments:"Allowed IPs",
       colour:"green",
       type:"arrows-h",
       number: errorNumber

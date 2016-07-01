@@ -1,7 +1,7 @@
 'use strict';
 /**
  * @ngdoc function
- * @name hadoopApp.clusters:ClustersCtrl
+ * @name cesgaBDApp.clusters:ClustersCtrl
  * @description 
  * # ClustersCtrl
  * Controller of the clusters view 

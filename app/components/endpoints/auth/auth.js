@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc service
- * @name hadoopApp.endpoints.auth
+ * @name cesgaBDApp.endpoints.auth
  * @description
  * # Auth module
  * Auth module
