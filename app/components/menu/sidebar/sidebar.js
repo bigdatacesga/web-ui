@@ -17,24 +17,24 @@ angular.module('cesgaBDApp.menu.sidebar', [])
       },
       controller:function($scope){
         $scope.selectedMenu = 'dashboard';
-        $scope.collapseVar = 0;
-        $scope.multiCollapseVar = 0;
-        
-        $scope.check = function(x){
-          
-          if(x==$scope.collapseVar)
-            $scope.collapseVar = 0;
+
+        $scope.collapsePaaS = 0
+        $scope.unfoldPaas = function(x){
+          if(x==$scope.collapsePaaS)
+            $scope.collapsePaaS = 0;
           else
-            $scope.collapseVar = x;
+            $scope.collapsePaaS = x;
         };
-        
-        $scope.multiCheck = function(y){
-          
-          if(y==$scope.multiCollapseVar)
-            $scope.multiCollapseVar = 0;
+
+        $scope.collapseSettings = 0
+        $scope.unfoldSettings = function(x){
+
+          if(x==$scope.collapseSettings)
+            $scope.collapseSettings = 0;
           else
-            $scope.multiCollapseVar = y;
+            $scope.collapseSettings = x;
         };
+
       }
     }
   }]);

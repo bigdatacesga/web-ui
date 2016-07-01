@@ -32,12 +32,11 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
 
   var errorNumber = "#unknown"
   vm.stats = {
-    bigdata : {
-      link:"#/paas",
-      comments:"PaaS",
-      colour:"yellow",
-      type:"th-large",
-      number:errorNumber
+    hdp : {
+      link:"#/hdp",
+      comments:"Hadoop Services",
+      colour:"primary",
+      type:"database"
     },
     cloud : {
       link:"#/cloud",
@@ -59,29 +58,43 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
       colour:"red",
       type:"key",
       number: errorNumber
+    },
+    clusters : {
+        link:"#/bigdata_instances",
+        comments:"PaaS Clusters",
+        colour:"primary",
+        type:"cubes",
+        number:errorNumber
+    },
+    products : {
+        link:"#/bigdata_services",
+        comments:"PaaS products",
+        colour:"primary",
+        type:"th-list",
+        number:errorNumber
     }
   };
 
 
   var receivedData;
 
-  getBigdata();
-  function getBigdata() {
-    var username = window.sessionStorage.username;
-    return BigdataService.listInstances(username,null,null)
-      .then(function(data){
-        receivedData = data.data;
-        if(receivedData == undefined){
-
-        }else{
-          vm.bigdata = receivedData.clusters;
-          vm.stats.bigdata.number = vm.bigdata.length;
-        }
-      })
-      .catch(function(error) {
-        vm.stats.bigdata.number = errorNumber;
-      });
-  }
+  // getBigdata();
+  // function getBigdata() {
+  //   var username = window.sessionStorage.username;
+  //   return BigdataService.listInstances(username,null,null)
+  //     .then(function(data){
+  //       receivedData = data.data;
+  //       if(receivedData == undefined){
+  //
+  //       }else{
+  //         vm.bigdata = receivedData.clusters;
+  //         vm.stats.bigdata.number = vm.bigdata.length;
+  //       }
+  //     })
+  //     .catch(function(error) {
+  //       vm.stats.bigdata.number = errorNumber;
+  //     });
+  // }
 
   getCloud();
   var errorMessage;
@@ -127,6 +140,43 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
           vm.stats.keys.number = errorNumber;
         });
   }
+
+    getBigdataInstances();
+    function getBigdataInstances() {
+        var username = window.sessionStorage.username;
+        return BigdataService.listInstances(username,null,null)
+            .then(function(data){
+                receivedData = data.data;
+                if(receivedData == undefined){
+
+                }else{
+                    vm.clusters = receivedData.clusters;
+                    vm.stats.clusters.number = vm.clusters.length;
+                }
+            })
+            .catch(function(error) {
+                vm.stats.clusters.number = errorNumber;
+            });
+    }
+
+    getBigdataServices();
+    var errorMessage;
+    function getBigdataServices() {
+        return BigdataService.listServices()
+            .then(function(data){
+                receivedData = data.data;
+                if(receivedData == undefined){
+                    errorMessage = "Sorry :( , it seems we could not get info from the server, it may be down.";
+                    alert(errorMessage);
+                }else{
+                    vm.products = receivedData.products;
+                    vm.stats.products.number = vm.products.length;
+                }
+            })
+            .catch(function(error) {
+                vm.stats.products.number = errorNumber;
+            });
+    }
 
 
 
