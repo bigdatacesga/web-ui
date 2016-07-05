@@ -10,6 +10,6 @@ angular.module('cesgaBDApp.help', ['ui.router'])
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('help', {
     url:'/help',
-    templateUrl: 'help/help.html',
+    templateUrl: 'help/home.html',
   });
 }])

@@ -9,10 +9,16 @@
 angular.module('cesgaBDApp.menu.topbar', [])
 	.directive('topbar',function(){
 		return {
-        templateUrl:'components/menu/topbar/topbar.html',
-        restrict: 'E',
-        replace: true,
+			templateUrl:'components/menu/topbar/topbar.html',
+			restrict: 'E',
+			replace: true,
     	}
-	});
+	})
+	.controller('TopBarCtrl', ['$scope', '$state', '$window', function($scope, $state, $window) {
+		$scope.logout = function () {
+			$window.sessionStorage.clear();
+			$state.go('login');
+		};
+	}]);
 
 

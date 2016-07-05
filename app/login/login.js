@@ -22,6 +22,8 @@ angular.module('cesgaBDApp.login', ['ui.router'])
   var self = this;
   self.user = { username: '', password: '' };
   self.message = '';
+  self.AuthFailed = false;
+
 
   self.login = function () {
     var credentials = "username=" + self.user.username 
@@ -34,19 +36,23 @@ angular.module('cesgaBDApp.login', ['ui.router'])
         }
       })
       .success(function (data, status, headers, config) {
-        $log.debug('Successfully authentication of the user ' + self.user.username);
-        $window.sessionStorage.token = data.token;
-        $window.sessionStorage.expires = data.expires;
-        $window.sessionStorage.expires = data.expires;
-        $window.sessionStorage.username = self.user.username;
-        self.message = 'Welcome';
-        $state.go('dashboard');
+        if (status == 200){
+          $log.debug('Successfully authentication of the user ' + self.user.username);
+          $window.sessionStorage.token = data.token;
+          $window.sessionStorage.expires = data.expires;
+          $window.sessionStorage.username = self.user.username;
+          self.message = 'Welcome';
+          $state.go('dashboard');
+        }else{
+          self.message = 'Error: Invalid user or password';
+          self.AuthFailed = true;
+        }
       })
       .error(function (data, status, headers, config) {
         $log.debug('Failure authenticating user ' + self.user.username);
         // Erase the token if the user fails to log in
         delete $window.sessionStorage.token;
-
+        self.AuthFailed = true;
         // Handle login errors here
         self.message = 'Error: Invalid user or password';
       });

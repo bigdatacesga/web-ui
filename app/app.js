@@ -22,7 +22,6 @@ angular
   'cesgaBDApp.details.bigdata',
   'cesgaBDApp.components.endpoints.ips',
   'cesgaBDApp.components.endpoints.keys'
-
 ])
 .config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
   // For any unmatched url, redirect to /dashboard
