@@ -43,6 +43,7 @@ angular.module('cesgaBDApp.login', ['ui.router'])
           $window.sessionStorage.username = self.user.username;
           self.message = 'Welcome';
           $state.go('dashboard');
+
         }else{
           self.message = 'Error: Invalid user or password';
           self.AuthFailed = true;

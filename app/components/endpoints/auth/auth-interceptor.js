@@ -9,7 +9,7 @@
  */
 angular.module('cesgaBDApp.components.endpoints.auth.auth-interceptor', [])
 
-.factory('authInterceptor', function ($rootScope, $q, $window) {
+.factory('authInterceptor', function ($rootScope, $q, $injector, $window) {
   return {
     request: function (config) {
       config.headers = config.headers || {};
@@ -23,12 +23,9 @@ angular.module('cesgaBDApp.components.endpoints.auth.auth-interceptor', [])
     },
     response: function (response) {
       if (response.status === 401) {
-        alert("You need to authenticate");
+        //alert("You need to authenticate");
         //$state.go('login');
         location = "#/login";
-      }
-      if (response.status === 409) {
-        alert("Maximum number of nodes exceeded.");
       }
       return response || $q.when(response);
     }
