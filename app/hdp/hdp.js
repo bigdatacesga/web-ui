@@ -29,18 +29,34 @@ angular.module('cesgaBDApp.hdp', ['ui.router', 'cesgaBDApp.stat'])
             'Karma'
         ];
 
-
-        var errorNumber = "#unknown"
         vm.stats = {
-            clusters : {
-                link:"http://hue.hdp.cesga.es:8888/",
+            yarn : {
+                link:"http://hadoop.cesga.es/yarn/",
                 comments:"YARN",
                 colour:"primary",
                 type:"database"
             },
-            products : {
+            jobhistory : {
+                link:"http://hadoop.cesga.es/jobhistory/",
+                comments:"Jobhistory",
+                colour:"primary",
+                type:"database"
+            },
+            hue : {
                 link:"http://hue.hdp.cesga.es:8888/",
                 comments:"HUE",
+                colour:"primary",
+                type:"database"
+            },
+            zeppelin : {
+                link:"http://hadoop.cesga.es/zeppelin/",
+                comments:"Zeppelin",
+                colour:"primary",
+                type:"database"
+            },
+            spark : {
+                link:"http://hadoop.cesga.es/spark/",
+                comments:"Spark",
                 colour:"primary",
                 type:"database"
             }

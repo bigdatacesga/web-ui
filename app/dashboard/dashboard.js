@@ -32,33 +32,33 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
 
   var errorNumber = "#unknown"
   vm.stats = {
-    //hdp : {
-    //   link:"#/hdp",
-    //   comments:"Hadoop Services",
-    //   colour:"primary",
-    //   type:"database"
-    // },
-    // cloud : {
-    //   link:"#/cloud",
-    //   comments:"Cloud Service",
-    //   colour:"primary",
-    //   type:"cloud",
-    //   number:errorNumber
-    // },
-    // ips: {
-    //   link:"#/firewall",
-    //   comments:"Allowed IPs",
-    //   colour:"green",
-    //   type:"arrows-h",
-    //   number: errorNumber
-    // },
-    // keys: {
-    //   link:"#/sshkeys",
-    //   comments:"SSH Keys",
-    //   colour:"red",
-    //   type:"key",
-    //   number: errorNumber
-    // },
+    hdp : {
+      link:"#/hdp",
+      comments:"Hadoop Services",
+      colour:"primary",
+      type:"database"
+    },
+    cloud : {
+      link:"#/cloud",
+      comments:"Cloud Service",
+      colour:"primary",
+      type:"cloud",
+      number:errorNumber
+    },
+    ips: {
+      link:"#/firewall",
+      comments:"Allowed IPs",
+      colour:"green",
+      type:"arrows-h",
+      number: errorNumber
+    },
+    keys: {
+      link:"#/sshkeys",
+      comments:"SSH Keys",
+      colour:"red",
+      type:"key",
+      number: errorNumber
+    },
     clusters : {
         link:"#/bigdata_instances",
         comments:"PaaS Clusters",

@@ -1,33 +1,46 @@
 
   <div class="panel panel-default">
 
-      <table class="table-responsive table table-bordered table-striped">
-        <tr>
-          <th rowspan="2"><h4>{{paasserviceData.name}}</h4></th>
-          <td>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Version</th>
-                  <th>Description</th>
-                  <th>Commands</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="version in paasserviceData.versions">
-                  <td>{{version.version}}</td>
-                  <td>{{version.description}}</td>
-                  <td>
-                    <button type="button" class="btn btn-info" ng-click='launchInstance($index)'>
-                      <i class="fa fa-info-circle"></i> Launch Instance
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </table><!-- /.table-responsive -->
+
+    <md-card>
+      <md-card-content class="header layout-align-center-center layout-column" layout-align="center center" layout="column">
+        <h2>{{paasserviceData.name}}</h2>
+      </md-card-content>
+      <md-card-actions ng-repeat="version in paasserviceData.versions" layout="column" layout-align="end center">
+        <p>{{version.version}}</p>
+        <p>{{version.description}}</p>
+        <md-button class="btn btn-info" ng-click='launchInstance($index)'>Launch Instance</md-button>
+      </md-card-actions>
+    </md-card>
+
+
+      <!--<table class="table-responsive table table-bordered table-striped">-->
+        <!--<tr>-->
+          <!--<th rowspan="2"><h4>{{paasserviceData.name}}</h4></th>-->
+          <!--<td>-->
+            <!--<table class="table table-bordered table-striped">-->
+              <!--<thead>-->
+                <!--<tr>-->
+                  <!--<th>Version</th>-->
+                  <!--<th>Description</th>-->
+                  <!--<th>Commands</th>-->
+                <!--</tr>-->
+              <!--</thead>-->
+              <!--<tbody>-->
+                <!--<tr ng-repeat="version in paasserviceData.versions">-->
+                  <!--<td>{{version.version}}</td>-->
+                  <!--<td>{{version.description}}</td>-->
+                  <!--<td>-->
+                    <!--<button type="button" class="btn btn-info" ng-click='launchInstance($index)'>-->
+                      <!--<i class="fa fa-info-circle"></i> Launch Instance-->
+                    <!--</button>-->
+                  <!--</td>-->
+                <!--</tr>-->
+              <!--</tbody>-->
+            <!--</table>-->
+          <!--</td>-->
+        <!--</tr>-->
+      <!--</table>&lt;!&ndash; /.table-responsive &ndash;&gt;-->
 
 
   </div><!-- /.panel-default -->
