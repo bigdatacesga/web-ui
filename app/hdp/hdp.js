@@ -33,32 +33,32 @@ angular.module('cesgaBDApp.hdp', ['ui.router', 'cesgaBDApp.stat'])
             yarn : {
                 link:"http://hadoop.cesga.es/yarn/",
                 comments:"YARN",
-                colour:"primary",
-                type:"database"
+                colour:"yellow",
+                image: "assets/images/hadoop-logo.png"
             },
             jobhistory : {
                 link:"http://hadoop.cesga.es/jobhistory/",
                 comments:"Jobhistory",
-                colour:"primary",
-                type:"database"
+                colour:"blue",
+                image: "assets/images/history-icon.png"
             },
             hue : {
                 link:"http://hue.hdp.cesga.es:8888/",
                 comments:"HUE",
-                colour:"primary",
-                type:"database"
+                colour:"green",
+                image: "assets/images/hue-icon.png"
             },
             zeppelin : {
                 link:"http://hadoop.cesga.es/zeppelin/",
                 comments:"Zeppelin",
-                colour:"primary",
-                type:"database"
+                colour:"red",
+                image: "assets/images/zeppelin-icon.png"
             },
             spark : {
                 link:"http://hadoop.cesga.es/spark/",
                 comments:"Spark",
-                colour:"primary",
-                type:"database"
+                colour:"pink",
+                image: "assets/images/spark-icon.png"
             }
         };
     }]);

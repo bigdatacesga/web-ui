@@ -5,6 +5,116 @@
         </div>
     </div>
     <div class="row">
-        <stat ng-repeat="stat in hdp.stats" stat-data="stat"/>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-{{hdp.stats.yarn.colour}}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <img src="{{hdp.stats.yarn.image}}" height="60px"/>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div>{{hdp.stats.yarn.comments}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href={{hdp.stats.yarn.link}}>
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-{{hdp.stats.jobhistory.colour}}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <img src="{{hdp.stats.jobhistory.image}}" height="60px"/>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div>{{hdp.stats.jobhistory.comments}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href={{hdp.stats.jobhistory.link}}>
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-{{hdp.stats.hue.colour}}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <img src="{{hdp.stats.hue.image}}" height="60px"/>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div>{{hdp.stats.hue.comments}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href={{hdp.stats.hue.link}}>
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-{{hdp.stats.zeppelin.colour}}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <img src="{{hdp.stats.zeppelin.image}}" height="60px"/>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div>{{hdp.stats.zeppelin.comments}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href={{hdp.stats.zeppelin.link}}>
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-{{hdp.stats.spark.colour}}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <img src="{{hdp.stats.spark.image}}" height="60px"/>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div>{{hdp.stats.spark.comments}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href={{hdp.stats.spark.link}}>
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
