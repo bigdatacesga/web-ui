@@ -14,7 +14,7 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
     url:'/bigdata_instances',
     templateUrl: 'bigdata_instances/bigdata_instances.html',
     controller: 'BigdataInstancesCtrl',
-    controllerAs: 'bigdata_instances',
+    controllerAs: 'instances',
     data: {
         requireLogin: true
     }
@@ -22,7 +22,7 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
 }])
 
 .controller('BigdataInstancesCtrl',
-            ['BigdataService', '$log', '$state', '$uibModal', '$window', function(BigdataService, $log, $window) {
+            ['BigdataService', '$log', '$uibModal', function(BigdataService, $log, $uibModal) {
 
 
   var vm = this;
@@ -31,7 +31,8 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
   var BackendDownMessage = 
     "Sorry :( , it seems we could not launch the service, the server may be down.";
 
-  vm.clusters = [];
+  vm.clustersActive = [];
+  vm.clustersInactive = [];
   vm.endpoint = BigdataService;
 
   function handleBackendDown(message, status, error){
@@ -63,22 +64,53 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
               instanceName = receivedData.clusters[index].data.name
               instanceStatus = receivedData.clusters[index].data.status
             }
-            clusters.push({
-              "uri" : instanceUri,
-              "name" : instanceName,
-              "status" : instanceStatus,
-              "product": instanceUri.split("/")[2],
-              "version": instanceUri.split("/")[3],
-              "id": instanceUri.split("/")[4]
-            })
+            if (instanceStatus != "destroyed" && instanceStatus != "error during configuration") {
+              vm.clustersActive.push({
+                "uri": instanceUri,
+                "name": instanceName,
+                "status": instanceStatus,
+                "product": instanceUri.split("/")[2],
+                "version": instanceUri.split("/")[3],
+                "id": instanceUri.split("/")[4]
+              })
+            }else{
+              vm.clustersInactive.push({
+                "uri": instanceUri,
+                "name": instanceName,
+                "status": instanceStatus,
+                "product": instanceUri.split("/")[2],
+                "version": instanceUri.split("/")[3],
+                "id": instanceUri.split("/")[4]
+              })
+            }
           }
-          vm.clusters = clusters;
         }      
       }).catch(function(error) {
         //ERROR
         handleBackendDown(BackendDownMessage, data.status, error.data.message);
       });
   }
+
+  vm.toggleDetails = function(index, table){
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'bigdata_instances/partials/details.html',
+      controller: 'ModalInstanceDetailsCtrlBigdata',
+      controllerAs: 'modal',
+      size: 'lg',
+      resolve: {
+        instanceInfo: function () {
+          if (table == "active"){
+            return vm.clustersActive[index];
+          }
+          if (table == "inactive"){
+            return vm.clustersInactive[index];
+          }
+        }
+      }
+    });
+  };
+
   //Call function to draw the data on the interface
   vm.drawInstances();
 

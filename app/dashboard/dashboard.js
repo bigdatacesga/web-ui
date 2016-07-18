@@ -35,7 +35,7 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
     hdp : {
       link:"#/hdp",
       comments:"Hadoop Services",
-      colour:"primary",
+      colour:"yellow",
       type:"database"
     },
     cloud : {
@@ -55,21 +55,21 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
     keys: {
       link:"#/sshkeys",
       comments:"SSH Keys",
-      colour:"red",
+      colour:"green",
       type:"key",
       number: errorNumber
     },
     clusters : {
         link:"#/bigdata_instances",
         comments:"PaaS Clusters",
-        colour:"primary",
+        colour:"red",
         type:"cubes",
         number:errorNumber
     },
     products : {
         link:"#/bigdata_services",
         comments:"PaaS products",
-        colour:"primary",
+        colour:"red",
         type:"th-list",
         number:errorNumber
     }

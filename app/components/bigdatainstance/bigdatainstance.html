@@ -1,28 +1,15 @@
-<div class="col-lg-12 col-md-12">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <div>
-          <table class="table table-bordered table-striped">
-              <tr>
-                  <td><h3>{{bigdatainstanceData.product}}</h3></td>
-                  <td><p>{{bigdatainstanceData.version}}</p></td>
-                  <td><p>Cluster nº {{bigdatainstanceData.id}}</p></td>
-                  <td><p>{{bigdatainstanceData.status}}</p></td>
-                  <td>
-                      <button type="button" class="btn btn-info" ng-click='toggleDetails()'>
-                      <i class="fa fa-info-circle"></i> Details
-                  </button>
-                  </td>
-                  <td>
-                      <button type="button" class="btn btn-info" ng-click='destroyInstance($index)'>
-                      <i class="fa fa-info-circle"></i> Destroy Instance
-                  </button>
-                  </td>
-              </tr>
-          </table>
-      </div><!-- /.row -->
-    </div><!-- /.panel-heading-->
-  </div><!-- /.panel-default -->
-</div>
+<tr>
 
+    <td>{{bigdatainstanceData.product}}</td>
+    <td>{{bigdatainstanceData.status}}</td>
+    <td>{{bigdatainstanceData.version}}</td>
+    <td>{{bigdatainstanceData.id}}</td>
+    <td>
+        <div>
+            <md-button class="btn btn-info" ng-click='toggleDetails()'>See details</md-button>
+            <md-button class="btn btn-info" ng-click='destroyInstance($index)'>Destroy Instance</md-button>
+        </div>
+    </td>
+
+</tr>
 

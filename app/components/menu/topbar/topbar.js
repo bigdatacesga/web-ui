@@ -15,6 +15,7 @@ angular.module('cesgaBDApp.menu.topbar', [])
     	}
 	})
 	.controller('TopBarCtrl', ['$scope', '$state', '$window', function($scope, $state, $window) {
+		$scope.username = $window.sessionStorage.username;
 		$scope.logout = function () {
 			$window.sessionStorage.clear();
 			$state.go('login');

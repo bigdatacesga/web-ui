@@ -1,11 +1,64 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Bigdata Clusters</h1>
+            <h1 class="page-header">Active Clusters</h1>
         </div><!-- /.col-lg-12 -->
     </div>
 
-    <div class="col-lg-12 col-md-12">
-            <bigdatainstance  ng-repeat="cluster in bigdata_instances.clusters" bigdatainstance-data="cluster" show-details="false" />
-        </div>
+    <table style="width:100%">
+        <tr>
+            <th>Product</th>
+            <th>Status</th>
+            <th>Version</th>
+            <th>Id</th>
+            <th>Actions</th>
+        </tr>
+
+        <!--<bigdatainstance ng-repeat="cluster in bigdata_instances.clustersActive" bigdatainstance-data="cluster" />-->
+
+        <tr ng-repeat="cluster in instances.clustersActive">
+            <td>{{cluster.product}}</td>
+            <td>{{cluster.status}}</td>
+            <td>{{cluster.version}}</td>
+            <td>{{cluster.id}}</td>
+            <td>
+                <div>
+                    <md-button class="btn btn-info" ng-click='instances.toggleDetails($index,"active")'>Details</md-button>
+                    <md-button class="btn btn-danger" ng-click='instances.destroyInstance($index)'>Destroy</md-button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Inactive Clusters</h1>
+        </div><!-- /.col-lg-12 -->
+    </div>
+
+    <table style="width:100%">
+        <tr>
+            <th>Product</th>
+            <th>Status</th>
+            <th>Version</th>
+            <th>Id</th>
+            <th>Actions</th>
+        </tr>
+
+        <!--<bigdatainstance ng-repeat="cluster in bigdata_instances.clustersActive" bigdatainstance-data="cluster" />-->
+
+        <tr ng-repeat="cluster in instances.clustersInactive">
+            <td>{{cluster.product}}</td>
+            <td>{{cluster.status}}</td>
+            <td>{{cluster.version}}</td>
+            <td>{{cluster.id}}</td>
+            <td>
+                <div>
+                    <md-button class="btn btn-info" ng-click='instances.toggleDetails($index, "inactive")'>Details</md-button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
 </div>
