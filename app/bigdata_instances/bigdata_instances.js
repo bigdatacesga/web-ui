@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to see active clusters
  */
-angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdatainstance', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
+angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('bigdata_instances', {
@@ -109,6 +109,20 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
         }
       }
     });
+  };
+
+  vm.destroyInstance = function(index) {
+
+    BigdataService.destroyInstance(vm.clustersActive[index].uri).success(function (data, status){
+      if (status == 200){
+        // OK
+      }else{
+        // Skip this service-version
+      }
+    }).error(function (data){
+      alert('Could not destroy instance');
+    });
+
   };
 
   //Call function to draw the data on the interface

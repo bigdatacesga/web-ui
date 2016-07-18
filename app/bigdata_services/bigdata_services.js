@@ -7,7 +7,7 @@
  * Controller of the clusters view 
  * Allows to launch new clusters
  */
-angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.bigdatainstance', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
+angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('bigdata_services', {
@@ -43,6 +43,11 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
     if(error != undefined) {$log.info('Error: ' + error);}
   }
 
+  var ImagesMap = {
+    "gluster": "'assets/images/gluster-icon.png'",
+    "mpi" : "'assets/images/mpi-icon.png'"
+  }
+
   //DRAW SERVICES
   vm.drawServices = function() {
     var receivedData;
@@ -58,7 +63,8 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
           for (var index in receivedData.products){
             var serviceName = receivedData.products[index]
             products.push({
-              "name" : serviceName
+              "name" : serviceName,
+              "image_url" : ImagesMap[serviceName]
             })
           }
           vm.products = products;
