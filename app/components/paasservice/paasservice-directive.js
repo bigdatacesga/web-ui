@@ -53,9 +53,7 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
           product.options.optional = data.optional //{"size": 2}
           product.options.advanced = data.advanced //{}
           product.options.descriptions = data.descriptions //{"size": "number of worker nodes"}
-
-
-
+          
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'bigdata_services/partials/launch.html',

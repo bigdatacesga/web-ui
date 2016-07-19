@@ -1,6 +1,6 @@
 angular.module('cesgaBDApp.launcher.bigdata', ['ui.router','ui.bootstrap'])
 
-.controller('ModalInstanceCtrlBigdata', function ($scope, $uibModalInstance, $log, serviceInfo, BigdataService) {
+.controller('ModalInstanceCtrlBigdata', function ($scope, $uibModalInstance, $log, $state, $location, serviceInfo, BigdataService) {
   var modal = this;
   modal.serviceInfo = serviceInfo;
 
@@ -27,8 +27,9 @@ angular.module('cesgaBDApp.launcher.bigdata', ['ui.router','ui.bootstrap'])
             var attrValue = obj[key];
             modal.serviceToLaunch.options.required[key] = attrValue
         }
-	    BigdataService.launchInstance(modal.serviceToLaunch.options.required, modal.serviceToLaunch.name, modal.serviceToLaunch.version).success(function (data){
-        
+	    BigdataService.launchInstance(modal.serviceToLaunch.options.required, modal.serviceToLaunch.name, modal.serviceToLaunch.version).success(function (data, $state){
+            alert('Instance was submitted.');
+            $location.path('bigdata_instances')
        	}).error(function (data){
 
       	});

@@ -113,15 +113,17 @@ angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'ces
 
   vm.destroyInstance = function(index) {
 
-    BigdataService.destroyInstance(vm.clustersActive[index].uri).success(function (data, status){
-      if (status == 200){
-        // OK
-      }else{
-        // Skip this service-version
-      }
+    BigdataService.destroyInstance(vm.clustersActive[index].uri).success(function (data){
+      alert('Instance was destroyed.');
+      vm.clustersActive[index].status = "destroyed"
+      //$location.path('bigdata_instances')
+      //$route.reload();
+      location.reload();
     }).error(function (data){
       alert('Could not destroy instance');
     });
+
+
 
   };
 
