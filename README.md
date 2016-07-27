@@ -18,6 +18,11 @@ npm install
 
 To run the application including a proxy to connect to the REST service:
 ```
+npm start
+```
+
+Under the hood this actually runs:
+```
 grunt server
 ```
 
@@ -27,9 +32,9 @@ Start the big-data-rest-api [REST service]() on port 8081 for the big data servi
 
 Now browse to the app at `http://localhost:9001/app/index.html`.
 
-It is also possible to run the angularjs application in standalone mode (without the proxy) using:
+It is also possible to run the angularjs application in standalone mode (without the proxy) with automatic page reload, for that you have to change package.json to use http-server instead of grunt:
 ```
-npm start
+    "start": "http-server -a localhost -p 8000 -c-1",
 ```
 
 In this case the app is accessible at `http://localhost:8000/app/index.html`.

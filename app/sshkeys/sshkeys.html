@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">SSH Keys</h1>
+    </div><!-- div col-lg-12 -->
+  </div><!-- div row -->
+
+  <div class="alert alert-danger"
+         ng-bind="sshkeys.errorMessage"
+         ng-show="sshkeys.errorMessage"></div>
+  
+  <div class="row">
+    <div class="col-lg-12">
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <i class="fa fa-wrench fa-fw"></i> SSH Keys Management
+            </div>
+
+            <div class="panel-body">
+
+              <div class="row"> <!-- row(2) -->
+
+                <div class="col-xs-7 panel">
+
+                  <textarea style="font-size: 9pt"
+                            cols=15
+                            ng-model="sshkeys.newkey.pubkey"
+                            type="text"
+                            placeholder="public key string" 
+                            class="col-xs-12" 
+                            id="pubkey" 
+                            tooltip-placement="bottom" 
+                            tooltip="Paste your public key here"
+                  >
+
+                  </textarea>
+  <!--            <input  type="text" 
+                            ng-model="sshkeys.newkey.pubkey"
+                            placeholder="public key string" 
+                            class="col-xs-12" 
+                            id="pubkey" 
+                            tooltip-placement="bottom" 
+                            tooltip="Paste your public key here" />
+                          -->
+                </div>
+<!--                 <div class="col-xs-1 panel">
+                  /
+                </div> -->
+<!--                 <div class="col-xs-2 panel">
+                  <input  type="text" 
+                          ng-model="sshkeys.newkey.type"
+                          placeholder="eg. RSA" 
+                          class="col-xs-12" 
+                          id="type" 
+                          tooltip-placement="bottom" 
+                          tooltip="Type of public key" />
+                </div>  -->
+                <!-- div col-xs-10 -->
+
+<!--                     <div class="col-xs-2 panel form-group">
+                        <div class="controls">
+                            <select 
+                              placeholder="eg. RSA"
+                              class="form-control col-xs-12" 
+                              id="type" 
+                              ng-model="sshkeys.newkey.type"
+                              tooltip-placement="bottom" 
+                              tooltip="Type of public key">
+                                <option value='' disabled selected>Key Type<option>
+                                <option>rsa</option>
+                                <option>ssh-dss</option>
+                            </select>
+                        </div>
+                    </div> -->
+
+
+
+<!-- 		            <div class="col-xs-10 panel">
+		              <input type="text" placeholder="TODO" class="col-xs-12" id="sshkeys_input_sshkey"></input>
+		            </div> -->
+                <!-- div col-xs-10 -->
+
+  		          <div class="col-xs-2">
+            		  <button class="btn btn-success pull-right" ng-click="sshkeys.addKey()" type="button">
+            		    <i class="fa fa-plus"></i>Add Key
+            		  </button>
+  		          </div> <!-- div col-xs-2 -->
+
+	           </div> <!-- div row (2) -->
+	      
+             <sshkey ng-repeat="sshkey in sshkeys.keys" sshkey-data="sshkey"/>
+            </div> <!-- div panel-body -->
+        </div><!-- div panel -->
+      </div><!-- div col-lg-12 -->
+</div><!-- div row --> 

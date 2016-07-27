@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['src/**/*.js'],
+        src: ['app/**/*.js'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'qunit']);
 
   //grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['concat', 'uglify']);
 
   grunt.registerTask('server', function (target) {
     grunt.task.run([
