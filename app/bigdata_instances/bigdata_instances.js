@@ -72,6 +72,16 @@
       });
     };
 
+    var historyEnabled = false;
+
+    vm.toggleHistory = function() {
+      historyEnabled = !historyEnabled;
+    }
+
+    vm.showHistory = function() {
+      return historyEnabled;
+    }
+
     //Call function to draw the data on the interface
     vm.drawInstances();
 
