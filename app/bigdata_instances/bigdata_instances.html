@@ -1,90 +1,139 @@
-<div class="container-fluid">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Active Clusters</h1>
-    </div><!-- /.col-lg-12 -->
-  </div>
-
-  <div ng-show="instances.clustersActive.length == 0">
-    <p>Currently there are no active clusters.</p>
-    <p>You can launch a new cluster or review the list of previously run clusters.</p>
-    <br />
-  </div>
-
-  <!--<bigdatainstance ng-repeat="cluster in bigdata_instances.clustersActive" bigdatainstance-data="cluster" />-->
-
-  <div class="table-responsive" ng-show="instances.clustersActive.length > 0">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Status</th>
-          <th>Version</th>
-          <th>Id</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="cluster in instances.clustersActive">
-        <td>{{cluster.product}}</td>
-        <td>{{cluster.status}}</td>
-        <td>{{cluster.version}}</td>
-        <td>{{cluster.id}}</td>
-        <td>
-          <button class="btn" ng-click='instances.toggleDetails($index,"active")'>Show Info</button>
-          <button class="btn btn-danger" ng-click='instances.destroyInstance($index)'>Destroy</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!--<bigdatainstance ng-repeat="cluster in bigdata_instances.clustersActive" bigdatainstance-data="cluster" />-->
-
-  <!-- <section layout="row" layout-align="left" layout-wrap> -->
-  <div class="btn-example">
-    <button type="button" class="btn btn-info" ng-show="!instances.showHistory()" ng-click='instances.toggleHistory()'>
+<div class="row">
+  <br />
+  <div class="col-log-12 btn-example pull-right">
+    <button type="button" class="btn btn-info" ng-show="!vm.historyEnabled" ng-click='vm.toggleHistory()'>
       <i class="fa fa-info-circle"></i> Show Cluster History
     </button>
-    <button type="button" class="btn btn-info" ng-show="instances.showHistory()" ng-click='instances.toggleHistory()'>
+    <button type="button" class="btn btn-info" ng-show="vm.historyEnabled" ng-click='vm.toggleHistory()'>
       <i class="fa fa-info-circle"></i> Hide Cluster History
     </button>
     <button type="button" class="btn btn-success" ui-sref="bigdata_services">
       <i class="fa fa-th-list fa-fw"></i> Launch New Cluster
     </button>
   </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-  <div collapse="!instances.showHistory()">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="page-header">Cluster History</h2>
-      </div><!-- /.col-lg-12 -->
+<br />
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">Active Clusters</div>
+      <div class="panel-body">
+        <div class="loading" ng-show="vm.loading">
+          <p>Retrieving data ... </p>
+          <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+        <!-- /.loading -->
+
+        <div class="loaded" ng-hide="vm.loading">
+          <div id="no-active-clusters" ng-show="vm.clustersActive.length == 0">
+            <p>Currently there are no active clusters.</p>
+            <p>You can launch a new cluster or review the list of previously run clusters.</p>
+            <br />
+          </div>
+          <!-- /#no-active-clusters -->
+
+          <!--<bigdatainstance ng-repeat="cluster in bigdata_instances.clustersActive" bigdatainstance-data="cluster" />-->
+
+          <div class="table-responsive" ng-show="vm.clustersActive.length > 0">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Status</th>
+                  <th>Version</th>
+                  <th>Id</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="cluster in vm.clustersActive">
+                <td>{{cluster.product}}</td>
+                <td>{{cluster.status}}</td>
+                <td>{{cluster.version}}</td>
+                <td>{{cluster.id}}</td>
+                <td>
+                  <button class="btn" ng-click='vm.toggleClusterInfo(vm.clustersActive[$index])'>
+                    Show Info
+                  </button>
+                  <button class="btn btn-danger" ng-click='vm.destroyInstance($index)'>
+                    Destroy
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.loaded -->
+
+      </div>
+      <!-- /.panel-body -->
     </div>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Status</th>
-            <th>Version</th>
-            <th>Id</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="cluster in instances.clustersInactive">
-          <td>{{cluster.product}}</td>
-          <td>{{cluster.status}}</td>
-          <td>{{cluster.version}}</td>
-          <td>{{cluster.id}}</td>
-          <td>
-            <button class="btn" ng-click='instances.toggleDetails($index, "inactive")'>Show Details</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- /.panel -->
   </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-</div><!-- /.container-fluid -->
+<div class="row" ng-show="vm.historyEnabled">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">Cluster History</div>
+      <div class="panel-body">
+
+        <div class="loading" ng-show="vm.loading">
+          <p>Retrieving data ... </p>
+          <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+        <!-- /.loading -->
+
+        <div class="loaded" ng-hide="vm.loading">
+          <div id="empty-history" ng-show="vm.clustersActive.length == 0">
+            <p>Cluster history is empty.</p>
+            <br />
+          </div>
+          <!-- /#empty-history -->
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Status</th>
+                  <th>Version</th>
+                  <th>Id</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="cluster in vm.clustersInactive">
+                <td>{{cluster.product}}</td>
+                <td>{{cluster.status}}</td>
+                <td>{{cluster.version}}</td>
+                <td>{{cluster.id}}</td>
+                <td>
+                  <button class="btn" ng-click='vm.toggleClusterInfo(vm.clustersInactive[$index])'>Show Details</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.loaded -->
+
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

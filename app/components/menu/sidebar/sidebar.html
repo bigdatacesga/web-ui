@@ -16,7 +16,7 @@
             <li ng-class="{active: collapsePaaS==1}">{{dropDown}}
                 <a href="" ng-click="unfoldPaas(1)"><i class="fa fa-server fa-fw"></i> PaaS <span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapsePaaS!=1">
+                <ul class="nav nav-second-level" uib-collapse="collapsePaaS!=1">
                     <li ui-sref-active="active">
                     <a ui-sref="bigdata_services"><i class="fa fa-cubes fa-fw"></i> PaaS Products <span></span></a>
                     </li>
@@ -29,7 +29,7 @@
             <li ng-class="{active: collapseSettings==1}">{{dropDown}}
                 <a href="" ng-click="unfoldSettings(1)"><i class="fa fa-wrench fa-fw"></i> Configuration <span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseSettings!=1">
+                <ul class="nav nav-second-level" uib-collapse="collapseSettings!=1">
                     <li ui-sref-active="active">
                         <a ui-sref="sshkeys"><i class="fa fa-key fa-fw"></i>SSH Keys</a>
                     </li>

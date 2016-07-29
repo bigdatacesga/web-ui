@@ -8,14 +8,14 @@
  * Allows to see active/inactive clusters
  */
 (function() {
-  var app = angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata']);
+  var app = angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata', 'ngMaterial']);
 
   app.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('bigdata_instances', {
       url:'/bigdata_instances',
       templateUrl: 'bigdata_instances/bigdata_instances.html',
       controller: 'BigdataInstancesCtrl',
-      controllerAs: 'instances',
+      controllerAs: 'vm',
       data: {
           requireLogin: true
       }
@@ -29,32 +29,23 @@
     vm.clustersActive = [];
     vm.clustersInactive = [];
 
-    vm.drawInstances = function() {
-      var receivedData;
-      var username = window.sessionStorage.username;
-      // TODO: Split listInstances in several methods
-      return BigdataService.listInstances(username, null, null)
-        .then(getClustersComplete)
-        .catch(getClustersFailed);
+    vm.loading = true;
+
+    // By default we show cluster history
+    vm.historyEnabled = true;
+
+    vm.toggleHistory = function() {
+      vm.historyEnabled = !vm.historyEnabled;
     }
 
-    vm.toggleDetails = function(index, table) {
+    vm.toggleClusterInfo = function(cluster) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'bigdata_instances/partials/details.html',
         controller: 'ModalInstanceDetailsCtrlBigdata',
         controllerAs: 'modal',
         size: 'lg',
-        resolve: {
-          instanceInfo: function () {
-            if (table == "active"){
-              return vm.clustersActive[index];
-            }
-            if (table == "inactive"){
-              return vm.clustersInactive[index];
-            }
-          }
-        }
+        resolve: { instanceInfo: cluster }
       });
     };
 
@@ -72,18 +63,19 @@
       });
     };
 
-    var historyEnabled = false;
+    vm.update = activate;
 
-    vm.toggleHistory = function() {
-      historyEnabled = !historyEnabled;
+    activate();
+
+    function activate() {
+      vm.loading = true;
+      var receivedData;
+      var username = window.sessionStorage.username;
+      // TODO: Split listInstances in several methods
+      return BigdataService.listInstances(username, null, null)
+        .then(getClustersComplete)
+        .catch(getClustersFailed);
     }
-
-    vm.showHistory = function() {
-      return historyEnabled;
-    }
-
-    //Call function to draw the data on the interface
-    vm.drawInstances();
 
     function getClustersComplete(data){
       var clusters = data.data.clusters;
@@ -99,6 +91,7 @@
       }
       vm.clustersActive = active.sort(reverseSortByProductAndId);
       vm.clustersInactive = inactive.sort(reverseSortByProductAndId);
+      vm.loading = false;
     }
 
     function sortByProductAndId(c1, c2) {
