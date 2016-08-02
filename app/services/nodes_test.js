@@ -1,9 +1,9 @@
 'use strict';
 
-describe('cesgaBDApp.components.endpoints.nodes', function() {
+describe('bigdata.components.endpoints.nodes', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.bigdata.nodes'));
-  beforeEach(module('cesgaBDApp.components.endpoints.cloud.nodes'));
+  beforeEach(module('bigdata.components.endpoints.bigdata.nodes'));
+  beforeEach(module('bigdata.components.endpoints.cloud.nodes'));
 
   var serviceMulti, serviceCloud, mockBackend;
 

@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.dashboard:DashboardCtrl
+ * @name bigdata.dashboard:DashboardCtrl
  * @description 
  * # HomeCtrl
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.cloud', 'cesgaBDApp.components.endpoints.ips','cesgaBDApp.components.endpoints.keys'])
+angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.components.endpoints.bigdata', 'bigdata.components.endpoints.cloud', 'bigdata.components.endpoints.ips','bigdata.components.endpoints.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {

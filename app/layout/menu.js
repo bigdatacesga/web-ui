@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.menu:menu 
+ * @name bigdata.menu:menu 
  * @description
  * # menu
  */
-angular.module('cesgaBDApp.menu', ['cesgaBDApp.menu.topbar', 'cesgaBDApp.menu.sidebar'])
+angular.module('bigdata.menu', ['bigdata.menu.topbar', 'bigdata.menu.sidebar'])
 	.directive('menu',function(){
 		return {
         templateUrl:'components/menu/menu.html',

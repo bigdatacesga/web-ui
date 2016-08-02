@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.cloud_services controller', function() {
+describe('bigdata.cloud_services controller', function() {
 
-  beforeEach(module('cesgaBDApp.cloud_services'));
+  beforeEach(module('bigdata.cloud_services'));
 
   var ctrl, dummyClusters, state;
 

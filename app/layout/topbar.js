@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.menu.topbar:topbar
+ * @name bigdata.menu.topbar:topbar
  * @description
  * # headerNotification
  */
-angular.module('cesgaBDApp.menu.topbar', [])
+angular.module('bigdata.menu.topbar', [])
 	.directive('topbar',function(){
 		return {
 			templateUrl:'components/menu/topbar/topbar.html',

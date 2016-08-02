@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.paas
+ * @name bigdata.paas
  * @description
  * # HomeCtrl
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('cesgaBDApp.hdp', ['ui.router', 'cesgaBDApp.stat'])
+angular.module('bigdata.hdp', ['ui.router', 'bigdata.stat'])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('hdp', {

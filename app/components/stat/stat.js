@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('cesgaBDApp.stat', [
-  'cesgaBDApp.stat.stat-directive'
+angular.module('bigdata.stat', [
+  'bigdata.stat.stat-directive'
 ])

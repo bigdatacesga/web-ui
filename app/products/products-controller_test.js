@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.bigdata_services controller', function() {
+describe('bigdata.bigdata_services controller', function() {
 
-  beforeEach(module('cesgaBDApp.bigdata_services'));
+  beforeEach(module('bigdata.bigdata_services'));
 
   var ctrl, mockBackend, state;
 

@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.components.endpoints.keys', function() {
+describe('bigdata.components.endpoints.keys', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.keys'));
+  beforeEach(module('bigdata.components.endpoints.keys'));
 
   var service, mockBackend;
 

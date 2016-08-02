@@ -1,9 +1,9 @@
 'use strict';
 
-describe('cesgaBDApp.iprule module', function() {
+describe('bigdata.iprule module', function() {
 
   // Given
-  beforeEach(module('cesgaBDApp.iprule.iprule-directive'));
+  beforeEach(module('bigdata.iprule.iprule-directive'));
 
   var compile, mockBackend, rootScope;
 

@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.sshkeys module', function() {
+describe('bigdata.sshkeys module', function() {
 
-  beforeEach(module('cesgaBDApp.sshkeys'));
+  beforeEach(module('bigdata.sshkeys'));
 
   beforeEach(inject(function($state) {
     spyOn($state, 'go');

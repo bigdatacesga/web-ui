@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name cesgaBDApp.NodesService
+ * @name bigdata.NodesService
  * @description
  * # NodesService
- * Service in the cesgaBDApp.
+ * Service in the bigdata.
  */
-angular.module('cesgaBDApp.components.endpoints.bigdata.nodes', [])
+angular.module('bigdata.components.endpoints.bigdata.nodes', [])
 .factory('NodesServiceMulti', ['$http', function ($http) {
     return {
       listClusterNodes: function(service_type, service_name, instance_id) {
@@ -19,7 +19,7 @@ angular.module('cesgaBDApp.components.endpoints.bigdata.nodes', [])
     };
   }]);
 
-angular.module('cesgaBDApp.components.endpoints.cloud.nodes', [])
+angular.module('bigdata.components.endpoints.cloud.nodes', [])
 .factory('NodesServiceCloud', ['$http', function ($http) {
     return {
       listClusterNodes: function(clusterId) {

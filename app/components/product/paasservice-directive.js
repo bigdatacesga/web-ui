@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.bigdataInstance.bigdataInstance-directive:bigdataInstance
+ * @name bigdata.bigdataInstance.bigdataInstance-directive:bigdataInstance
  * @description
  * # stats
  */
-angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.components.endpoints.bigdata', 'cesgaBDApp.components.endpoints.bigdata.nodes'])
+angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.components.endpoints.bigdata', 'bigdata.components.endpoints.bigdata.nodes'])
 
 .directive('paasservice', ['BigdataService', '$uibModal' ,function(BigdataService, $uibModal) {
   return {

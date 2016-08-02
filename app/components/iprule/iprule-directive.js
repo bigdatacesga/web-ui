@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.iprule.iprule-directive:iprule
+ * @name bigdata.iprule.iprule-directive:iprule
  * @description
  * # stats
  */
-angular.module('cesgaBDApp.iprule.iprule-directive', ['cesgaBDApp.components.endpoints.ips'])
+angular.module('bigdata.iprule.iprule-directive', ['bigdata.components.endpoints.ips'])
 
 .directive('iprule', ['IpService', function(IpService) {
     return{

@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.firewall:FirewallCtrl
+ * @name bigdata.firewall:FirewallCtrl
  * @description 
  * # FirewallCtrl
  * Controller of the firewall view 
  * Allows to see current firewall configuration and to add new rules
  */
-angular.module('cesgaBDApp.firewall', ['ui.router', 'cesgaBDApp.iprule', 'cesgaBDApp.components.endpoints.ips'])
+angular.module('bigdata.firewall', ['ui.router', 'bigdata.iprule', 'bigdata.components.endpoints.ips'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('firewall', {

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name cesgaBDApp.KeyService
+ * @name bigdata.KeyService
  * @description
  * # KeyService
- * SSH Keys Service in the cesgaBDApp.
+ * SSH Keys Service in the bigdata.
  */
-angular.module('cesgaBDApp.components.endpoints.keys', [])
+angular.module('bigdata.components.endpoints.keys', [])
     .factory('KeyService', ['$http', function ($http) {
         return {
 

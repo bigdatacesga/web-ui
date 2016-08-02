@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.sshkeys:SSHKeysCtrl
+ * @name bigdata.sshkeys:SSHKeysCtrl
  * @description 
  * # SSHKeysCtrl
  * Controller of the sshkeys view 
  * Allows to see registered ssh keys and to add new keys
  */
-angular.module('cesgaBDApp.sshkeys', ['ui.router', 'cesgaBDApp.sshkey', 'cesgaBDApp.components.endpoints.keys'])
+angular.module('bigdata.sshkeys', ['ui.router', 'bigdata.sshkey', 'bigdata.components.endpoints.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('sshkeys', {

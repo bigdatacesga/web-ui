@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.components.endpoints.ips', function() {
+describe('bigdata.components.endpoints.ips', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.ips'));
+  beforeEach(module('bigdata.components.endpoints.ips'));
 
   var service, mockBackend;
 

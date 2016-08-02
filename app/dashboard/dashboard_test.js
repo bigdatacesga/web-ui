@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.dashboard module', function() {
+describe('bigdata.dashboard module', function() {
 
-  beforeEach(module('cesgaBDApp.dashboard'));
+  beforeEach(module('bigdata.dashboard'));
 
   describe('dashboard controller', function(){
 

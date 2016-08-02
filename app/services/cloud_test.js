@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.components.endpoints.cloud', function() {
+describe('bigdata.components.endpoints.cloud', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.cloud'));
+  beforeEach(module('bigdata.components.endpoints.cloud'));
 
   var service, mockBackend;
 

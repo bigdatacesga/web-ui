@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.menu.sidebar:sidebar
+ * @name bigdata.menu.sidebar:sidebar
  * @description
  * # adminPosHeader
  */
 
-angular.module('cesgaBDApp.menu.sidebar', [])
+angular.module('bigdata.menu.sidebar', [])
   .directive('sidebar',['$location',function() {
     return {
       templateUrl:'components/menu/sidebar/sidebar.html',

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.notifications:notifications
+ * @name bigdata.notifications:notifications
  * @description
  * # notifications
  */
-angular.module('cesgaBDApp.notifications', [])
+angular.module('bigdata.notifications', [])
 	.directive('notifications',function(){
 		return {
         templateUrl:'components/notifications/notifications.html',

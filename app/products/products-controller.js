@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.products:ProductsCtrl
+ * @name bigdata.products:ProductsCtrl
  * @description 
  * # ProductsCtrl
  * Controller of the products view 
  * Allows to explore existing products
  */
-angular.module('cesgaBDApp.products', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
+angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.notifications', 'bigdata.paasservice', 'bigdata.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('products', {

@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.firewall module', function() {
+describe('bigdata.firewall module', function() {
 
-  beforeEach(module('cesgaBDApp.firewall'));
+  beforeEach(module('bigdata.firewall'));
 
   beforeEach(inject(function($state) {
     spyOn($state, 'go');

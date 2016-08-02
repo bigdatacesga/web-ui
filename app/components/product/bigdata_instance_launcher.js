@@ -1,4 +1,4 @@
-angular.module('cesgaBDApp.launcher.bigdata', ['ui.router','ui.bootstrap'])
+angular.module('bigdata.launcher.bigdata', ['ui.router','ui.bootstrap'])
 
 .controller('ModalInstanceCtrlBigdata', function ($scope, $uibModalInstance, $log, $state, $location, serviceInfo, BigdataService) {
   var modal = this;

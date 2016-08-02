@@ -1,11 +1,11 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.help:HelpCtrl
+ * @name bigdata.help:HelpCtrl
  * @description 
  * Allows to see help/documentation
  */
-angular.module('cesgaBDApp.help', ['ui.router'])
+angular.module('bigdata.help', ['ui.router'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('help', {

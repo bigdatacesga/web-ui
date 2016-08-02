@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc service
- * @name cesgaBDApp.endpoints.auth
+ * @name bigdata.endpoints.auth
  * @description
  * # Auth module
  * Auth module
  */
-angular.module('cesgaBDApp.components.endpoints.auth', ['cesgaBDApp.components.endpoints.auth.auth-interceptor'])
+angular.module('bigdata.components.endpoints.auth', ['bigdata.components.endpoints.auth.auth-interceptor'])

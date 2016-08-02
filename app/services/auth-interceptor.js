@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name cesgaBDApp.auth.auth-interceptor
+ * @name bigdata.auth.auth-interceptor
  * @description
  * # AuthInterceptor
  * auth interceptor
  */
-angular.module('cesgaBDApp.components.endpoints.auth.auth-interceptor', [])
+angular.module('bigdata.components.endpoints.auth.auth-interceptor', [])
 
 .factory('authInterceptor', function ($rootScope, $q, $injector, $window) {
   return {

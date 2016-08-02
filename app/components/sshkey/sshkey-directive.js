@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.sshkey.sshkey-directive:sshkey
+ * @name bigdata.sshkey.sshkey-directive:sshkey
  * @description
  * # stats
  */
-angular.module('cesgaBDApp.sshkey.sshkey-directive', ['cesgaBDApp.components.endpoints.keys'])
+angular.module('bigdata.sshkey.sshkey-directive', ['bigdata.components.endpoints.keys'])
 
 .directive('sshkey', ['KeyService', function(KeyService) {
     return{

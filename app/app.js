@@ -2,26 +2,26 @@
 
 // Declare app level module which depends on views, and components
 angular
-.module('cesgaBDApp', [
+.module('bigdata', [
   'ui.router',
   'ui.bootstrap',
   'angular-loading-bar',
-  'cesgaBDApp.components.endpoints.auth',
-  'cesgaBDApp.login',
-  'cesgaBDApp.menu',
-  'cesgaBDApp.dashboard',
-  'cesgaBDApp.hdp',
-  'cesgaBDApp.cloudview',
-  'cesgaBDApp.products',
-  'cesgaBDApp.clusters',
-  'cesgaBDApp.sshkeys',
-  'cesgaBDApp.firewall',
-  'cesgaBDApp.help',
-  'cesgaBDApp.launcher.cloud',
-  'cesgaBDApp.launcher.bigdata',
-  'cesgaBDApp.details.bigdata',
-  'cesgaBDApp.components.endpoints.ips',
-  'cesgaBDApp.components.endpoints.keys'
+  'bigdata.components.endpoints.auth',
+  'bigdata.login',
+  'bigdata.menu',
+  'bigdata.dashboard',
+  'bigdata.hdp',
+  'bigdata.cloudview',
+  'bigdata.products',
+  'bigdata.clusters',
+  'bigdata.sshkeys',
+  'bigdata.firewall',
+  'bigdata.help',
+  'bigdata.launcher.cloud',
+  'bigdata.launcher.bigdata',
+  'bigdata.details.bigdata',
+  'bigdata.components.endpoints.ips',
+  'bigdata.components.endpoints.keys'
 ])
 .config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
   // For any unmatched url, redirect to /dashboard

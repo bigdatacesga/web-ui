@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cesgaBDApp.iprule', [
-  'cesgaBDApp.iprule.iprule-directive'
+angular.module('bigdata.iprule', [
+  'bigdata.iprule.iprule-directive'
 ])
 

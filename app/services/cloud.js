@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name cesgaBDApp.CloudService
+ * @name bigdata.CloudService
  * @description
  * # CloudService
- * Service in the cesgaBDApp.
+ * Service in the bigdata.
  */
-angular.module('cesgaBDApp.components.endpoints.cloud', [])
+angular.module('bigdata.components.endpoints.cloud', [])
 .factory('CloudService', ['$http', function ($http) {
     var callTimeout = 10000; //10 seconds
     return {

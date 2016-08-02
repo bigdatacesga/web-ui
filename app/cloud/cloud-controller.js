@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.cloudview:CloudCtrl
+ * @name bigdata.cloudview:CloudCtrl
  * @description 
  * # CloudCtrl
  * Controller of the cloud view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('cesgaBDApp.cloudview', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.cloud', 'cesgaBDApp.components.endpoints.cloud'])
+angular.module('bigdata.cloudview', ['ui.router','ui.bootstrap', 'bigdata.notifications', 'bigdata.cloud', 'bigdata.components.endpoints.cloud'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('cloud', {

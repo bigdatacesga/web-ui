@@ -1,4 +1,4 @@
-angular.module('cesgaBDApp.launcher.cloud', ['ui.router','ui.bootstrap'])
+angular.module('bigdata.launcher.cloud', ['ui.router','ui.bootstrap'])
 
 .controller('ModalInstanceCtrlCloud', function ($scope, $uibModalInstance, items) {
   var modal = this;

@@ -1,9 +1,9 @@
 'use strict';
 
-describe('cesgaBDApp.cloud module', function() {
+describe('bigdata.cloud module', function() {
 
   // Given
-  beforeEach(module('cesgaBDApp.cloud.cloud-directive'));
+  beforeEach(module('bigdata.cloud.cloud-directive'));
 
   var compile, mockBackend, rootScope;
 

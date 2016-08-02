@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.login module', function() {
+describe('bigdata.login module', function() {
 
-  beforeEach(module('cesgaBDApp.login'));
+  beforeEach(module('bigdata.login'));
 
   beforeEach(inject(function($state) {
     spyOn($state, 'go');

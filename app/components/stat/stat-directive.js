@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name cesgaBDApp.stat:stat
+ * @name bigdata.stat:stat
  * @description
  * # stat
  */
-    angular.module('cesgaBDApp.stat.stat-directive', ['cesgaBDApp.components.endpoints.bigdata'])
+    angular.module('bigdata.stat.stat-directive', ['bigdata.components.endpoints.bigdata'])
         .directive('stat',[ 'BigdataService', function(BigdataService) {
             return {
                 templateUrl:'components/stat/stat.html',

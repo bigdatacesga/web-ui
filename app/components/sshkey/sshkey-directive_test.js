@@ -1,9 +1,9 @@
 'use strict';
 
-describe('cesgaBDApp.sshkey module', function() {
+describe('bigdata.sshkey module', function() {
 
   // Given
-  beforeEach(module('cesgaBDApp.sshkey.sshkey-directive'));
+  beforeEach(module('bigdata.sshkey.sshkey-directive'));
 
   var compile, mockBackend, rootScope;
 

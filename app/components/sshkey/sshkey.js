@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cesgaBDApp.sshkey', [
-  'cesgaBDApp.sshkey.sshkey-directive'
+angular.module('bigdata.sshkey', [
+  'bigdata.sshkey.sshkey-directive'
 ])
 

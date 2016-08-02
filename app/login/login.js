@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.clusters:ClustersCtrl
+ * @name bigdata.clusters:ClustersCtrl
  * @description 
  * # ClustersCtrl
  * Controller of the clusters view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('cesgaBDApp.login', ['ui.router'])
+angular.module('bigdata.login', ['ui.router'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('login', {

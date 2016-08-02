@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name cesgaBDApp.ClusterService
+ * @name bigdata.ClusterService
  * @description
  * # ClusterService
- * Service in the cesgaBDApp.
+ * Service in the bigdata.
  */
-angular.module('cesgaBDApp.components.endpoints.ips', [])
+angular.module('bigdata.components.endpoints.ips', [])
     .factory('IpService', ['$http', function ($http) {
         return {
             getAll: function () {

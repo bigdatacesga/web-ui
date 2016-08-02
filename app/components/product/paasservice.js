@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cesgaBDApp.paasservice', [
-  'cesgaBDApp.paasservice.paasservice-directive'
+angular.module('bigdata.paasservice', [
+  'bigdata.paasservice.paasservice-directive'
 ])
 

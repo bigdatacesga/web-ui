@@ -1,8 +1,8 @@
 'use strict';
 
-describe('cesgaBDApp.components.endpoints.auth.auth-interceptor', function() {
+describe('bigdata.components.endpoints.auth.auth-interceptor', function() {
 
-  beforeEach(module('cesgaBDApp.components.endpoints.auth.auth-interceptor'));
+  beforeEach(module('bigdata.components.endpoints.auth.auth-interceptor'));
 
   var interceptor, mockBackend, window;
 
