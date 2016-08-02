@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('bigdata.launcher.bigdata', ['ui.router','ui.bootstrap'])
+  angular.module('bigdata.components.product.launcher', ['ui.router','ui.bootstrap'])
 
-  .controller('ModalInstanceCtrlBigdata', function ($scope, $uibModalInstance, $log, $state, $location, serviceInfo, BigdataService) {
+  .controller('LauncherCtrl', function ($scope, $uibModalInstance, $log, $state, $location, serviceInfo, PaasService) {
     var modal = this;
     modal.serviceInfo = serviceInfo;
 
@@ -30,7 +30,7 @@
         var attrValue = obj[key];
         modal.serviceToLaunch.options.required[key] = attrValue
       }
-      BigdataService.launchInstance(modal.serviceToLaunch.options.required, modal.serviceToLaunch.name, modal.serviceToLaunch.version).success(function (data, $state){
+      PaasService.launchInstance(modal.serviceToLaunch.options.required, modal.serviceToLaunch.name, modal.serviceToLaunch.version).success(function (data, $state){
         alert('Instance was submitted.');
         $location.path('bigdata_instances')
       }).error(function (data){

@@ -7,7 +7,7 @@
  * # stat
  */
     angular.module('bigdata.stat.stat-directive', ['bigdata.services.bigdata'])
-        .directive('stat',[ 'BigdataService', function(BigdataService) {
+        .directive('stat',[ 'PaasService', function(PaasService) {
             return {
                 templateUrl:'components/stat/stat.html',
                 restrict:'E',

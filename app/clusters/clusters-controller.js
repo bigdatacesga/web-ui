@@ -22,7 +22,7 @@
     });
   }])
 
-  app.controller('BigdataInstancesCtrl', ['BigdataService', '$log', '$uibModal', '$q', function(BigdataService, $log, $uibModal) {
+  app.controller('BigdataInstancesCtrl', ['PaasService', '$log', '$uibModal', '$q', function(PaasService, $log, $uibModal) {
 
     var vm = this;
     var BackendDownMessage = "Unable to connect to the Big Data PaaS service";
@@ -50,7 +50,7 @@
     };
 
     vm.destroyInstance = function(index) {
-      BigdataService.destroyInstance(vm.clustersActive[index].uri)
+      PaasService.destroyInstance(vm.clustersActive[index].uri)
       .then(function (data) {
         // TODO: Display a status message instead of an alert
         alert('Instance destroyed');
@@ -72,7 +72,7 @@
       var receivedData;
       var username = window.sessionStorage.username;
       // TODO: Split listInstances in several methods
-      return BigdataService.listInstances(username, null, null)
+      return PaasService.listInstances(username, null, null)
         .then(getClustersComplete)
         .catch(getClustersFailed);
     }

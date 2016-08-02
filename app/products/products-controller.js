@@ -22,7 +22,7 @@ angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.notific
 }])
 
 .controller('ProductsCtrl', 
-            ['BigdataService', '$log', '$state', '$uibModal', function(BigdataService, $log) {
+            ['PaasService', '$log', '$state', '$uibModal', function(PaasService, $log) {
 
 
   var vm = this;
@@ -32,7 +32,7 @@ angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.notific
     'Sorry :( , it seems we could not launch the service, the server may be down.';
 
   vm.products = [];
-  vm.endpoint = BigdataService;
+  vm.endpoint = PaasService;
 
   function handleBackendDown(message, status, error){
     if(message != undefined) {

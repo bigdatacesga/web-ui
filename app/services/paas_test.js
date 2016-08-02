@@ -6,8 +6,8 @@ describe('bigdata.services.bigdata', function() {
 
   var service, mockBackend;
 
-  beforeEach(inject(function(BigdataService, $httpBackend) {
-    service = BigdataService;
+  beforeEach(inject(function(PaasService, $httpBackend) {
+    service = PaasService;
     mockBackend = $httpBackend;
   }));
 

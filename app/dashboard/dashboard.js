@@ -21,7 +21,7 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.servi
   });
 }])
 
-.controller('DashboardCtrl', ['BigdataService', 'CloudService', 'IpService', 'KeyService', '$window', function(BigdataService, CloudService, IpService, KeyService, $window) {
+.controller('DashboardCtrl', ['PaasService', 'CloudService', 'IpService', 'KeyService', '$window', function(PaasService, CloudService, IpService, KeyService, $window) {
   var vm = this;
   vm.awesomeThings = [
     'HTML5 Boilerplate',
@@ -81,7 +81,7 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.servi
   // getBigdata();
   // function getBigdata() {
   //   var username = window.sessionStorage.username;
-  //   return BigdataService.listInstances(username,null,null)
+  //   return PaasService.listInstances(username,null,null)
   //     .then(function(data){
   //       receivedData = data.data;
   //       if(receivedData == undefined){
@@ -144,7 +144,7 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.servi
     getBigdataInstances();
     function getBigdataInstances() {
         var username = window.sessionStorage.username;
-        return BigdataService.listInstances(username,null,null)
+        return PaasService.listInstances(username,null,null)
             .then(function(data){
                 receivedData = data.data;
                 if(receivedData == undefined){
@@ -159,10 +159,10 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.servi
             });
     }
 
-    getBigdataServices();
+    getPaasServices();
     var errorMessage;
-    function getBigdataServices() {
-        return BigdataService.listServices()
+    function getPaasServices() {
+        return PaasService.listServices()
             .then(function(data){
                 receivedData = data.data;
                 if(receivedData == undefined){

@@ -7,7 +7,7 @@ describe('bigdata.bigdata_services controller', function() {
   var ctrl, mockBackend, state;
 
 
-  beforeEach(inject(function(BigdataService, $httpBackend) {
+  beforeEach(inject(function(PaasService, $httpBackend) {
     mockBackend = $httpBackend;
   }));
 
@@ -42,7 +42,7 @@ describe('bigdata.bigdata_services controller', function() {
   }
   });
 
-  beforeEach(inject(function($controller, BigdataService, $q) {
+  beforeEach(inject(function($controller, PaasService, $q) {
     ctrl = $controller('BigdataCtrl');
   }));
 

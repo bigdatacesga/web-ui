@@ -6,11 +6,11 @@
  * @description
  * # stats
  */
-angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.bigdata', 'bigdata.services.bigdata.nodes'])
+angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.paas', 'ui.bootstrap', 'bigdata.components.product.launcher'])
 
-.directive('paasservice', ['BigdataService', '$uibModal' ,function(BigdataService, $uibModal) {
+.directive('paasservice', ['PaasService', '$uibModal' ,function(PaasService, $uibModal) {
   return {
-    templateUrl:'components/paasservice/paasservice.html',
+    templateUrl: 'components/product/product.html',
     restrict: 'E',
     replace: true,
     scope: {
@@ -23,10 +23,10 @@ angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.b
 
       vmService.paasserviceData.versions = [];
 
-      BigdataService.showServiceVersions(vmService.paasserviceData.name)
+      PaasService.showServiceVersions(vmService.paasserviceData.name)
       .success(function (data){
         for (var v in data.versions){
-            BigdataService.showService(vmService.paasserviceData.name, data.versions[v])
+            PaasService.showService(vmService.paasserviceData.name, data.versions[v])
             .success(function (data, status){
               if (status == 200){
                 var newService = {
@@ -53,7 +53,7 @@ angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.b
 
       vmService.launchInstance = function(index) {
         var product = vmService.paasserviceData.versions[index]
-        BigdataService.getProductOptions(vmService.paasserviceData.name, vmService.paasserviceData.versions[index].version).success(function (data){
+        PaasService.getProductOptions(vmService.paasserviceData.name, vmService.paasserviceData.versions[index].version).success(function (data){
           product.options = {}
           product.options.required = data.required //{}
           product.options.optional = data.optional //{"size": 2}
@@ -62,8 +62,8 @@ angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.b
           
           var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'components/product/partials/launch.html',
-            controller: 'ModalInstanceCtrlBigdata',
+            templateUrl: 'components/product/partials/launcher.html',
+            controller: 'LauncherCtrl',
             controllerAs: 'modal',
             size: 'lg',
             resolve: {
