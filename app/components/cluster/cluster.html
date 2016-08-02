@@ -1,0 +1,60 @@
+<div class="col-lg-12 col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-sm-3 hidden-xs">
+          <i class="fa icon-hadoop fa-5x"></i>
+        </div>
+        <div class="col-sm-9">
+          <div class="{{getExitStatus()}}"></div>
+          <div class="cluster-name">Cluster {{clusterData.clustername}}</div>
+          <div class="cluster-details">Cluster is {{getClusterState()}}</div>
+          <div class="pull-right">{{clusterData.size}} nodes</div>
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /.panel-heading-->
+
+    <div class="panel-footer">
+      <button type="button" class="btn btn-info" ng-show="showDetails == 'false'" ng-click='toggleDetails()'>
+        <i class="fa fa-info-circle"></i> Show Details
+      </button>
+      <button type="button" class="btn btn-info" ng-hide="showDetails == 'false'" ng-click='toggleDetails()'>
+        <i class="fa fa-info-circle"></i> Hide Details
+      </button>
+      <button type="button" class="btn btn-info" ng-show="showDetails == 'true'" ng-click='refresh()'>
+        <i class="fa fa-info-circle"></i> Refresh
+      </button>
+      <button type="button" class="btn btn-danger pull-right" ng-click='removeCluster()'>
+        <i class="fa fa-trash-o"></i> Destroy Cluster
+      </button>
+       <div class="clearfix"></div>
+    </div><!-- /.panel-footer-->
+
+    <div collapse="isCollapsed()">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>VM ID</th>
+              <th>Name</th>
+              <th>IP</th>
+              <th>Status</th>
+              <th>CPU</th>
+              <th>Mem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="vm in clusterData.vms">
+              <td>{{vm.nodeInSystemId}}</td>
+              <td>{{vm.name}}</td>
+              <td>{{vm.ip}}</td>
+              <td>{{vm.status}}</td>
+              <td>{{vm.ucpu}} %</td>
+              <td>{{vm.umem / 1024}} MB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+    </div><!-- /.collapse -->
+  </div><!-- /.panel-default -->
+</div>
