@@ -6,10 +6,10 @@
  * @description
  * # headerNotification
  */
-angular.module('bigdata.menu.topbar', [])
+angular.module('bigdata.layout.menu.topbar', [])
 	.directive('topbar',function(){
 		return {
-			templateUrl:'components/menu/topbar/topbar.html',
+			templateUrl:'layout/topbar.html',
 			restrict: 'E',
 			replace: true,
     	}

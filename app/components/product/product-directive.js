@@ -2,58 +2,57 @@
 
 /**
  * @ngdoc directive
- * @name bigdata.bigdataInstance.bigdataInstance-directive:bigdataInstance
+ * @name bigdata.components.product
  * @description
  * # stats
  */
-angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.paas', 'ui.bootstrap', 'bigdata.components.product.launcher'])
+angular.module('bigdata.components.product', ['bigdata.components.product.launcher', 'bigdata.services.paas', 'ui.bootstrap'])
 
-.directive('paasservice', ['PaasService', '$uibModal' ,function(PaasService, $uibModal) {
+.directive('product', ['PaasService', '$uibModal' ,function(PaasService, $uibModal) {
   return {
     templateUrl: 'components/product/product.html',
     restrict: 'E',
     replace: true,
     scope: {
-      paasserviceData: '=',
+      productData: '=',
       showDetails: '@'
     },
     link: function(scope, element, attrs) {
       var vmService = scope;
       
+      vmService.productData.versions = [];
 
-      vmService.paasserviceData.versions = [];
-
-      PaasService.showServiceVersions(vmService.paasserviceData.name)
-      .success(function (data){
-        for (var v in data.versions){
-            PaasService.showService(vmService.paasserviceData.name, data.versions[v])
-            .success(function (data, status){
-              if (status == 200){
-                var newService = {
-                  "description": data.description,
-                  "name": data.name,
-                  "version": data.version
-                  //"options": JSON.parse(data.options)
-                }
-                vmService.paasserviceData.versions.push(newService)
-                //TODO: Select the highest version instead of the first one
-                //vmService.paasserviceData.selectedVersion = vmService.paasserviceData.versions[0];
-              } else {
-                // Skip this service-version
-              }
-            })
-            .error(function (data){
-               alert('Could not get the service info');
-            });
-        }
-      })
-      .error(function (data){
-         alert('Could not get the version');
-      });
+      PaasService.showServiceVersions(vmService.productData.name)
+        .success(function (data){
+          for (var v in data.versions){
+              PaasService.showService(vmService.productData.name, data.versions[v])
+                .success(function (data, status){
+                  if (status == 200){
+                    var newService = {
+                      "description": data.description,
+                      "name": data.name,
+                      "version": data.version
+                      //"options": JSON.parse(data.options)
+                    }
+                    vmService.productData.versions.push(newService)
+                    //TODO: Select the highest version instead of the first one
+                    //vmService.productData.selectedVersion = vmService.productData.versions[0];
+                  } else {
+                    // Skip this service-version
+                  }
+                })
+                .error(function (data){
+                   alert('Could not get the service info');
+                });
+          }
+        })
+        .error(function (data){
+           alert('Could not get the version');
+        });
 
       vmService.launchInstance = function(index) {
-        var product = vmService.paasserviceData.versions[index]
-        PaasService.getProductOptions(vmService.paasserviceData.name, vmService.paasserviceData.versions[index].version).success(function (data){
+        var product = vmService.productData.versions[index]
+        PaasService.getProductOptions(vmService.productData.name, vmService.productData.versions[index].version).success(function (data){
           product.options = {}
           product.options.required = data.required //{}
           product.options.optional = data.optional //{"size": 2}
@@ -68,7 +67,7 @@ angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.p
             size: 'lg',
             resolve: {
               serviceInfo: function () {
-                return vmService.paasserviceData.versions[index];
+                return vmService.productData.versions[index];
               }
             }
           });

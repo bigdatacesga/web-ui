@@ -1,25 +1,25 @@
 <md-card>
-<!-- <img ng-src="{{paasserviceData.image_url}}" class="md-card-image" alt="{{paasserviceData.name}}"> -->
-<!--  <img ng-src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/MongoDB-Logo.svg/1280px-MongoDB-Logo.svg.png" class="md-card-image" alt="{{paasserviceData.name}}"> -->
-  <img ng-src="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png" class="md-card-image" alt="{{paasserviceData.name}}">
+<!-- <img ng-src="{{productData.image_url}}" class="md-card-image" alt="{{productData.name}}"> -->
+<!--  <img ng-src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/MongoDB-Logo.svg/1280px-MongoDB-Logo.svg.png" class="md-card-image" alt="{{productData.name}}"> -->
+  <img ng-src="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png" class="md-card-image" alt="{{productData.name}}">
   <md-card-title>
     <md-card-title-text>
-      <span class="md-headline">{{paasserviceData.name | uppercase}}</span>
+      <span class="md-headline">{{productData.name | uppercase}}</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-content>
-    <p>{{paasserviceData.versions[0].description}}</p>
+    <p>{{productData.versions[0].description}}</p>
   </md-card-content>
   <md-card-actions layout="row" layout-align="end center">
 
       <md-input-container style="margin-right: 10px;">
         <label>Version</label>
-        <md-select ng-model="paasserviceData.selectedVersion">
-        <md-option ng-repeat="version in paasserviceData.versions" ng-value="{{version}}" ng-attr-selected="{{$last}}" selected>{{version.version}}</md-option>
+        <md-select ng-model="productData.selectedVersion">
+        <md-option ng-repeat="version in productData.versions" ng-value="{{version}}" ng-attr-selected="{{$last}}" selected>{{version.version}}</md-option>
         </md-select>
       </md-input-container>
 
-    <div ng-repeat="version in paasserviceData.versions">
+    <div ng-repeat="version in productData.versions">
       <p>{{version.version}}</p>
       <p>{{version.description}}</p>
       <md-button class="btn btn-success" ng-click='launchInstance($index)'>Launch</md-button>

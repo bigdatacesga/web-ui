@@ -7,7 +7,7 @@
  * Controller of the products view 
  * Allows to explore existing products
  */
-angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.notifications', 'bigdata.paasservice', 'bigdata.services.bigdata'])
+angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.components.product', 'bigdata.services.paas'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('products', {

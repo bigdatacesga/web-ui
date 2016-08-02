@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('bigdata.hdp', ['ui.router', 'bigdata.stat'])
+angular.module('bigdata.hdp', ['ui.router', 'bigdata.components.stat'])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('hdp', {
@@ -23,11 +23,6 @@ angular.module('bigdata.hdp', ['ui.router', 'bigdata.stat'])
 
     .controller('HDPCtrl', [function() {
         var vm = this;
-        vm.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
 
         vm.stats = {
             yarn : {

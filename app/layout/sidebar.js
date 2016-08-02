@@ -7,10 +7,10 @@
  * # adminPosHeader
  */
 
-angular.module('bigdata.menu.sidebar', [])
+angular.module('bigdata.layout.menu.sidebar', [])
   .directive('sidebar',['$location',function() {
     return {
-      templateUrl:'components/menu/sidebar/sidebar.html',
+      templateUrl:'layout/sidebar.html',
       restrict: 'E',
       replace: true,
       scope: {

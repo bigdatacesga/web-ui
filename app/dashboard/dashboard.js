@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.services.bigdata', 'bigdata.services.cloud', 'bigdata.services.ips','bigdata.services.keys'])
+angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bigdata.services.paas', 'bigdata.services.cloud', 'bigdata.services.ips','bigdata.services.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {
@@ -21,163 +21,123 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.servi
   });
 }])
 
-.controller('DashboardCtrl', ['PaasService', 'CloudService', 'IpService', 'KeyService', '$window', function(PaasService, CloudService, IpService, KeyService, $window) {
+.controller('DashboardCtrl', ['PaasService', 'CloudService', 'IpService', 'KeyService', '$window', '$log', function(PaasService, CloudService, IpService, KeyService, $window, $log) {
   var vm = this;
-  vm.awesomeThings = [
-    'HTML5 Boilerplate',
-    'AngularJS',
-    'Karma'
-  ];
-
-
-  var errorNumber = "#unknown"
+  var errorNumber = 'Loading...';
   vm.stats = {
     hdp : {
-      link:"#/hdp",
-      comments:"Hadoop Services",
-      colour:"yellow",
-      type:"database"
+      link: '#/hdp',
+      comments: 'Hadoop Services',
+      colour: 'yellow',
+      type: 'database'
     },
     cloud : {
-      link:"#/cloud",
-      comments:"Cloud Service",
-      colour:"primary",
-      type:"cloud",
-      number:errorNumber
+      link: '#/cloud',
+      comments: 'Cloud Service',
+      colour: 'primary',
+      type: 'cloud',
+      number: errorNumber
     },
     ips: {
-      link:"#/firewall",
-      comments:"Allowed IPs",
-      colour:"green",
-      type:"arrows-h",
+      link: '#/firewall',
+      comments: 'Allowed IPs',
+      colour: 'green',
+      type: 'arrows-h',
       number: errorNumber
     },
     keys: {
-      link:"#/sshkeys",
-      comments:"SSH Keys",
-      colour:"green",
-      type:"key",
+      link: '#/sshkeys',
+      comments: 'SSH Keys',
+      colour: 'green',
+      type: 'key',
       number: errorNumber
     },
     clusters : {
-        link:"#/clusters",
-        comments:"PaaS Clusters",
-        colour:"red",
-        type:"cubes",
+        link:'#/clusters',
+        comments:'PaaS Clusters',
+        colour:'red',
+        type:'cubes',
         number:errorNumber
     },
     products : {
-        link:"#/products",
-        comments:"PaaS products",
-        colour:"red",
-        type:"th-list",
+        link:'#/products',
+        comments:'PaaS products',
+        colour:'red',
+        type:'th-list',
         number:errorNumber
     }
   };
 
-
-  var receivedData;
-
-  // getBigdata();
-  // function getBigdata() {
-  //   var username = window.sessionStorage.username;
-  //   return PaasService.listInstances(username,null,null)
-  //     .then(function(data){
-  //       receivedData = data.data;
-  //       if(receivedData == undefined){
-  //
-  //       }else{
-  //         vm.bigdata = receivedData.clusters;
-  //         vm.stats.bigdata.number = vm.bigdata.length;
-  //       }
-  //     })
-  //     .catch(function(error) {
-  //       vm.stats.bigdata.number = errorNumber;
-  //     });
-  // }
-
-  getCloud();
-  var errorMessage;
-  function getCloud() {
+  function getCloudClustersInfo() {
     return CloudService.list()
       .then(function(data){
-        receivedData = data.data;
-        if(receivedData == undefined){
-            errorMessage = "Sorry :( , it seems we could not get info from the server, it may be down.";
-            alert(errorMessage);
-        }else{
-          vm.cloud = data.data;
-          vm.stats.cloud.number = vm.cloud.length;
-        }
+        vm.cloud = data.data;
+        vm.stats.cloud.number = vm.cloud.length;
       })
       .catch(function(error) {
-        vm.stats.cloud.number = errorNumber;
+        $log.error('Error retrieving Cloud Clusters information: ' + error.statusText);
+        vm.stats.cloud.number = 'N/A';
       });
   }
 
-
-  getIps();
-  function getIps() {
+  function getFirewallIpsInfo() {
     return IpService.getAll()
-        .then(function(data){
-          vm.ips = data.data;
-          vm.stats.ips.number = vm.ips.length;
-        })
-        .catch(function(error) {
-          vm.stats.ips.number = errorNumber;
-        });
+      .then(function(data){
+        vm.ips = data.data;
+        vm.stats.ips.number = vm.ips.length;
+      })
+      .catch(function(error) {
+        $log.error('Error retrieving user firewall addresses: ' + error.statusText);
+        vm.stats.ips.number = errorNumber;
+      });
   }
 
-
-  getKeys();
-  function getKeys() {
+  function getSshKeysInfo() {
     return KeyService.getAll()
-        .then(function(data){
-          vm.keys = data.data;
-          vm.stats.keys.number = vm.keys.length;
-        })
-        .catch(function(error) {
-          vm.stats.keys.number = errorNumber;
-        });
+      .then(function(data){
+        vm.keys = data.data;
+        vm.stats.keys.number = vm.keys.length;
+      })
+      .catch(function(error) {
+        $log.error('Error retrieving user SSH public keys: ' + error.statusText);
+        vm.stats.keys.number = 'N/A';
+      });
   }
 
-    getBigdataInstances();
-    function getBigdataInstances() {
-        var username = window.sessionStorage.username;
-        return PaasService.listInstances(username,null,null)
-            .then(function(data){
-                receivedData = data.data;
-                if(receivedData == undefined){
+  function getPaasClustersInfo() {
+    var username = window.sessionStorage.username;
+    return PaasService.listInstances(username, null, null)
+      .then(function(data){
+        var receivedData = data.data;
+        vm.clusters = receivedData.clusters;
+        vm.stats.clusters.number = vm.clusters.length;
+      })
+      .catch(function(error) {
+        $log.error('Error retrieving Clusters info from Paas: ' + error.statusText);
+        vm.stats.clusters.number = 'N/A';
+      });
+  }
 
-                }else{
-                    vm.clusters = receivedData.clusters;
-                    vm.stats.clusters.number = vm.clusters.length;
-                }
-            })
-            .catch(function(error) {
-                vm.stats.clusters.number = errorNumber;
-            });
-    }
+  function getPaasProductsInfo() {
+    return PaasService.listServices()
+      .then(function(data){
+        var receivedData = data.data;
+        vm.products = receivedData.products;
+        vm.stats.products.number = vm.products.length;
+      })
+      .catch(function(error) {
+        $log.error('Error retrieving Products info from Paas: ' + error.statusText);
+        vm.stats.products.number = 'N/A';
+      });
+  }
 
-    getPaasServices();
-    var errorMessage;
-    function getPaasServices() {
-        return PaasService.listServices()
-            .then(function(data){
-                receivedData = data.data;
-                if(receivedData == undefined){
-                    errorMessage = "Sorry :( , it seems we could not get info from the server, it may be down.";
-                    alert(errorMessage);
-                }else{
-                    vm.products = receivedData.products;
-                    vm.stats.products.number = vm.products.length;
-                }
-            })
-            .catch(function(error) {
-                vm.stats.products.number = errorNumber;
-            });
-    }
+  function activate() {
+    getCloudClustersInfo();
+    getFirewallIpsInfo();
+    getSshKeysInfo();
+    getPaasClustersInfo();
+    getPaasProductsInfo();
+  }
 
-
-
+  activate();
 }]);

@@ -53,15 +53,15 @@ module.exports = function(grunt) {
         {
           context: '/bigdata/api',
           host: 'hadoop.cesga.es',
-          port: 443,
-          https: true,
+          port: 80,
+          https: false,
           changeOrigin: false
         },
         {
           context: '/api',
           host: 'hadoop.cesga.es',
-          port: 443,
-          https: true,
+          port: 80,
+          https: false,
           changeOrigin: false
         }
       ]

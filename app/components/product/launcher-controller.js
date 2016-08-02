@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('bigdata.components.product.launcher', ['ui.router','ui.bootstrap'])
+  angular.module('bigdata.components.product.launcher', ['ui.router', 'ui.bootstrap'])
 
   .controller('LauncherCtrl', function ($scope, $uibModalInstance, $log, $state, $location, serviceInfo, PaasService) {
     var modal = this;

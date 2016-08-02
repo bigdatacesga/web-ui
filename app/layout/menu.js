@@ -6,10 +6,10 @@
  * @description
  * # menu
  */
-angular.module('bigdata.menu', ['bigdata.menu.topbar', 'bigdata.menu.sidebar'])
+angular.module('bigdata.layout.menu', ['bigdata.layout.menu.topbar', 'bigdata.layout.menu.sidebar'])
 	.directive('menu',function(){
 		return {
-        templateUrl:'components/menu/menu.html',
+        templateUrl:'layout/menu.html',
         restrict: 'E',
         replace: true,
     	}
