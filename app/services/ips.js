@@ -7,7 +7,7 @@
  * # ClusterService
  * Service in the bigdata.
  */
-angular.module('bigdata.components.endpoints.ips', [])
+angular.module('bigdata.services.ips', [])
     .factory('IpService', ['$http', function ($http) {
         return {
             getAll: function () {

@@ -6,7 +6,7 @@ angular
   'ui.router',
   'ui.bootstrap',
   'angular-loading-bar',
-  'bigdata.components.endpoints.auth',
+  'bigdata.services.auth',
   'bigdata.login',
   'bigdata.menu',
   'bigdata.dashboard',
@@ -20,8 +20,8 @@ angular
   'bigdata.launcher.cloud',
   'bigdata.launcher.bigdata',
   'bigdata.details.bigdata',
-  'bigdata.components.endpoints.ips',
-  'bigdata.components.endpoints.keys'
+  'bigdata.services.ips',
+  'bigdata.services.keys'
 ])
 .config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
   // For any unmatched url, redirect to /dashboard

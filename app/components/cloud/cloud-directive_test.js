@@ -1,9 +1,9 @@
 'use strict';
 
-describe('bigdata.cloud module', function() {
+describe('bigdata cloud directive', function() {
 
   // Given
-  beforeEach(module('bigdata.cloud.cloud-directive'));
+  beforeEach(module('bigdata.components.cloud'));
 
   var compile, mockBackend, rootScope;
 

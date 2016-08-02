@@ -6,7 +6,7 @@
  * @description
  * # stat
  */
-    angular.module('bigdata.stat.stat-directive', ['bigdata.components.endpoints.bigdata'])
+    angular.module('bigdata.stat.stat-directive', ['bigdata.services.bigdata'])
         .directive('stat',[ 'BigdataService', function(BigdataService) {
             return {
                 templateUrl:'components/stat/stat.html',

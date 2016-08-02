@@ -1,8 +1,8 @@
 'use strict';
 
-describe('bigdata.components.endpoints.ips', function() {
+describe('bigdata.services.ips', function() {
 
-  beforeEach(module('bigdata.components.endpoints.ips'));
+  beforeEach(module('bigdata.services.ips'));
 
   var service, mockBackend;
 

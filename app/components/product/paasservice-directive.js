@@ -6,7 +6,7 @@
  * @description
  * # stats
  */
-angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.components.endpoints.bigdata', 'bigdata.components.endpoints.bigdata.nodes'])
+angular.module('bigdata.paasservice.paasservice-directive', ['bigdata.services.bigdata', 'bigdata.services.bigdata.nodes'])
 
 .directive('paasservice', ['BigdataService', '$uibModal' ,function(BigdataService, $uibModal) {
   return {

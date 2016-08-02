@@ -7,7 +7,7 @@
  * # NodesService
  * Service in the bigdata.
  */
-angular.module('bigdata.components.endpoints.bigdata.nodes', [])
+angular.module('bigdata.services.bigdata.nodes', [])
 .factory('NodesServiceMulti', ['$http', function ($http) {
     return {
       listClusterNodes: function(service_type, service_name, instance_id) {
@@ -19,7 +19,7 @@ angular.module('bigdata.components.endpoints.bigdata.nodes', [])
     };
   }]);
 
-angular.module('bigdata.components.endpoints.cloud.nodes', [])
+angular.module('bigdata.services.cloud.nodes', [])
 .factory('NodesServiceCloud', ['$http', function ($http) {
     return {
       listClusterNodes: function(clusterId) {

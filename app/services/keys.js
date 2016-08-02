@@ -7,7 +7,7 @@
  * # KeyService
  * SSH Keys Service in the bigdata.
  */
-angular.module('bigdata.components.endpoints.keys', [])
+angular.module('bigdata.services.keys', [])
     .factory('KeyService', ['$http', function ($http) {
         return {
 

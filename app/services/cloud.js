@@ -7,7 +7,7 @@
  * # CloudService
  * Service in the bigdata.
  */
-angular.module('bigdata.components.endpoints.cloud', [])
+angular.module('bigdata.services.cloud', [])
 .factory('CloudService', ['$http', function ($http) {
     var callTimeout = 10000; //10 seconds
     return {

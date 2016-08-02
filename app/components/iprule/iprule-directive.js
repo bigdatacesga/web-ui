@@ -6,7 +6,7 @@
  * @description
  * # stats
  */
-angular.module('bigdata.iprule.iprule-directive', ['bigdata.components.endpoints.ips'])
+angular.module('bigdata.iprule.iprule-directive', ['bigdata.services.ips'])
 
 .directive('iprule', ['IpService', function(IpService) {
     return{

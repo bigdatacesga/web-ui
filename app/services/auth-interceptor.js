@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name bigdata.auth.auth-interceptor
- * @description
+ * @name bigdata.services.auth-interceptor
+ * @description If user has not valid token it is redirected to login page
  * # AuthInterceptor
  * auth interceptor
  */
-angular.module('bigdata.components.endpoints.auth.auth-interceptor', [])
+angular.module('bigdata.services.auth-interceptor', [])
 
 .factory('authInterceptor', function ($rootScope, $q, $injector, $window) {
   return {

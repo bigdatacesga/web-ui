@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.components.endpoints.bigdata', 'bigdata.components.endpoints.cloud', 'bigdata.components.endpoints.ips','bigdata.components.endpoints.keys'])
+angular.module('bigdata.dashboard', ['ui.router', 'bigdata.stat', 'bigdata.services.bigdata', 'bigdata.services.cloud', 'bigdata.services.ips','bigdata.services.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {

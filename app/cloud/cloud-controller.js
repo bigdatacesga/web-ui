@@ -7,7 +7,7 @@
  * Controller of the cloud view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('bigdata.cloudview', ['ui.router','ui.bootstrap', 'bigdata.notifications', 'bigdata.cloud', 'bigdata.components.endpoints.cloud'])
+angular.module('bigdata.cloudview', ['ui.router','ui.bootstrap', 'bigdata.notifications', 'bigdata.cloud', 'bigdata.services.cloud'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('cloud', {

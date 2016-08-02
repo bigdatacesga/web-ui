@@ -7,7 +7,7 @@
  * Controller of the sshkeys view 
  * Allows to see registered ssh keys and to add new keys
  */
-angular.module('bigdata.sshkeys', ['ui.router', 'bigdata.sshkey', 'bigdata.components.endpoints.keys'])
+angular.module('bigdata.sshkeys', ['ui.router', 'bigdata.sshkey', 'bigdata.services.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('sshkeys', {

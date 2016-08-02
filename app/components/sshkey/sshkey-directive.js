@@ -6,7 +6,7 @@
  * @description
  * # stats
  */
-angular.module('bigdata.sshkey.sshkey-directive', ['bigdata.components.endpoints.keys'])
+angular.module('bigdata.sshkey.sshkey-directive', ['bigdata.services.keys'])
 
 .directive('sshkey', ['KeyService', function(KeyService) {
     return{

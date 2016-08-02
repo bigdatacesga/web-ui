@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('bigdata.components.cloud', ['bigdata.components.endpoints.cloud', 'bigdata.components.endpoints.cloud.nodes'])
+    .module('bigdata.components.cloud', ['bigdata.services.cloud', 'bigdata.services.cloud.nodes'])
     .directive('cloud', ['CloudService', 'NodesServiceCloud', cloudClusterInfo]);
 
   function cloudClusterInfo(CloudService, NodesServiceCloud) {

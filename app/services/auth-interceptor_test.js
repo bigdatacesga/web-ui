@@ -1,8 +1,8 @@
 'use strict';
 
-describe('bigdata.components.endpoints.auth.auth-interceptor', function() {
+describe('bigdata.services.auth.auth-interceptor', function() {
 
-  beforeEach(module('bigdata.components.endpoints.auth.auth-interceptor'));
+  beforeEach(module('bigdata.services.auth.auth-interceptor'));
 
   var interceptor, mockBackend, window;
 

@@ -1,8 +1,8 @@
 'use strict';
 
-describe('bigdata.components.endpoints.cloud', function() {
+describe('bigdata.services.cloud', function() {
 
-  beforeEach(module('bigdata.components.endpoints.cloud'));
+  beforeEach(module('bigdata.services.cloud'));
 
   var service, mockBackend;
 
