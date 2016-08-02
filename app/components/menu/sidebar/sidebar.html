@@ -10,18 +10,18 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="cloud_services"><i class="fa fa-cloud fa-fw"></i> Cloud <span></span></a>
+                <a ui-sref="cloud"><i class="fa fa-cloud fa-fw"></i> Cloud <span></span></a>
             </li>
 
             <li ng-class="{active: collapsePaaS==1}">{{dropDown}}
                 <a href="" ng-click="unfoldPaas(1)"><i class="fa fa-server fa-fw"></i> PaaS <span
-                        class="fa arrow"></span></a>
+                    class="fa arrow"></span><span class="badge">BETA</span></a>
                 <ul class="nav nav-second-level" uib-collapse="collapsePaaS!=1">
                     <li ui-sref-active="active">
-                    <a ui-sref="bigdata_services"><i class="fa fa-cubes fa-fw"></i> PaaS Products <span></span></a>
+                    <a ui-sref="products"><i class="fa fa-cubes fa-fw"></i> PaaS Products <span></span></a>
                     </li>
                     <li ui-sref-active="active">
-                    <a ui-sref="bigdata_instances"><i class="fa fa-th-list fa-fw"></i> PaaS Clusters <span></span></a>
+                    <a ui-sref="clusters"><i class="fa fa-th-list fa-fw"></i> PaaS Clusters <span></span></a>
                     </li>
                 </ul>
             </li>

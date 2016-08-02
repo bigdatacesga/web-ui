@@ -81,15 +81,3 @@ body {
 text-decoration: none;
 background-color: #eee;
 }
-
-.paaservice {
-  background-color: lightblue;
-}
-
-md-card {
-  background: lightgray; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(lightgray, floralwhite); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(lightgray, floralwhite); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(lightgray, floralwhite); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(lightgray, floralwhite); /* Standard syntax */
-}

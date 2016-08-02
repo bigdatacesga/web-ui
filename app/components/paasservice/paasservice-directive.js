@@ -23,9 +23,11 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
 
       vmService.paasserviceData.versions = [];
 
-      BigdataService.showServiceVersions(vmService.paasserviceData.name).success(function (data){
+      BigdataService.showServiceVersions(vmService.paasserviceData.name)
+      .success(function (data){
         for (var v in data.versions){
-            BigdataService.showService(vmService.paasserviceData.name, data.versions[v]).success(function (data, status){
+            BigdataService.showService(vmService.paasserviceData.name, data.versions[v])
+            .success(function (data, status){
               if (status == 200){
                 var newService = {
                   "description": data.description,
@@ -34,14 +36,18 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
                   //"options": JSON.parse(data.options)
                 }
                 vmService.paasserviceData.versions.push(newService)
-              }else{
+                //TODO: Select the highest version instead of the first one
+                //vmService.paasserviceData.selectedVersion = vmService.paasserviceData.versions[0];
+              } else {
                 // Skip this service-version
               }
-            }).error(function (data){
+            })
+            .error(function (data){
                alert('Could not get the service info');
             });
         }
-      }).error(function (data){
+      })
+      .error(function (data){
          alert('Could not get the version');
       });
 
@@ -56,7 +62,7 @@ angular.module('cesgaBDApp.paasservice.paasservice-directive', ['cesgaBDApp.comp
           
           var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'bigdata_services/partials/launch.html',
+            templateUrl: 'components/product/partials/launch.html',
             controller: 'ModalInstanceCtrlBigdata',
             controllerAs: 'modal',
             size: 'lg',

@@ -1,7 +1,7 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.dashboard.home:HomeCtrl
+ * @name cesgaBDApp.dashboard:DashboardCtrl
  * @description 
  * # HomeCtrl
  * Controller of the home view of the dashboard
@@ -60,14 +60,14 @@ angular.module('cesgaBDApp.dashboard', ['ui.router', 'cesgaBDApp.stat', 'cesgaBD
       number: errorNumber
     },
     clusters : {
-        link:"#/bigdata_instances",
+        link:"#/clusters",
         comments:"PaaS Clusters",
         colour:"red",
         type:"cubes",
         number:errorNumber
     },
     products : {
-        link:"#/bigdata_services",
+        link:"#/products",
         comments:"PaaS products",
         colour:"red",
         type:"th-list",

@@ -1,20 +1,20 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.bigdata_instances:BigdataInstancesCtrl
+ * @name cesgaBDApp.clusters:ClustersCtrl
  * @description 
- * # BigdataInstancesCtrl
+ * # ClustersCtrl
  * Controller of the clusters view 
  * Allows to see active/inactive clusters
  */
 (function() {
-  var app = angular.module('cesgaBDApp.bigdata_instances', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata', 'ngMaterial']);
+  var app = angular.module('cesgaBDApp.clusters', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata', 'ngMaterial']);
 
   app.config(['$stateProvider', function ($stateProvider) {
-    $stateProvider.state('bigdata_instances', {
-      url:'/bigdata_instances',
-      templateUrl: 'bigdata_instances/bigdata_instances.html',
-      controller: 'BigdataInstancesCtrl',
+    $stateProvider.state('clusters', {
+      url:'/clusters',
+      templateUrl: 'clusters/clusters.html',
+      controller: 'ClustersCtrl',
       controllerAs: 'vm',
       data: {
           requireLogin: true

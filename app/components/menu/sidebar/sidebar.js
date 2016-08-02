@@ -18,7 +18,7 @@ angular.module('cesgaBDApp.menu.sidebar', [])
       controller:function($scope){
         $scope.selectedMenu = 'dashboard';
 
-        $scope.collapsePaaS = 1
+        $scope.collapsePaaS = 0
         $scope.unfoldPaas = function(x){
           if(x==$scope.collapsePaaS)
             $scope.collapsePaaS = 0;

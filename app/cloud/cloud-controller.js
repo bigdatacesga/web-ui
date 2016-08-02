@@ -1,20 +1,20 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.clusters:ClustersCtrl
+ * @name cesgaBDApp.cloudview:CloudCtrl
  * @description 
- * # ClustersCtrl
- * Controller of the clusters view 
+ * # CloudCtrl
+ * Controller of the cloud view 
  * Allows to see active clusters and to launch new clusters
  */
-angular.module('cesgaBDApp.cloud_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.cloud', 'cesgaBDApp.components.endpoints.cloud'])
+angular.module('cesgaBDApp.cloudview', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.cloud', 'cesgaBDApp.components.endpoints.cloud'])
 
 .config(['$stateProvider', function ($stateProvider) {
-  $stateProvider.state('cloud_services', {
+  $stateProvider.state('cloud', {
     url:'/cloud',
-    templateUrl: 'cloud_services/cloud_services.html',
+    templateUrl: 'cloud/cloud.html',
     controller: 'CloudCtrl',
-    controllerAs: 'cloud_services',
+    controllerAs: 'cloud',
     data: {
         requireLogin: true
     }
@@ -53,7 +53,7 @@ angular.module('cesgaBDApp.cloud_services', ['ui.router','ui.bootstrap', 'cesgaB
     
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'cloud_services/partials/wizard.html',
+        templateUrl: 'cloud/partials/wizard.html',
         controller: 'ModalInstanceCtrlCloud',
         controllerAs: 'modal',
         resolve: {

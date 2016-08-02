@@ -1,27 +1,27 @@
 'use strict';
 /**
  * @ngdoc function
- * @name cesgaBDApp.bigdata_services:BigdataCtrl
+ * @name cesgaBDApp.products:ProductsCtrl
  * @description 
- * # BigdataCtrl
- * Controller of the clusters view 
- * Allows to launch new clusters
+ * # ProductsCtrl
+ * Controller of the products view 
+ * Allows to explore existing products
  */
-angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
+angular.module('cesgaBDApp.products', ['ui.router','ui.bootstrap', 'cesgaBDApp.notifications', 'cesgaBDApp.paasservice', 'cesgaBDApp.components.endpoints.bigdata'])
 
 .config(['$stateProvider', function ($stateProvider) {
-  $stateProvider.state('bigdata_services', {
-    url:'/bigdata_services',
-    templateUrl: 'bigdata_services/bigdata_services.html',
-    controller: 'BigdataCtrl',
-    controllerAs: 'bigdata_services',
+  $stateProvider.state('products', {
+    url: '/products',
+    templateUrl: 'products/products.html',
+    controller: 'ProductsCtrl',
+    controllerAs: 'products',
     data: {
         requireLogin: true
     }
   });
 }])
 
-.controller('BigdataCtrl', 
+.controller('ProductsCtrl', 
             ['BigdataService', '$log', '$state', '$uibModal', function(BigdataService, $log) {
 
 
@@ -29,7 +29,7 @@ angular.module('cesgaBDApp.bigdata_services', ['ui.router','ui.bootstrap', 'cesg
 
   //CONSTANTS
   var BackendDownMessage = 
-    "Sorry :( , it seems we could not launch the service, the server may be down.";
+    'Sorry :( , it seems we could not launch the service, the server may be down.';
 
   vm.products = [];
   vm.endpoint = BigdataService;
