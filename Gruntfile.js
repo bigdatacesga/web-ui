@@ -52,16 +52,16 @@ module.exports = function(grunt) {
       proxies: [
         {
           context: '/bigdata/api',
-          host: '127.0.0.1',
-          port: 5000,
-          https: false,
+          host: 'hadoop.cesga.es',
+          port: 443,
+          https: true,
           changeOrigin: false
         },
         {
           context: '/api',
-          host: '127.0.0.1',
-          port: 8080,
-          https: false,
+          host: 'hadoop.cesga.es',
+          port: 443,
+          https: true,
           changeOrigin: false
         }
       ]
