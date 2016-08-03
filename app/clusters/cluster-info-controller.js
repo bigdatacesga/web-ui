@@ -11,15 +11,15 @@
   'use strict';
 
   angular.module('bigdata.clusters.info', ['bigdata.services.logger', 'ui.router', 'ui.bootstrap'])
-    .controller('ClusterInfoCtrl', ['$scope', '$uibModalInstance', 'logger', 'instanceInfo', 'PaasService', ClusterInfoCtrl]);
+    .controller('ClusterInfoCtrl', ['$uibModalInstance', 'logger', 'instanceInfo', 'PaasService', ClusterInfoCtrl]);
               
-  function ClusterInfoCtrl($scope, $uibModalInstance, logger, instanceInfo, PaasService) {
+  function ClusterInfoCtrl($uibModalInstance, logger, instanceInfo, PaasService) {
     var modal = this;
     modal.instanceInfo = instanceInfo;
 
     PaasService.showInstanceNodes(modal.instanceInfo.uri)
       .then(function (response){
-        modal.instanceInfo.nodes = responsedata.nodes;
+        modal.instanceInfo.nodes = response.data.nodes;
       })
       .catch(function (error){
         logger.error('Error retrieving cluster information');

@@ -2,14 +2,17 @@
 <div class="row">
   <br />
   <div class="col-log-12 btn-example pull-right">
-    <button type="button" class="btn btn-info" ng-show="!vm.historyEnabled" ng-click='vm.toggleHistory()'>
-      <i class="fa fa-info-circle"></i> Show Cluster History
+    <button type="button" class="btn btn-info" ng-show="!vm.historyEnabled" ng-click="vm.toggleHistory()">
+      <i class="fa fa-info-circle"></i> Show History
     </button>
-    <button type="button" class="btn btn-info" ng-show="vm.historyEnabled" ng-click='vm.toggleHistory()'>
-      <i class="fa fa-info-circle"></i> Hide Cluster History
+    <button type="button" class="btn btn-info" ng-show="vm.historyEnabled" ng-click="vm.toggleHistory()">
+      <i class="fa fa-info-circle"></i> Hide History
     </button>
     <button type="button" class="btn btn-success" ui-sref="products">
       <i class="fa fa-th-list fa-fw"></i> Launch New Cluster
+    </button>
+    <button type="button" class="btn btn-default" ng-click="vm.refresh()">
+      <i class="fa fa-refresh"></i> Refresh
     </button>
   </div>
   <!-- /.col-lg-12 -->
@@ -21,7 +24,8 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading">Active Clusters</div>
+      <div class="panel-heading">Active Clusters
+      </div>
       <div class="panel-body">
         <div class="loading" ng-show="vm.loading">
           <p>Retrieving data ... </p>

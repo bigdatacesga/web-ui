@@ -24,9 +24,14 @@
     });
   }]);
 
-  app.controller('ClustersCtrl', ['PaasService', 'logger', '$uibModal', '$q', function(PaasService, logger, $uibModal, $q) {
+  app.controller('ClustersCtrl', ['PaasService', 'logger', '$uibModal', '$q', '$scope', '$interval', ClustersCtrl]);
+
+  function ClustersCtrl(PaasService, logger, $uibModal, $q, $scope, $interval) {
+
+    var username = window.sessionStorage.username;
 
     var vm = this;
+
     vm.clustersActive = [];
     vm.clustersInactive = [];
 
@@ -52,27 +57,61 @@
 
     vm.destroyInstance = function(index) {
       PaasService.destroyInstance(vm.clustersActive[index].uri)
-        .then(function (data) {
+        .then(function (response) {
           // TODO: Display a status message instead of an alert
-          alert('Instance destroyed');
-          vm.clustersActive[index].status = "destroyed";
-          // TODO: Reload asynchronously without refreshing the whole page
-          location.reload();
+          alert('Cluster is being destroyed');
+          // Update cluster information
+          activate();
         })
-        .catch(function (data){
+        .catch(function (error){
+          // TODO: Show message instead of using alert
           alert('Could not destroy instance');
         });
     };
 
-    vm.update = activate;
+    vm.loadData = loadData;
+
+    vm.refresh = refresh;
+
+
+    var stop;
+
+    vm.startAutoRefresh = function() {
+      if (angular.isUndefined(stop)) {
+        // Run the autorefresh during count times
+        var delayMilliseconds = 30000;
+        var count = 100;
+        stop = $interval(function() {
+          vm.loadData();
+        }, delayMilliseconds, count);
+      }
+    };
+
+    vm.stopAutoRefresh = function() {
+      if (angular.isDefined(stop)) {
+        $interval.cancel(stop);
+        stop = undefined;
+      }
+    };
+
+    $scope.$on('$destroy', function() {
+      $scope.stopAutoRefresh();
+    });
 
     activate();
 
     function activate() {
+      var data = loadData();
+      vm.startAutoRefresh();
+      return data;
+    }
+
+    function refresh() {
       vm.loading = true;
-      var receivedData;
-      var username = window.sessionStorage.username;
-      // TODO: Split listInstances in several methods
+      return loadData();
+    }
+
+    function loadData() {
       return PaasService.listInstances(username, null, null)
         .then(getClustersComplete)
         .catch(getClustersFailed);
@@ -159,6 +198,6 @@
       logger.debug(error.data.message);
       return $q.reject(error);
     }
+  }
 
-  }]);
 })();
