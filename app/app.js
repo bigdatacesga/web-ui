@@ -12,7 +12,7 @@ angular
     'bigdata.dashboard',
     'bigdata.hdp',
     'bigdata.products',
-    //'bigdata.clusters',
+    'bigdata.clusters',
     //'bigdata.sshkeys',
     //'bigdata.firewall',
     'bigdata.help',

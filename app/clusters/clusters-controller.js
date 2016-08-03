@@ -1,4 +1,3 @@
-'use strict';
 /**
  * @ngdoc function
  * @name bigdata.clusters:ClustersCtrl
@@ -8,7 +7,10 @@
  * Allows to see active/inactive clusters
  */
 (function() {
-  var app = angular.module('bigdata.clusters', ['ui.router','ui.bootstrap', 'bigdata.notifications', 'bigdata.paasservice', 'bigdata.services.bigdata', 'ngMaterial']);
+
+  'use strict';
+
+  var app = angular.module('bigdata.clusters', ['bigdata.services.logger', 'bigdata.clusters.info', 'bigdata.services.paas', 'ui.router', 'ui.bootstrap', 'ngMaterial']);
 
   app.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('clusters', {
@@ -20,12 +22,11 @@
           requireLogin: true
       }
     });
-  }])
+  }]);
 
-  app.controller('BigdataInstancesCtrl', ['PaasService', '$log', '$uibModal', '$q', function(PaasService, $log, $uibModal) {
+  app.controller('ClustersCtrl', ['PaasService', 'logger', '$uibModal', '$q', function(PaasService, logger, $uibModal, $q) {
 
     var vm = this;
-    var BackendDownMessage = "Unable to connect to the Big Data PaaS service";
     vm.clustersActive = [];
     vm.clustersInactive = [];
 
@@ -36,13 +37,13 @@
 
     vm.toggleHistory = function() {
       vm.historyEnabled = !vm.historyEnabled;
-    }
+    };
 
     vm.toggleClusterInfo = function(cluster) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'bigdata_instances/partials/details.html',
-        controller: 'ModalInstanceDetailsCtrlBigdata',
+        templateUrl: 'clusters/partials/details.html',
+        controller: 'ClusterInfoCtrl',
         controllerAs: 'modal',
         size: 'lg',
         resolve: { instanceInfo: cluster }
@@ -51,16 +52,16 @@
 
     vm.destroyInstance = function(index) {
       PaasService.destroyInstance(vm.clustersActive[index].uri)
-      .then(function (data) {
-        // TODO: Display a status message instead of an alert
-        alert('Instance destroyed');
-        vm.clustersActive[index].status = "destroyed";
-        // TODO: Reload asynchronously without refreshing the whole page
-        location.reload();
-      })
-      .catch(function (data){
-        alert('Could not destroy instance');
-      });
+        .then(function (data) {
+          // TODO: Display a status message instead of an alert
+          alert('Instance destroyed');
+          vm.clustersActive[index].status = "destroyed";
+          // TODO: Reload asynchronously without refreshing the whole page
+          location.reload();
+        })
+        .catch(function (data){
+          alert('Could not destroy instance');
+        });
     };
 
     vm.update = activate;
@@ -95,13 +96,13 @@
     }
 
     function sortByProductAndId(c1, c2) {
-      if (c1.product.localeCompare(c2.product) != 0)
-        return c1.product.localeCompare(c2.product)
-      if (c1.version.localeCompare(c2.version) != 0)
-        return c1.version.localeCompare(c2.version)
+      if (c1.product !== c2.product)
+        return c1.product.localeCompare(c2.product);
+      if (c1.version !== c2.version)
+        return c1.version.localeCompare(c2.version);
       var id1 = parseInt(c1.id, 0);
       var id2 = parseInt(c2.id, 0);
-      if (id1 == id2)
+      if (id1 === id2)
         return 0;
       return (id1 < id2) ? -1 : 1;
     }
@@ -111,7 +112,7 @@
     }
 
     function isActive(cluster) {
-      if (/(error|destroyed)/.test(cluster.status))
+      if (/destroyed/.test(cluster.status))
         return false;
       return true;
     }
@@ -153,15 +154,10 @@
     }
 
     function getClustersFailed(error) {
-      handleBackendDown(BackendDownMessage, error.status, error.data.message);
+      logger.error('Failed to retrieve the list of clusters from the PaaS service');
+      logger.debug(error.status);
+      logger.debug(error.data.message);
       return $q.reject(error);
-    }
-
-    function handleBackendDown(message, status, error){
-      if(message != undefined) alert(message);
-      if(message != undefined) $log.info('Message: ' + message);
-      if(status != undefined) $log.info('Status: ' + status);
-      if(error != undefined) $log.info('Error: ' + error);
     }
 
   }]);
