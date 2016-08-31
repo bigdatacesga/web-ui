@@ -11,7 +11,7 @@ angular.module('bigdata.hdp', ['ui.router', 'bigdata.components.stat'])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('hdp', {
-            url:'/hdp',
+            url: '/hdp',
             templateUrl: 'hdp/hdp.html',
             controller: 'HDPCtrl',
             controllerAs : 'hdp',
@@ -24,36 +24,42 @@ angular.module('bigdata.hdp', ['ui.router', 'bigdata.components.stat'])
     .controller('HDPCtrl', [function() {
         var vm = this;
 
-        vm.stats = {
-            yarn : {
-                link:"http://hadoop.cesga.es/yarn/",
-                comments:"YARN",
-                colour:"yellow",
-                image: "assets/images/hadoop-logo.png"
+        vm.proxies = [
+            {
+                link: 'http://yarn.hdp.cesga.es:8088',
+                name: 'YARN',
+                colour: 'yellow',
+                image: 'assets/images/hadoop-logo.png'
             },
-            jobhistory : {
-                link:"http://hadoop.cesga.es/jobhistory/",
-                comments:"Jobhistory",
-                colour:"blue",
-                image: "assets/images/history-icon.png"
+            {
+                link: 'http://mapreduce.hdp.cesga.es:19888',
+                name: 'MapReduce2',
+                colour: 'blue',
+                image: 'assets/images/history-icon.png'
             },
-            hue : {
-                link:"http://hue.hdp.cesga.es:8888/",
-                comments:"HUE",
-                colour:"green",
-                image: "assets/images/hue-icon.png"
+            {
+                link: 'http://spark.hdp.cesga.es:18080',
+                name:'Spark',
+                colour:'pink',
+                image: 'assets/images/spark-icon.png'
             },
-            zeppelin : {
-                link:"http://hadoop.cesga.es/zeppelin/",
-                comments:"Zeppelin",
-                colour:"red",
-                image: "assets/images/zeppelin-icon.png"
+            {
+                link: 'http://namenode.hdp.cesga.es:50070',
+                name: 'HDFS',
+                colour: 'yellow',
+                image: 'assets/images/hdfs-logo.png'
             },
-            spark : {
-                link:"http://hadoop.cesga.es/spark/",
-                comments:"Spark",
-                colour:"pink",
-                image: "assets/images/spark-icon.png"
+            {
+                link: 'http://hue.hdp.cesga.es:8888',
+                name: 'HUE',
+                colour: 'green',
+                image: 'assets/images/hue-icon.png'
+            },
+            {
+                link:'http://zeppelin.hdp.cesga.es:9995',
+                name:'Zeppelin',
+                colour:'red',
+                image: 'assets/images/zeppelin-icon.png'
             }
-        };
+        ];
     }]);

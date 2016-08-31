@@ -1,120 +1,32 @@
 <div>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Hadoop Services</h1>
+            <h1 class="page-header">Hadoop HDP Services</h1>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-{{hdp.stats.yarn.colour}}">
+        <div class="col-lg-4 col-md-6" ng-repeat="proxy in hdp.proxies">
+            <div class="panel panel-{{proxy.colour}}">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-9">
-                            <img src="{{hdp.stats.yarn.image}}" height="60px"/>
+                            <img src="{{proxy.image}}" height="60px"/>
                         </div>
                         <div class="col-xs-3 text-right">
-                            <div>{{hdp.stats.yarn.comments}}</div>
+                            <div>{{proxy.name}}</div>
                         </div>
                     </div>
                 </div>
-                <a href={{hdp.stats.yarn.link}}>
+                <a href={{proxy.link}}>
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">Connect</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
                 </a>
             </div>
         </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-{{hdp.stats.jobhistory.colour}}">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <img src="{{hdp.stats.jobhistory.image}}" height="60px"/>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            <div>{{hdp.stats.jobhistory.comments}}</div>
-                        </div>
-                    </div>
-                </div>
-                <a href={{hdp.stats.jobhistory.link}}>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-{{hdp.stats.hue.colour}}">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <img src="{{hdp.stats.hue.image}}" height="60px"/>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            <div>{{hdp.stats.hue.comments}}</div>
-                        </div>
-                    </div>
-                </div>
-                <a href={{hdp.stats.hue.link}}>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-{{hdp.stats.zeppelin.colour}}">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <img src="{{hdp.stats.zeppelin.image}}" height="60px"/>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            <div>{{hdp.stats.zeppelin.comments}}</div>
-                        </div>
-                    </div>
-                </div>
-                <a href={{hdp.stats.zeppelin.link}}>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-{{hdp.stats.spark.colour}}">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <img src="{{hdp.stats.spark.image}}" height="60px"/>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            <div>{{hdp.stats.spark.comments}}</div>
-                        </div>
-                    </div>
-                </div>
-                <a href={{hdp.stats.spark.link}}>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
     </div>
+
 </div>
