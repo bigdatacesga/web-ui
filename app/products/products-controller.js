@@ -44,8 +44,11 @@ angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.compone
   }
 
   var ImagesMap = {
-    "gluster": "'assets/images/gluster-icon.png'",
-    "mpi" : "'assets/images/mpi-icon.png'"
+    'gluster': 'assets/images/gluster-icon.png',
+    'mongodb': 'assets/images/mongodb-icon.png',
+    'postgresql': 'assets/images/postgresql-icon.gif',
+    'cassandra': 'assets/images/cassandra-icon.png',
+    'mpi' : 'assets/images/mpi-icon.png'
   }
 
   //DRAW SERVICES
@@ -63,8 +66,8 @@ angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.compone
           for (var index in receivedData.products){
             var serviceName = receivedData.products[index]
             products.push({
-              "name" : serviceName,
-              "image_url" : ImagesMap[serviceName]
+              'name' : serviceName,
+              'image_url' : ImagesMap[serviceName]
             })
           }
           vm.products = products;

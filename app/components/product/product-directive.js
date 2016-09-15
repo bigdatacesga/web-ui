@@ -4,7 +4,8 @@
  * @ngdoc directive
  * @name bigdata.components.product
  * @description
- * # stats
+ * # product
+ * Directive to display a Big Data Product
  */
 angular.module('bigdata.components.product', ['bigdata.components.product.launcher', 'bigdata.services.paas', 'ui.bootstrap'])
 
@@ -21,38 +22,36 @@ angular.module('bigdata.components.product', ['bigdata.components.product.launch
       var vmService = scope;
       
       vmService.productData.versions = [];
-
+      vmService.productData.selectedVersion = null;
+      
       PaasService.showServiceVersions(vmService.productData.name)
-        .success(function (data){
-          for (var v in data.versions){
+        .success(function (data) {
+          for (var v in data.versions) {
               PaasService.showService(vmService.productData.name, data.versions[v])
                 .success(function (data, status){
-                  if (status == 200){
                     var newService = {
-                      "description": data.description,
-                      "name": data.name,
-                      "version": data.version
-                      //"options": JSON.parse(data.options)
-                    }
-                    vmService.productData.versions.push(newService)
+                      'description': data.description,
+                      'name': data.name,
+                      'version': data.version
+                      //'options': JSON.parse(data.options)
+                    };
+                    vmService.productData.versions.push(newService);
                     //TODO: Select the highest version instead of the first one
-                    //vmService.productData.selectedVersion = vmService.productData.versions[0];
-                  } else {
-                    // Skip this service-version
-                  }
+                    if (vmService.productData.selectedVersion === null)
+                      vmService.productData.selectedVersion = newService;
                 })
                 .error(function (data){
                    alert('Could not get the service info');
                 });
           }
+          //vmService.productData.selectedVersion = data.versions[0];
         })
         .error(function (data){
            alert('Could not get the version');
         });
 
-      vmService.launchInstance = function(index) {
-        var product = vmService.productData.versions[index]
-        PaasService.getProductOptions(vmService.productData.name, vmService.productData.versions[index].version).success(function (data){
+      vmService.launchInstance = function(product) {
+        PaasService.getProductOptions(product.name, product.version).success(function (data){
           product.options = {}
           product.options.required = data.required //{}
           product.options.optional = data.optional //{"size": 2}
@@ -67,7 +66,7 @@ angular.module('bigdata.components.product', ['bigdata.components.product.launch
             size: 'lg',
             resolve: {
               serviceInfo: function () {
-                return vmService.productData.versions[index];
+                return product;
               }
             }
           });
