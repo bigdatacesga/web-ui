@@ -1,11 +1,10 @@
 'use strict';
 /**
  * @ngdoc function
- * @name bigdata.paas
+ * @name bigdata.hdp
  * @description
- * # HomeCtrl
- * Controller of the home view of the dashboard
- * The home view is also the first view seen by a user
+ * # HDPCtrl
+ * Controller of the HDP proxies view
  */
 angular.module('bigdata.hdp', ['ui.router', 'bigdata.components.stat'])
 
@@ -33,9 +32,9 @@ angular.module('bigdata.hdp', ['ui.router', 'bigdata.components.stat'])
             },
             {
                 link: 'http://mapreduce.hdp.cesga.es:19888',
-                name: 'MapReduce2',
+                name: 'MR2',
                 colour: 'blue',
-                image: 'assets/images/history-icon.png'
+                image: 'assets/images/mapreduce.png'
             },
             {
                 link: 'http://spark.hdp.cesga.es:18080',
@@ -47,7 +46,7 @@ angular.module('bigdata.hdp', ['ui.router', 'bigdata.components.stat'])
                 link: 'http://namenode.hdp.cesga.es:50070',
                 name: 'HDFS',
                 colour: 'yellow',
-                image: 'assets/images/hdfs-logo.png'
+                image: 'assets/images/hdfs.png'
             },
             {
                 link: 'http://hue.hdp.cesga.es:8888',
