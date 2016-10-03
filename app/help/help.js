@@ -10,6 +10,6 @@ angular.module('bigdata.help', ['ui.router'])
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('help', {
     url:'/help',
-    templateUrl: 'help/home.html',
+    templateUrl: 'help/help.html'
   });
-}])
+}]);
