@@ -21,20 +21,28 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bi
   });
 }])
 
-.controller('DashboardCtrl', ['PaasService', 'CloudService', 'IpService', 'KeyService', '$window', '$log', function(PaasService, CloudService, IpService, KeyService, $window, $log) {
+.controller('DashboardCtrl', ['PaasService', 'IpService', 'KeyService', '$window', '$log', function(PaasService, IpService, KeyService, $window, $log) {
   var vm = this;
   var errorNumber = 'Loading...';
   vm.stats = {
-    hdp : {
-      link: '#/hdp',
-      comments: 'Hadoop Services',
-      colour: 'yellow',
-      type: 'database'
+    products : {
+        link:'#/products',
+        comments:'PaaS products',
+        colour:'yellow',
+        type:'th-list',
+        number:errorNumber
+    },
+    clusters : {
+        link:'#/clusters',
+        comments:'PaaS Clusters',
+        colour:'green',
+        type:'cubes',
+        number:errorNumber
     },
     ips: {
       link: '#/firewall',
       comments: 'Allowed IPs',
-      colour: 'green',
+      colour: 'yellow',
       type: 'arrows-h',
       number: errorNumber
     },
@@ -44,20 +52,6 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bi
       colour: 'green',
       type: 'key',
       number: errorNumber
-    },
-    clusters : {
-        link:'#/clusters',
-        comments:'PaaS Clusters',
-        colour:'red',
-        type:'cubes',
-        number:errorNumber
-    },
-    products : {
-        link:'#/products',
-        comments:'PaaS products',
-        colour:'red',
-        type:'th-list',
-        number:errorNumber
     }
   };
 
@@ -113,7 +107,6 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bi
   }
 
   function activate() {
-    getCloudClustersInfo();
     getFirewallIpsInfo();
     getSshKeysInfo();
     getPaasClustersInfo();
