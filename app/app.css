@@ -66,3 +66,10 @@
   content: "";
   padding: 0;
 }
+
+.bdcesga {
+  font-family: arvo;
+  font-size: 200%;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
