@@ -13,8 +13,8 @@ angular
     'bigdata.hdp',
     'bigdata.products',
     'bigdata.clusters',
-    //'bigdata.sshkeys',
-    //'bigdata.firewall',
+    'bigdata.sshkeys',
+    'bigdata.firewall',
     'bigdata.help',
     //'bigdata.cloudview',
     /* Third-party */

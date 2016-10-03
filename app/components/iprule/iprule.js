@@ -2,5 +2,5 @@
 
 angular.module('bigdata.iprule', [
   'bigdata.iprule.iprule-directive'
-])
+]);
 

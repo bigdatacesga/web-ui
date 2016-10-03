@@ -7,7 +7,7 @@
  * Controller of the firewall view 
  * Allows to see current firewall configuration and to add new rules
  */
-angular.module('bigdata.firewall', ['ui.router', 'bigdata.iprule', 'bigdata.services.ips'])
+angular.module('bigdata.firewall', ['ui.router', 'bigdata.iprule.iprule-directive', 'bigdata.services.ips'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('firewall', {
