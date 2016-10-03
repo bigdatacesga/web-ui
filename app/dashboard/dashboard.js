@@ -7,7 +7,7 @@
  * Controller of the home view of the dashboard
  * The home view is also the first view seen by a user
  */
-angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bigdata.services.paas', 'bigdata.services.cloud', 'bigdata.services.ips','bigdata.services.keys'])
+angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bigdata.services.paas', 'bigdata.services.ips','bigdata.services.keys'])
 
 .config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('dashboard', {
@@ -30,13 +30,6 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bi
       comments: 'Hadoop Services',
       colour: 'yellow',
       type: 'database'
-    },
-    cloud : {
-      link: '#/cloud',
-      comments: 'Cloud Service',
-      colour: 'primary',
-      type: 'cloud',
-      number: errorNumber
     },
     ips: {
       link: '#/firewall',
@@ -67,18 +60,6 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bi
         number:errorNumber
     }
   };
-
-  function getCloudClustersInfo() {
-    return CloudService.list()
-      .then(function(data){
-        vm.cloud = data.data;
-        vm.stats.cloud.number = vm.cloud.length;
-      })
-      .catch(function(error) {
-        $log.error('Error retrieving Cloud Clusters information: ' + error.statusText);
-        vm.stats.cloud.number = 'N/A';
-      });
-  }
 
   function getFirewallIpsInfo() {
     return IpService.getAll()
