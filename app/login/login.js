@@ -42,7 +42,7 @@ angular.module('bigdata.login', ['ui.router'])
           $window.sessionStorage.expires = data.expires;
           $window.sessionStorage.username = self.user.username;
           self.message = 'Welcome';
-          $state.go('dashboard');
+          $state.go('hdp');
 
         }else{
           self.message = 'Error: Invalid user or password';
