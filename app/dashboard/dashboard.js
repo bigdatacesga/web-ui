@@ -94,7 +94,7 @@ angular.module('bigdata.dashboard', ['ui.router', 'bigdata.components.stat', 'bi
   }
 
   function getPaasProductsInfo() {
-    return PaasService.listServices()
+    return PaasService.listProducts()
       .then(function(data){
         var receivedData = data.data;
         vm.products = receivedData.products;

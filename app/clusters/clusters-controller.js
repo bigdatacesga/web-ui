@@ -117,8 +117,8 @@
         .catch(getClustersFailed);
     }
 
-    function getClustersComplete(data){
-      var clusters = data.data.clusters;
+    function getClustersComplete(response){
+      var clusters = response.data.clusters;
       var active = [];
       var inactive = [];
       for (var i = 0; i < clusters.length; i++) {
@@ -163,8 +163,8 @@
         status: ""
       };
       if (data.result == "success") {
-        cluster.name = data.data.name
-        cluster.status = data.data.status
+        cluster.name = data.data.name;
+        cluster.status = data.data.status;
       }
       return cluster;
     }
@@ -177,7 +177,7 @@
         "product": getProductName(cluster.uri),
         "version": getProductVersion(cluster.uri),
         "id": getClusterId(cluster.uri)
-      })
+      });
     }
 
     function getProductName(clusterUri) {

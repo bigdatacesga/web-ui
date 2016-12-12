@@ -18,35 +18,34 @@
 
       //TODO: Refactor
       function listInstances(username, service_name, service_version) {
-          var base_url = '/bigdata/api/v1/clusters';
-          var url = base_url;
+        var base_url = '/bigdata/api/v1/clusters';
+        var url = base_url;
 
-          if(username != "" && username != null){
-            url = url + '/' + username;
-          }else{
-            return $http.get(url, {timeout: callTimeout});
-          }
-
-          if(service_name != "" && service_name != null){
-            url = url + '/' + service_name
-          }else{
-            return $http.get(url, {timeout: callTimeout}); 
-          }
-
-          if(service_version != "" && service_version != null){
-            url = url + '/' + service_version
-          }else{
-            return $http.get(url, {timeout: callTimeout});
-          }
-
+        if(username != "" && username != null){
+          url = url + '/' + username;
+        }else{
           return $http.get(url, {timeout: callTimeout});
+        }
+
+        if(service_name != "" && service_name != null){
+          url = url + '/' + service_name;
+        }else{
+          return $http.get(url, {timeout: callTimeout}); 
+        }
+
+        if(service_version != "" && service_version != null){
+          url = url + '/' + service_version;
+        }else{
+          return $http.get(url, {timeout: callTimeout});
+        }
+
+        return $http.get(url, {timeout: callTimeout});
       }
 
       return {
-        listServices: function() {
+        listProducts: function() {
           return $http.get('/bigdata/api/v1/products');
         },
-        listInstances: listInstances,
         showServiceVersions: function(service_name) {
           return $http.get('/bigdata/api/v1/products/' + service_name);
         },
@@ -56,13 +55,14 @@
         getProductOptions: function(service_name, service_version){
           return $http.get('/bigdata/api/v1/products/' + service_name + '/' + service_version + '/' + 'options');
         },
+        listInstances: listInstances,
         showInstance: function(instance_path) {
           return $http.get('/bigdata/api/v1' + '/' + instance_path);
         },
         showInstanceNodes: function(instance_path) {
           //var base_url = '/bigdata/api/v1/instances'
           var base_url = '/bigdata/api/v1';
-          var url = base_url + '/' + instance_path + '/' + 'nodes'
+          var url = base_url + '/' + instance_path + '/' + 'nodes';
           //return $http.get(url, {timeout: callTimeout});
           return $http.get(url);
         },

@@ -5,7 +5,14 @@
     </div><!-- /.col-lg-12 -->
   </div>
 
-  <md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>
-      <product flex-md="40" flex-gt-md="30" ng-repeat="product in products.products" product-data="product" />
-  </md-content>
+  <div class="loading" ng-show="products.loading">
+    <p>Retrieving data ... </p>
+    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+  </div>
+
+  <div class="loaded" ng-hide="products.loading">
+    <md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>
+        <product flex-md="40" flex-gt-md="30" ng-repeat="product in products.products" product-data="product" />
+    </md-content>
+  </div>
 </div>

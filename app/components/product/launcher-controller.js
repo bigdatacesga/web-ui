@@ -1,9 +1,12 @@
 (function() {
+
   'use strict';
 
-  angular.module('bigdata.components.product.launcher', ['ui.router', 'ui.bootstrap'])
+  var app = angular.module('bigdata.components.product.launcher', ['bigdata.services.logger', 'ui.bootstrap', 'ui.router']);
 
-  .controller('LauncherCtrl', function ($scope, $uibModalInstance, $log, $state, $location, serviceInfo, PaasService) {
+  app.controller('LauncherCtrl', ['$state', '$scope', '$uibModalInstance', 'logger', 'serviceInfo', 'PaasService', LauncherCtrl]);
+
+  function LauncherCtrl($state, $scope, $uibModalInstance, logger, serviceInfo, PaasService) {
     var modal = this;
     modal.serviceInfo = serviceInfo;
 
@@ -19,23 +22,24 @@
 
 
     modal.submitForm = function(){
-      $log.debug(modal.serviceInfo.options.optional);
-      $log.debug(modal.serviceInfo.options.required);
-      $log.debug(modal.serviceToLaunch.options.optional);
-      $log.debug(modal.serviceToLaunch.options.required);
+      logger.debug(modal.serviceInfo.options.optional);
+      logger.debug(modal.serviceInfo.options.required);
+      logger.debug(modal.serviceToLaunch.options.optional);
+      logger.debug(modal.serviceToLaunch.options.required);
 
-
-      var obj = modal.serviceToLaunch.options.optional
+      var obj = modal.serviceToLaunch.options.optional;
       for(var key in obj){
         var attrValue = obj[key];
-        modal.serviceToLaunch.options.required[key] = attrValue
+        modal.serviceToLaunch.options.required[key] = attrValue;
       }
-      PaasService.launchInstance(modal.serviceToLaunch.options.required, modal.serviceToLaunch.name, modal.serviceToLaunch.version).success(function (data, $state){
+      PaasService.launchInstance(modal.serviceToLaunch.options.required, modal.serviceToLaunch.name, modal.serviceToLaunch.version).success(function (data){
         alert('Instance was submitted.');
-        $location.path('bigdata_instances')
+        $state.go('clusters');
       }).error(function (data){
-
+        alert('Error submitting cluster');
+        logger.error('Error submitting cluster');
+        logger.error(data);
       });
-    }
-  });
+    };
+  }
 })();

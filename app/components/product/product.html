@@ -1,7 +1,5 @@
-<md-card>
-  <img ng-src="{{productData.image_url}}" class="md-card-image" alt="{{productData.name}}">
-<!--  <img ng-src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/MongoDB-Logo.svg/1280px-MongoDB-Logo.svg.png" class="md-card-image" alt="{{productData.name}}"> -->
-<!--  <img ng-src="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png" class="md-card-image" alt="{{productData.name}}"> -->
+<md-card ng-hide="productData.loading">
+  <img ng-src="{{productData.versions[0].logo_url}}" class="md-card-image" alt="{{productData.name}}">
 
   <!--
   <md-card-title>
@@ -33,4 +31,3 @@
   </md-card-actions>
 
 </md-card>
-

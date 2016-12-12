@@ -1,4 +1,3 @@
-'use strict';
 /**
  * @ngdoc function
  * @name bigdata.products:ProductsCtrl
@@ -7,77 +6,67 @@
  * Controller of the products view 
  * Allows to explore existing products
  */
-angular.module('bigdata.products', ['ui.router','ui.bootstrap', 'bigdata.components.product', 'bigdata.services.paas'])
+(function() {
 
-.config(['$stateProvider', function ($stateProvider) {
-  $stateProvider.state('products', {
-    url: '/products',
-    templateUrl: 'products/products.html',
-    controller: 'ProductsCtrl',
-    controllerAs: 'products',
-    data: {
-        requireLogin: true
+  'use strict';
+
+  var app = angular.module('bigdata.products', ['bigdata.services.logger', 'ui.router','ui.bootstrap', 'bigdata.components.product', 'bigdata.services.paas']);
+
+  app.config(['$stateProvider', function ($stateProvider) {
+    $stateProvider.state('products', {
+      url: '/products',
+      templateUrl: 'products/products.html',
+      controller: 'ProductsCtrl',
+      controllerAs: 'products',
+      data: {
+          requireLogin: true
+      }
+    });
+  }]);
+
+  app.controller('ProductsCtrl', ['PaasService', 'logger', '$q', ProductsCtrl]); 
+
+  function ProductsCtrl(PaasService, logger, $q) {
+
+    var vm = this;
+
+    vm.products = [];
+
+    vm.loading = true;
+
+    activate();
+
+    function activate() {
+      var data = loadData();
+      return data;
     }
-  });
-}])
 
-.controller('ProductsCtrl', 
-            ['PaasService', '$log', '$state', '$uibModal', function(PaasService, $log) {
-
-
-  var vm = this;
-
-  //CONSTANTS
-  var BackendDownMessage = 
-    'Sorry :( , it seems we could not launch the service, the server may be down.';
-
-  vm.products = [];
-  vm.endpoint = PaasService;
-
-  function handleBackendDown(message, status, error){
-    if(message != undefined) {
-      alert(message);
+    function loadData() {
+      vm.loading = true;
+      return PaasService.listProducts()
+        .then(getProductsComplete)
+        .catch(getProductsFailed);
     }
-    if(message != undefined) {$log.info('Message: ' + message);}
-    if(status != undefined) {$log.info('Status: ' + status);}
-    if(error != undefined) {$log.info('Error: ' + error);}
+
+    function getProductsComplete(data){
+      var products = data.data.products;
+      for (var i = 0; i < products.length; i++) {
+        var product = products[i];
+        addProduct(product);
+      }
+      vm.loading = false;
+    }
+
+    function addProduct(product) {
+      vm.products.push({'name': product});
+    }
+
+    function getProductsFailed(error) {
+      logger.error('Failed to retrieve the list of products from the PaaS service');
+      logger.debug(error.status);
+      logger.debug(error.data.message);
+      return $q.reject(error);
+    }
   }
 
-  var ImagesMap = {
-    'gluster': 'assets/images/gluster-icon.png',
-    'mongodb': 'assets/images/mongodb-icon.png',
-    'postgresql': 'assets/images/postgresql-icon.gif',
-    'cassandra': 'assets/images/cassandra-icon.png',
-    'mpi' : 'assets/images/mpi-icon.png'
-  }
-
-  //DRAW SERVICES
-  vm.drawServices = function() {
-    var receivedData;
-    return vm.endpoint.listServices()
-      .then(function(data){
-        var receivedData = data.data;
-        if(receivedData == undefined){
-          //ERROR
-          handleBackendDown(BackendDownMessage, data.status);
-        }else{
-          //SUCCESS
-          var products = [];
-          for (var index in receivedData.products){
-            var serviceName = receivedData.products[index]
-            products.push({
-              'name' : serviceName,
-              'image_url' : ImagesMap[serviceName]
-            })
-          }
-          vm.products = products;
-        }      
-      }).catch(function(error) {
-        //ERROR
-        handleBackendDown(BackendDownMessage, data.status, error.data.message);
-      });
-  }
-  //Call function to draw the data on the interface
-  vm.drawServices();
-
-}]);
+})();
