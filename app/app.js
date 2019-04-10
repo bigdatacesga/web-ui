@@ -11,6 +11,7 @@ angular
     'bigdata.login',
     'bigdata.dashboard',
     'bigdata.hdp',
+    'bigdata.cdh',
     'bigdata.products',
     'bigdata.clusters',
     'bigdata.sshkeys',

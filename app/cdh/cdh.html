@@ -1,0 +1,36 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Hadoop 3 Platform</h1>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" role="alert">
+      Remember to activate the VPN and modify your browser's proxy configuration before connecting to the services
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6" ng-repeat="proxy in cdh.proxies">
+            <div class="panel panel-{{proxy.colour}}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <img ng-src="{{proxy.image}}" height="60px"/>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <div>{{proxy.name}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href={{proxy.link}}>
+                    <div class="panel-footer">
+                        <span class="pull-left">Connect</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

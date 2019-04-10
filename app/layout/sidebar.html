@@ -9,6 +9,10 @@
                 <a ui-sref="hdp"><i class="fa fa-database fa-fw"></i> Hadoop <span></span></a>
             </li>
 
+            <li ui-sref-active="active">
+                <a ui-sref="cdh"><i class="fa fa-database fa-fw"></i> Hadoop 3 <span class="badge">NEW</span></a>
+            </li>
+
             <li ng-class="{active: collapsePaaS==1}">{{dropDown}}
                 <a href="" ng-click="unfoldPaas(1)"><i class="fa fa-server fa-fw"></i> PaaS <span
                     class="fa arrow"></span><span class="badge">BETA</span></a>
