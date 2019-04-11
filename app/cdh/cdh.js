@@ -47,6 +47,12 @@ angular.module('bigdata.cdh', ['ui.router', 'bigdata.components.stat'])
                 name: 'MR2',
                 colour: 'blue',
                 image: 'assets/images/mapreduce.png'
+            },
+            {
+                link: 'http://hadoop.cesga.es/#tutorials',
+                name: 'Tutorials',
+                colour: 'red',
+                image: 'assets/images/history-icon.png'
             }
         ];
     }]);
