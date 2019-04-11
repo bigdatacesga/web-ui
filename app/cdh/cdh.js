@@ -53,6 +53,12 @@ angular.module('bigdata.cdh', ['ui.router', 'bigdata.components.stat'])
                 name: 'Tutorials',
                 colour: 'red',
                 image: 'assets/images/history-icon.png'
+            },
+            {
+                link: 'http://hadoop.cesga.es/user_guide/',
+                name: 'User Guide',
+                colour: 'yellow',
+                image: 'assets/images/history-icon.png'
             }
         ];
     }]);
