@@ -49,13 +49,13 @@ angular.module('bigdata.cdh', ['ui.router', 'bigdata.components.stat'])
                 image: 'assets/images/mapreduce.png'
             },
             {
-                link: 'http://hadoop.cesga.es/#tutorials',
+                link: 'https://bigdata.cesga.es/#tutorials',
                 name: 'Tutorials',
                 colour: 'red',
                 image: 'assets/images/history-icon.png'
             },
             {
-                link: 'http://hadoop.cesga.es/user_guide/',
+                link: 'https://bigdata.cesga.es/user-guide/',
                 name: 'User Guide',
                 colour: 'yellow',
                 image: 'assets/images/history-icon.png'
